@@ -6,7 +6,6 @@ public class Enemies {
 
     private int enemy_hp;
     private int enemy_atk;
-    private int sdf;
     private String enemy_name;
 
     EnemyRandomizer enemyRandomizer = new EnemyRandomizer();
