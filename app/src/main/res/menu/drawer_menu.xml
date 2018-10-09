@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+        android:id="@+id/world"
+        android:icon="@drawable/ic_world"
+        android:title="World"></item>
+        <item
+            android:id="@+id/quest"
+            android:icon="@drawable/ic_quest"
+            android:title="Quest"></item>
+        <item
+            android:id="@+id/inventory"
+            android:icon="@drawable/ic_inventory"
+            android:title="Inventory"></item>
+        <item
+            android:id="@+id/character"
+            android:icon="@drawable/ic_character"
+            android:title="Character"></item>
+        <item
+            android:id="@+id/skilltree"
+            android:icon="@drawable/ic_skilltree"
+            android:title="Skilltree"></item>
+        <item
+            android:id="@+id/shop"
+            android:icon="@drawable/ic_shop"
+            android:title="Shop"></item>
+
+    </group>
+
+    <item android:title="Quit">
+        <menu>
+            <item
+                android:id="@+id/settings"
+                android:icon="@drawable/ic_settings"
+                android:title="Settings"></item>
+        </menu>
+    </item>
+
+</menu>

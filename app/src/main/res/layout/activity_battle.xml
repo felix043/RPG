@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BattleSystem.BattleActivity">
+
+    <TextView
+        android:id="@+id/enemy_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:textColor="#000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/enemy_healthBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="309dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="37dp"
+        android:progress="70"
+        android:progressDrawable="@drawable/style_healthbar"
+        android:progressTint="#FF0000"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enemy_name" />
+
+    <ProgressBar
+        android:id="@+id/enemy_manaBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="309dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:progressTint="#0000FF"
+        android:layout_marginEnd="8dp"
+        android:progress="80"
+        android:progressDrawable="@drawable/style_healthbar"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enemy_healthBar" />
+
+
+    <ProgressBar
+        android:id="@+id/player_healthBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="309dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:progress="70"
+        android:progressDrawable="@drawable/style_healthbar"
+        android:progressTint="#FF0000"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/player_manaBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/player_manaBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="309dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:progress="80"
+        android:progressDrawable="@drawable/style_healthbar"
+        android:progressTint="#0000FF"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/linearlayout_skillbtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <GridLayout
+        android:id="@+id/linearlayout_skillbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:columnCount="1"
+        android:rowCount="2"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Button
+                android:id="@+id/btn_skillone"
+                android:layout_width="wrap_content"
+                android:layout_height="65dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:textAllCaps="false"
+                />
+
+            <Button
+                android:id="@+id/btn_skilltwo"
+                android:layout_width="wrap_content"
+                android:layout_height="65dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/btn_skillthree"
+                android:layout_width="wrap_content"
+                android:layout_height="65dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:textAllCaps="false"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/btn_skillfour"
+                android:layout_width="wrap_content"
+                android:layout_height="65dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/btn_skillfive"
+                android:layout_width="wrap_content"
+                android:layout_height="65dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/btn_skillsix"
+                android:layout_width="wrap_content"
+                android:layout_height="65dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:textAllCaps="false"/>
+        </LinearLayout>
+
+
+    </GridLayout>
+
+</android.support.constraint.ConstraintLayout>

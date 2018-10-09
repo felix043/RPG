@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">RPG</string>
+
+    <string name="navigation_drawer_open">Open Naviagtion Drawer</string>
+    <string name="navigation_drawer_close">Close Naviagtion Drawer</string>
+</resources>
