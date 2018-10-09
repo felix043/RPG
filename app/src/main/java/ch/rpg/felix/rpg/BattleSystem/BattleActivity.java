@@ -15,15 +15,21 @@ public class BattleActivity extends AppCompatActivity {
     Player player = new Player();
     Skills skills = new Skills();
 
-    public void dealDamage(){
-        TextView editText = (TextView) findViewById(R.id.enemy_name);
-        editText.setText(String.valueOf(enemies.getEnemy_hp()));
+    //yet to be implemented
+    private int currentHp;
+
+    public void showEnemy() {
+        TextView enemyName = (TextView) findViewById(R.id.enemy_name);
+        TextView enemyHp = (TextView) findViewById(R.id.enemy_maxHp);
+
+        enemyName.setText(enemies.getEnemy_name());
+        enemyHp.setText(currentHp + " / " + String.valueOf(enemies.getEnemy_hp()));
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_battle);
-        dealDamage();
+        showEnemy();
     }
 }

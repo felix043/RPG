@@ -34,6 +34,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enemy_name" />
 
+    <TextView
+        android:id="@+id/enemy_maxHp"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:textColor="#000"
+        app:layout_constraintBottom_toBottomOf="@+id/enemy_healthBar"
+        app:layout_constraintEnd_toEndOf="@+id/enemy_healthBar"
+        app:layout_constraintStart_toStartOf="@+id/enemy_healthBar"
+        app:layout_constraintTop_toTopOf="@+id/enemy_healthBar" />
+
     <ProgressBar
         android:id="@+id/enemy_manaBar"
         style="?android:attr/progressBarStyleHorizontal"

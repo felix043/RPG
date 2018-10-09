@@ -3,7 +3,7 @@ package ch.rpg.felix.rpg.BattleSystem;
 import java.util.Random;
 
 public class EnemyRandomizer {
-
+    /*
     Enemies enemies = new Enemies();
 
     public void enemies1_1() {
@@ -21,5 +21,5 @@ public class EnemyRandomizer {
                 enemies.Rat();
                 break;
         }
-    }
+    }*/
 }
