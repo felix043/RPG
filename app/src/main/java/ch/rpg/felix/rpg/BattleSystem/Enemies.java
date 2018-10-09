@@ -13,7 +13,7 @@ public class Enemies {
     public void Goblin(){
         enemy_name = "Goblin";
         enemy_hp = 10;
-        enemy_atk = 5;
+        enemy_atk = 1000;
     }
 
     public void Hobgoblin() {
