@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import ch.rpg.felix.rpg.BattleSystem.Enemies;
 import ch.rpg.felix.rpg.BattleSystem.Player;
 import ch.rpg.felix.rpg.BattleSystem.Skills;
