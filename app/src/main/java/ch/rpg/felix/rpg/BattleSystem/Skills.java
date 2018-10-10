@@ -6,13 +6,20 @@ public class Skills {
     private String name;
 
     public void punch(){
-        damage = 10;
+        damage = 1;
         name = "Punch";
     }
 
     public void slash(){
-        damage = 15;
+        damage = 2;
         name = "Slash";
     }
 
+    public int getDamage() {
+        return damage;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

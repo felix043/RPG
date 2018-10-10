@@ -27,7 +27,7 @@ public class PrologueFragment extends Fragment {
         return view;
     }
 
-    public void getIntoBattleactivity() {
+    private void getIntoBattleactivity() {
         Intent i = new Intent();
         i.setClass(getActivity(), BattleActivity.class);
         i.putExtra("stage", String.valueOf(stage));
