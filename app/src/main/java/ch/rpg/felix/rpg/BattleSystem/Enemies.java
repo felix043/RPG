@@ -16,11 +16,6 @@ public class Enemies {
         enemy_atk = 1000;
     }
 
-    public void Hobgoblin() {
-        enemy_name = "Hobgoblin";
-        enemy_hp = 20;
-    }
-
     public void Ogre(){
         enemy_name = "Ogre";
         enemy_hp = 20;
@@ -33,24 +28,8 @@ public class Enemies {
         enemy_atk = 3;
     }
 
-    public void enemies1_1() {
-        Random random = new Random();
-        int numberOfMethods = 3;
-        switch (random.nextInt(numberOfMethods)) {
-            case 0:
-                Goblin();
-                break;
-            case 1:
-                Ogre();
-                break;
-            case 2:
-                Rat();
-                break;
-        }
-    }
 
     public int getEnemy_hp() {
-        enemies1_1();
         return enemy_hp;
     }
 
