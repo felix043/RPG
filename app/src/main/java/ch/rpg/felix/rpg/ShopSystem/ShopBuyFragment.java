@@ -1,4 +1,4 @@
-package ch.rpg.felix.rpg;
+package ch.rpg.felix.rpg.ShopSystem;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,12 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class ShopFragment extends Fragment {
+import ch.rpg.felix.rpg.R;
+
+public class ShopBuyFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_shop, container, false);
+        View view = inflater.inflate(R.layout.fragment_shop_buy, container, false);
+
         return view;
     }
+
 }
+
+
