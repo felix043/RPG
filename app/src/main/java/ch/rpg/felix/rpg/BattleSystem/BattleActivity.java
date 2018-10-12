@@ -3,11 +3,15 @@ package ch.rpg.felix.rpg.BattleSystem;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
+
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import ch.rpg.felix.rpg.BattleSystem.Enemies;
 import ch.rpg.felix.rpg.BattleSystem.Player;
@@ -17,24 +21,36 @@ import ch.rpg.felix.rpg.WorldFragmentChildren.PrologueFragment;
 
 public class BattleActivity extends AppCompatActivity {
 
+    //TODO Rewrite class at a later point for more flexibility (e.g different skills)
+
+    Player player = new Player();
     Enemies enemies = new Enemies();
     Skills skills = new Skills();
-    private int currentHp;
+    private int current_enemyHp;
+    private int current_playerHp;
 
     private void getEnemyStats() {
-        ProgressBar enemy_hp = (ProgressBar) findViewById(R.id.enemy_healthBar);
+        ProgressBar enemy_hpbar = (ProgressBar) findViewById(R.id.enemy_healthBar);
         TextView enemyName = (TextView) findViewById(R.id.enemy_name);
         TextView enemyHp = (TextView) findViewById(R.id.enemy_maxHp);
         enemyName.setText(enemies.getEnemy_name());
-        currentHp = enemies.getEnemy_hp();
-        enemyHp.setText(currentHp + " / " + String.valueOf(enemies.getEnemy_hp()));
-        enemy_hp.setMax(enemies.getEnemy_hp());
-        enemy_hp.setProgress(enemies.getEnemy_hp());
+        current_enemyHp = enemies.getEnemy_hp();
+        enemyHp.setText(current_enemyHp + " / " + String.valueOf(enemies.getEnemy_hp()));
+        enemy_hpbar.setMax(enemies.getEnemy_hp());
+        enemy_hpbar.setProgress(enemies.getEnemy_hp());
+    }
+
+    private void showPlayer() {
+        ProgressBar player_hpbar = (ProgressBar) findViewById(R.id.player_healthBar);
+        TextView playerHp = (TextView) findViewById(R.id.player_maxHp);
+        player_hpbar.setMax(player.getPlayer_max_hp());
+        player_hpbar.setProgress(player.getPlayer_max_hp());
+        current_playerHp = player.getPlayer_max_hp();
+        playerHp.setText(current_playerHp + " / " + String.valueOf(player.getPlayer_max_hp()));
     }
 
     private void showEnemy() {
         int stage1 = Integer.parseInt(getIntent().getStringExtra("stage"));
-
         if (stage1 == 11) {
             enemies.Rat();
             getEnemyStats();
@@ -45,10 +61,27 @@ public class BattleActivity extends AppCompatActivity {
             enemies.Ogre();
             getEnemyStats();
         }
-
     }
 
-    //TODO Rewrite class at a later point for more flexibility (e.g different skills)
+    private void playerAttack() {
+        TextView enemyHp = (TextView) findViewById(R.id.enemy_maxHp);
+        ProgressBar enemy_hpbar = (ProgressBar) findViewById(R.id.enemy_healthBar);
+
+        current_enemyHp = enemy_hpbar.getProgress();
+        current_enemyHp = current_enemyHp - skills.getDamage();
+        enemy_hpbar.setProgress(current_enemyHp);
+        enemyHp.setText(current_enemyHp + " / " + String.valueOf(enemies.getEnemy_hp()));
+    }
+
+    private void enemyAttack() {
+        TextView playerHp = (TextView) findViewById(R.id.player_maxHp);
+        ProgressBar player_hpbar = (ProgressBar) findViewById(R.id.player_healthBar);
+
+        current_playerHp = player_hpbar.getProgress();
+        current_playerHp = current_playerHp - 3;
+        player_hpbar.setProgress(current_playerHp);
+        playerHp.setText(current_playerHp + " / " + String.valueOf(player.getPlayer_max_hp()));
+    }
 
     private void setSkillnames() {
         final Button btnSkill1 = (Button) findViewById(R.id.btn_skillone);
@@ -67,27 +100,34 @@ public class BattleActivity extends AppCompatActivity {
         btnSkill1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updateEnemy();
                 skills.slash();
+                playerAttack();
+                enemyAttack();
+                endBattle();
             }
         });
 
         btnSkill2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updateEnemy();
+                playerAttack();
                 skills.punch();
+                enemyAttack();
+                endBattle();
             }
         });
     }
 
-    private void updateEnemy() {
-        final TextView enemyHp = (TextView) findViewById(R.id.enemy_maxHp);
-        final ProgressBar enemy_hp = (ProgressBar) findViewById(R.id.enemy_healthBar);
-        int test = enemy_hp.getProgress();
-        test = test - skills.getDamage();
-        enemy_hp.setProgress(test);
-        enemyHp.setText(test + " / " + String.valueOf(enemies.getEnemy_hp()));
+    private void endBattle() {
+        TextView playerHp = (TextView) findViewById(R.id.player_maxHp);
+        TextView enemyHp = (TextView) findViewById(R.id.enemy_maxHp);
+        if (current_enemyHp <= 0) {
+            current_enemyHp = 0;
+            enemyHp.setText(current_enemyHp + " / " + String.valueOf(enemies.getEnemy_hp()));
+        } else if (current_playerHp <= 0) {
+            current_playerHp = 0;
+            playerHp.setText(current_playerHp + " / " + String.valueOf(player.getPlayer_max_hp()));
+        }
     }
 
     @Override
@@ -95,6 +135,7 @@ public class BattleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_battle);
         showEnemy();
+        showPlayer();
         setSkillnames();
         BtnSkill();
     }

@@ -3,7 +3,7 @@ package ch.rpg.felix.rpg.BattleSystem;
 public class Player {
 
     private int player_level;
-    private int player_max_hp;
+    private int player_max_hp = 30;
     private int player_atk;
 
     public Player(){

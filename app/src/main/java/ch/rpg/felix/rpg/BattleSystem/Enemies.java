@@ -4,6 +4,8 @@ import java.util.Random;
 
 public class Enemies {
 
+
+
     private int enemy_hp;
     private int enemy_atk;
     private String enemy_name;

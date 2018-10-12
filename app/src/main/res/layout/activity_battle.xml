@@ -171,4 +171,15 @@
 
     </GridLayout>
 
+    <TextView
+        android:id="@+id/player_maxHp"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:textColor="#000"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/player_manaBar"
+        app:layout_constraintEnd_toEndOf="@+id/player_healthBar"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/player_healthBar" />
+
 </android.support.constraint.ConstraintLayout>
