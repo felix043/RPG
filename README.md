@@ -1,1 +1,1 @@
-This is a small RPG Game
+This is a small text-based RPG Game
