@@ -1,38 +1,41 @@
 package ch.rpg.felix.rpg.BattleSystem;
 
-public class Player {
+import android.support.v7.app.AppCompatActivity;
 
-    private int player_level;
-    private int player_max_hp = 30;
-    private int player_atk;
+import ch.rpg.felix.rpg.LevelAlgorithm;
 
-    private float xp;
+public class Player extends AppCompatActivity {
+
+    LevelAlgorithm levelAlgorithm = new LevelAlgorithm();
+
+    private int player_max_hp;
+    private int hp;
 
     public Player(){
+        player_max_hp = 10;
     }
 
     public int getPlayer_level() {
-
-        return player_level;
-    }
-
-    public void setPlayer_level(int player_level) {
-        this.player_level = player_level;
+        return levelAlgorithm.expNeededForNextLv();
     }
 
     public int getPlayer_max_hp() {
+        return getPlayer_level() * 5;
+    }
+
+    public int getPlayerCurrentHealth() {
+        int max = getPlayer_max_hp();
+        if (player_max_hp > max) {
+            player_max_hp = max;
+        }
         return player_max_hp;
     }
 
-    public void setPlayer_max_hp(int player_max_hp) {
-        this.player_max_hp = player_max_hp;
+    public float getStrength() {
+        return getPlayer_level() * 4f;
     }
 
-    public int getPlayer_atk() {
-        return player_atk;
-    }
-
-    public void setPlayer_atk(int player_atk) {
-        this.player_atk = player_atk;
+    public float getMagic() {
+        return getPlayer_level() * 2f;
     }
 }

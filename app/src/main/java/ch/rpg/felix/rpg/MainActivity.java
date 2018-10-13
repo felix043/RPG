@@ -8,12 +8,18 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import ch.rpg.felix.rpg.BattleSystem.Player;
 import ch.rpg.felix.rpg.ShopSystem.ShopBuyFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    Player player = new Player();
+    LevelAlgorithm ls = new LevelAlgorithm();
     private DrawerLayout drawer;
 
     @Override
@@ -36,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new WorldFragment()).commit();
             navigationView.setCheckedItem(R.id.world);
         }
-
+        showPlayerLevel();
     }
 
     @Override
@@ -66,5 +72,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void showPlayerLevel() {
+        NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
+        View hView = navView.getHeaderView(0);
+        TextView navPlayername = (TextView) hView.findViewById(R.id.currentPlayerlevel);
+        ProgressBar pb = (ProgressBar) hView.findViewById(R.id.player_xpbar);
+        navPlayername.setText(String.valueOf(player.getPlayer_level()));
+        pb.setMax(20);
     }
 }
