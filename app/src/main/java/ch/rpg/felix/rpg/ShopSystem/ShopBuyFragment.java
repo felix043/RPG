@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import ch.rpg.felix.rpg.R;
 
 public class ShopBuyFragment extends Fragment {
@@ -19,7 +18,6 @@ public class ShopBuyFragment extends Fragment {
 
         return view;
     }
-
 }
 
 

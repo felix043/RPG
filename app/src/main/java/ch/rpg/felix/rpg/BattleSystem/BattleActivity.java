@@ -3,21 +3,13 @@ package ch.rpg.felix.rpg.BattleSystem;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.google.firebase.analytics.FirebaseAnalytics;
-
-import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
-
-import ch.rpg.felix.rpg.BattleSystem.Enemies;
-import ch.rpg.felix.rpg.BattleSystem.Player;
-import ch.rpg.felix.rpg.BattleSystem.Skills;
+import ch.rpg.felix.rpg.Player.LevelAlgorithm;
+import ch.rpg.felix.rpg.Player.Player;
 import ch.rpg.felix.rpg.R;
-import ch.rpg.felix.rpg.WorldFragmentChildren.PrologueFragment;
 
 public class BattleActivity extends AppCompatActivity {
 
@@ -26,6 +18,7 @@ public class BattleActivity extends AppCompatActivity {
     Player player = new Player();
     Enemies enemies = new Enemies();
     Skills skills = new Skills();
+    LevelAlgorithm la = new LevelAlgorithm();
     private int current_enemyHp;
     private int current_playerHp;
 

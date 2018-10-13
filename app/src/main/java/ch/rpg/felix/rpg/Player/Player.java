@@ -1,8 +1,8 @@
-package ch.rpg.felix.rpg.BattleSystem;
+package ch.rpg.felix.rpg.Player;
 
 import android.support.v7.app.AppCompatActivity;
 
-import ch.rpg.felix.rpg.LevelAlgorithm;
+import ch.rpg.felix.rpg.Player.LevelAlgorithm;
 
 public class Player extends AppCompatActivity {
 

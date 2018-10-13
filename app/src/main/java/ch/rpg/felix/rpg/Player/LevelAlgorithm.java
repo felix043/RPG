@@ -1,4 +1,4 @@
-package ch.rpg.felix.rpg;
+package ch.rpg.felix.rpg.Player;
 
 public class LevelAlgorithm {
 
