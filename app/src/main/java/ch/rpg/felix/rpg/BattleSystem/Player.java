@@ -6,10 +6,13 @@ public class Player {
     private int player_max_hp = 30;
     private int player_atk;
 
+    private float xp;
+
     public Player(){
     }
 
     public int getPlayer_level() {
+
         return player_level;
     }
 

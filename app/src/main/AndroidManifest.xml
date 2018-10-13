@@ -25,7 +25,6 @@
             android:resizeableActivity="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ShopSystem.ShopActivity"></activity>
     </application>
 
 </manifest>
