@@ -2,14 +2,11 @@ package ch.rpg.felix.rpg.Player;
 
 import android.support.v7.app.AppCompatActivity;
 
-import ch.rpg.felix.rpg.Player.LevelAlgorithm;
-
 public class Player extends AppCompatActivity {
 
     LevelAlgorithm levelAlgorithm = new LevelAlgorithm();
 
     private int player_max_hp;
-    private int hp;
 
     public Player(){
         player_max_hp = 10;

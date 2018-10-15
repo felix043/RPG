@@ -8,7 +8,7 @@ public class LevelAlgorithm {
     private int expTransfer;
 
     public LevelAlgorithm() {
-        expObtained = 1;
+        expObtained = 105;
         currentPlayerlevel = 1;
     }
 
@@ -31,5 +31,13 @@ public class LevelAlgorithm {
             }
         }
         return currentPlayerlevel;
+    }
+
+    public int getExpForNextLv() {
+        return expForNextLv;
+    }
+
+    public int getExpObtained() {
+        return expObtained;
     }
 }

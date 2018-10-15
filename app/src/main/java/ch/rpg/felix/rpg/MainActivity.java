@@ -1,5 +1,6 @@
 package ch.rpg.felix.rpg;
 
+import android.app.Dialog;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -20,8 +21,7 @@ import ch.rpg.felix.rpg.ShopSystem.ShopBuyFragment;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     Player player = new Player();
-    LevelAlgorithm ls = new LevelAlgorithm();
-    private DrawerLayout drawer;
+    LevelAlgorithm la = new LevelAlgorithm();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new WorldFragment()).commit();
             navigationView.setCheckedItem(R.id.world);
         }
+        la.expNeededForNextLv();
         showPlayerLevel();
     }
 
@@ -78,9 +79,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void showPlayerLevel() {
         NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
         View hView = navView.getHeaderView(0);
+        ;
         TextView navPlayername = (TextView) hView.findViewById(R.id.currentPlayerlevel);
         ProgressBar pb = (ProgressBar) hView.findViewById(R.id.player_xpbar);
         navPlayername.setText(String.valueOf(player.getPlayer_level()));
-        pb.setMax(20);
+        pb.setMax(la.getExpForNextLv());
+        pb.setProgress(la.getExpObtained());
     }
 }
