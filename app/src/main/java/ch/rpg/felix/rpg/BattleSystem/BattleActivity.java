@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import ch.rpg.felix.rpg.Player.LevelAlgorithm;
 import ch.rpg.felix.rpg.Player.Player;
 import ch.rpg.felix.rpg.R;
@@ -17,11 +19,10 @@ public class BattleActivity extends AppCompatActivity {
     //TODO Rewrite class at a later point for more flexibility (e.g different skills)
 
     Dialog dialog;
-
     Player player = new Player();
     Enemies enemies = new Enemies();
     Skills skills = new Skills();
-    LevelAlgorithm la = new LevelAlgorithm();
+
     private int current_enemyHp;
     private int current_playerHp;
 
@@ -29,11 +30,19 @@ public class BattleActivity extends AppCompatActivity {
         dialog.setContentView(R.layout.popup_battleresult);
         Button btn_home = (Button) dialog.findViewById(R.id.btn_home);
         Button btn_nextstage = (Button) dialog.findViewById(R.id.btn_nextstage);
+        TextView battleresult = (TextView) dialog.findViewById(R.id.txt_battleresult);
+
+        if (current_enemyHp == 0) {
+            battleresult.setText("You won!");
+        } else {
+            battleresult.setText("You lost!");
+        }
 
         btn_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
+                onBackPressed();
             }
         });
         btn_nextstage.setOnClickListener(new View.OnClickListener() {
@@ -43,6 +52,12 @@ public class BattleActivity extends AppCompatActivity {
             }
         });
         dialog.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 
     private void getEnemyStats() {
@@ -137,6 +152,7 @@ public class BattleActivity extends AppCompatActivity {
     private void endBattle() {
         TextView playerHp = (TextView) findViewById(R.id.player_maxHp);
         TextView enemyHp = (TextView) findViewById(R.id.enemy_maxHp);
+
         if (current_enemyHp <= 0) {
             current_enemyHp = 0;
             enemyHp.setText(current_enemyHp + " / " + String.valueOf(enemies.getEnemy_hp()));

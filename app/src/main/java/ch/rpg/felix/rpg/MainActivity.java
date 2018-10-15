@@ -1,6 +1,5 @@
 package ch.rpg.felix.rpg;
 
-import android.app.Dialog;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -22,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     Player player = new Player();
     LevelAlgorithm la = new LevelAlgorithm();
+    private DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,22 +51,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.world:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new WorldFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new WorldFragment()).addToBackStack(null).commit();
                 break;
             case R.id.quest:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new QuestFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new QuestFragment()).addToBackStack(null).commit();
                 break;
             case R.id.inventory:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new InventoryFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new InventoryFragment()).addToBackStack(null).commit();
                 break;
             case R.id.character:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CharacterFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CharacterFragment()).addToBackStack(null).commit();
                 break;
             case R.id.skilltree:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SkilltreeFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SkilltreeFragment()).addToBackStack(null).commit();
                 break;
             case R.id.shop:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShopBuyFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShopBuyFragment()).addToBackStack(null).commit();
                 break;
             case R.id.settings:
                 Toast.makeText(this, "Settings not implemented yet", Toast.LENGTH_SHORT).show();

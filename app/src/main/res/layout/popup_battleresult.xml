@@ -2,21 +2,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="320dp"
     android:layout_height="450dp"
-    android:background="@color/colorPrimary"
     android:padding="5dp"
     android:layout_gravity="center">
+
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:id="@+id/txt_battleresult"
         android:layout_marginTop="20dp"
-        android:text="You win!"
         android:textAllCaps="false"
         android:textAlignment="center"
-        android:textSize="50dp"
-
-        />
+        android:textSize="50dp" />
 
     <View
         android:layout_width="match_parent"
@@ -41,13 +38,15 @@
             android:layout_width="100dp"
             android:layout_height="60dp"
             android:layout_weight="1"
-            android:text="Home" />
+            android:text="Back"
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/btn_nextstage"
             android:layout_width="100dp"
             android:layout_height="60dp"
             android:layout_weight="1"
+            android:visibility="gone"
             android:text="Next Stage" />
     </LinearLayout>
 </RelativeLayout>
