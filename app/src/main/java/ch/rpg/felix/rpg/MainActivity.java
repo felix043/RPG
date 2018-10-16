@@ -13,6 +13,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import ch.rpg.felix.rpg.Player.Player;
 import ch.rpg.felix.rpg.Player.LevelAlgorithm;
 import ch.rpg.felix.rpg.ShopSystem.ShopBuyFragment;
@@ -79,10 +81,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void showPlayerLevel() {
         NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
         View hView = navView.getHeaderView(0);
-        ;
         TextView navPlayername = (TextView) hView.findViewById(R.id.currentPlayerlevel);
+        TextView current_playerxp = (TextView) hView.findViewById(R.id.current_playerxp);
+        TextView xpforlevelup = (TextView) hView.findViewById(R.id.xpforlevelup);
         ProgressBar pb = (ProgressBar) hView.findViewById(R.id.player_xpbar);
+
         navPlayername.setText(String.valueOf(player.getPlayer_level()));
+        current_playerxp.setText(String.valueOf(la.getExpObtained()));
+        xpforlevelup.setText(String.valueOf(la.getExpForNextLv()));
         pb.setMax(la.getExpForNextLv());
         pb.setProgress(la.getExpObtained());
     }

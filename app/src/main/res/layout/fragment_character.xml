@@ -1,7 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@android:color/holo_purple">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
+
+    <ImageButton
+        android:id="@+id/mainhandslot"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/style_btn_equipment" />
+
+    <ImageButton
+        android:id="@+id/helmetslot"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_below="@+id/mainhandslot"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/style_btn_equipment" />
+
+    <ImageButton
+        android:id="@+id/gauntletslot"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_below="@+id/helmetslot"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/style_btn_equipment" />
+
+    <ImageButton
+        android:id="@+id/subhandslot"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/style_btn_equipment" />
+
+    <ImageButton
+        android:id="@+id/armorslot"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_below="@+id/subhandslot"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/style_btn_equipment" />
+
+    <ImageButton
+        android:id="@+id/bootsslot"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_below="@+id/armorslot"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/style_btn_equipment" />
 
 </RelativeLayout>

@@ -27,7 +27,7 @@ public class PrologueFragment extends Fragment {
         return view;
     }
 
-    private void getIntoBattleactivity() {
+    private void switchActivity() {
         Intent i = new Intent();
         i.setClass(getActivity(), BattleActivity.class);
         i.putExtra("stage", String.valueOf(stage));
@@ -44,7 +44,7 @@ public class PrologueFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 stage = 11;
-                getIntoBattleactivity();
+                switchActivity();
                 btn1_2.setVisibility(View.VISIBLE);
             }
         });
@@ -53,7 +53,7 @@ public class PrologueFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 stage = 12;
-                getIntoBattleactivity();
+                switchActivity();
                 btn1_3.setVisibility(View.VISIBLE);
             }
         });
@@ -62,7 +62,7 @@ public class PrologueFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 stage = 13;
-                getIntoBattleactivity();
+                switchActivity();
                 //btn1_4.setVisibility(View.VISIBLE);       fourth stage not implemented yet
             }
         });

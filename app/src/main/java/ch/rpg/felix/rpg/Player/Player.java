@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 
 public class Player extends AppCompatActivity {
 
-    LevelAlgorithm levelAlgorithm = new LevelAlgorithm();
+    private LevelAlgorithm levelAlgorithm = new LevelAlgorithm();
 
     private int player_max_hp;
 

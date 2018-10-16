@@ -109,7 +109,7 @@ public class BattleActivity extends AppCompatActivity {
         ProgressBar player_hpbar = (ProgressBar) findViewById(R.id.player_healthBar);
 
         current_playerHp = player_hpbar.getProgress();
-        current_playerHp = current_playerHp - 3;
+        current_playerHp = current_playerHp - 2;
         player_hpbar.setProgress(current_playerHp);
         playerHp.setText(current_playerHp + " / " + String.valueOf(player.getPlayer_max_hp()));
     }
