@@ -3,27 +3,34 @@ package ch.rpg.felix.rpg.Item;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 
 import java.util.List;
 
 public class ItemViewModel extends AndroidViewModel {
 
-    private MutableLiveData<List<Item>> item = null;
+    private LiveData<List<Item>> allItems;
+    private ItemRepository repository;
 
     public ItemViewModel(@NonNull Application application) {
         super(application);
-        item = new MutableLiveData<>();
-        item.setValue(ItemRepository.instance().getItem());
+        repository = new ItemRepository(application);
+        allItems = repository.getAllItems();
     }
 
-    LiveData<List<Item>> getItems() {
-        return item;
+    public void insert(Item item) {
+        repository.insert(item);
     }
 
-    public void createCookie(String itemname, int itemdamage) {
-        ItemRepository.instance().createItem(itemname, itemdamage);
-        item.setValue(ItemRepository.instance().getItem());
+    public void update(Item item) {
+        repository.update(item);
+    }
+
+    public void delete(Item item) {
+        repository.delete(item);
+    }
+
+    public LiveData<List<Item>> getAllItems() {
+        return allItems;
     }
 }

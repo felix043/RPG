@@ -1,42 +1,60 @@
 package ch.rpg.felix.rpg.Item;
 
+import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import ch.rpg.felix.rpg.R;
 
-public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
+public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
 
+    private List<Item> items = new ArrayList<>();
+
+    @NonNull
     @Override
-    public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemList = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_equipmentlist, parent, false);
-        return new ItemViewHolder(itemList);
+    public ItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.list_equipment, parent, false);
+        return new ItemHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(ItemViewHolder holder, int position) {
-        Item item = ItemRepository.instance().getItem().get(position);
-        holder.itemname.setText(item.getItemname());
-        holder.itemdamage.setText(item.getItemdamage());
+    public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
+        Item currentItem = items.get(position);
+        holder.itemname.setText(currentItem.getItem_name());
+        holder.itemdescription.setText("+ " + String.valueOf(currentItem.getItem_basedamage()) + " ATK");
     }
 
     @Override
     public int getItemCount() {
-        return ItemRepository.instance().getItem().size();
+        return items.size();
     }
 
-    public static class ItemViewHolder extends RecyclerView.ViewHolder {
+    public void setNotes(List<Item> items) {
+        this.items = items;
+        notifyDataSetChanged();
+    }
 
+    public class ItemHolder extends RecyclerView.ViewHolder {
         private TextView itemname;
-        private TextView itemdamage;
+        private TextView itemdescription;
+        private Button equipitem;
+        private CardView cardView;
 
-        public ItemViewHolder(View itemView) {
+        public ItemHolder(View itemView) {
             super(itemView);
             itemname = itemView.findViewById(R.id.txt_itemname);
-            itemdamage = itemView.findViewById(R.id.txt_details);
+            itemdescription = itemView.findViewById(R.id.txt_details);
+            equipitem = itemView.findViewById(R.id.btn_equip);
+            cardView = itemView.findViewById(R.id.cardview);
         }
     }
 }

@@ -1,37 +1,80 @@
 package ch.rpg.felix.rpg.Item;
 
-import java.util.ArrayList;
+import android.app.Application;
+import android.arch.lifecycle.LiveData;
+import android.os.AsyncTask;
+
 import java.util.List;
 
 public class ItemRepository {
 
-    private static ItemRepository instance = null;
-    private List<Item> items;
+    private ItemDao itemDao;
+    private LiveData<List<Item>> allItems;
 
-    public ItemRepository() {
-        items = new ArrayList<>();
-        loadItem();
+    public ItemRepository(Application application) {
+        ItemDatabase db = ItemDatabase.getInstance(application);
+        itemDao = db.itemDao();
+        allItems = itemDao.getAllItems();
     }
 
-    synchronized public static ItemRepository instance() {
-        if (instance == null) {
-            instance = new ItemRepository();
+    public void insert(Item item) {
+        new InsertItemAsyncTask(itemDao).execute(item);
+    }
+
+    public void update(Item item) {
+        new UpdateItemAsyncTask(itemDao).execute(item);
+    }
+
+    public void delete(Item item) {
+        new DeleteItemAsyncTask(itemDao).execute(item);
+    }
+
+    public LiveData<List<Item>> getAllItems() {
+        return allItems;
+    }
+
+    private static class InsertItemAsyncTask extends AsyncTask<Item, Void, Void> {
+
+        private ItemDao itemDao;
+
+        private InsertItemAsyncTask(ItemDao itemDao) {
+            this.itemDao = itemDao;
         }
-        return instance;
+
+        @Override
+        protected Void doInBackground(Item... items) {
+            itemDao.insert(items[0]);
+            return null;
+        }
     }
 
-    public void createItem(String itemname, int itemdamage) {
-        Item item = new Item(itemname, itemdamage);
-        items.add(item);
+    private static class UpdateItemAsyncTask extends AsyncTask<Item, Void, Void> {
+
+        private ItemDao itemDao;
+
+        private UpdateItemAsyncTask(ItemDao itemDao) {
+            this.itemDao = itemDao;
+        }
+
+        @Override
+        protected Void doInBackground(Item... items) {
+            itemDao.update(items[0]);
+            return null;
+        }
     }
 
-    public List<Item> getItem() {
-        return items;
-    }
+    private static class DeleteItemAsyncTask extends AsyncTask<Item, Void, Void> {
 
-    private void loadItem() {
-        createItem("Wood Sword", 3);
-        createItem("Bronze Sword", 5);
-        createItem("Iron Sword", 8);
+        private ItemDao itemDao;
+
+        private DeleteItemAsyncTask(ItemDao itemDao) {
+            this.itemDao = itemDao;
+        }
+
+        @Override
+        protected Void doInBackground(Item... items) {
+            itemDao.delete(items[0]);
+            return null;
+        }
     }
 }
