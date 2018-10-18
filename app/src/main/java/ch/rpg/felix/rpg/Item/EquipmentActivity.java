@@ -29,11 +29,52 @@ public class EquipmentActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         viewModel = ViewModelProviders.of(this).get(ItemViewModel.class);
-        viewModel.getAllItems().observe(this, new Observer<List<Item>>() {
-            @Override
-            public void onChanged(@Nullable List<Item> items) {
-                adapter.setNotes(items);
-            }
-        });
+
+
+        int equipID = Integer.parseInt(getIntent().getStringExtra("equipID"));
+        if (equipID == 1) {
+            viewModel.getAllWeapons().observe(this, new Observer<List<Item>>() {
+                @Override
+                public void onChanged(@Nullable List<Item> items) {
+                    adapter.setNotes(items);
+                }
+            });
+        } else if (equipID == 2) {
+            viewModel.getAllOffhands().observe(this, new Observer<List<Item>>() {
+                @Override
+                public void onChanged(@Nullable List<Item> items) {
+                    adapter.setNotes(items);
+                }
+            });
+        } else if (equipID == 3) {
+            viewModel.getAllHelmets().observe(this, new Observer<List<Item>>() {
+                @Override
+                public void onChanged(@Nullable List<Item> items) {
+                    adapter.setNotes(items);
+                }
+            });
+        } else if (equipID == 4) {
+            viewModel.getAllGauntlets().observe(this, new Observer<List<Item>>() {
+                @Override
+                public void onChanged(@Nullable List<Item> items) {
+                    adapter.setNotes(items);
+                }
+            });
+        } else if (equipID == 5) {
+            viewModel.getAllArmors().observe(this, new Observer<List<Item>>() {
+                @Override
+                public void onChanged(@Nullable List<Item> items) {
+                    adapter.setNotes(items);
+                }
+            });
+        } else if (equipID == 6) {
+            viewModel.getAllBoots().observe(this, new Observer<List<Item>>() {
+                @Override
+                public void onChanged(@Nullable List<Item> items) {
+                    adapter.setNotes(items);
+                }
+            });
+        }
     }
 }
+

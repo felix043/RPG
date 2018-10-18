@@ -23,4 +23,22 @@ public interface ItemDao {
 
     @Query("SELECT * FROM item_table ORDER BY item_name DESC")
     LiveData<List<Item>> getAllItems();
+
+    @Query("SELECT * FROM item_table WHERE item_category in (1) ORDER BY item_name DESC")
+    LiveData<List<Item>> getAllWeapons();
+
+    @Query("SELECT * FROM item_table WHERE item_category in (2) ORDER BY item_name DESC")
+    LiveData<List<Item>> getAllOffhands();
+
+    @Query("SELECT * FROM item_table WHERE item_category in (3) ORDER BY item_name DESC")
+    LiveData<List<Item>> getAllHelmets();
+
+    @Query("SELECT * FROM item_table WHERE item_category in (4) ORDER BY item_name DESC")
+    LiveData<List<Item>> getAllGauntlets();
+
+    @Query("SELECT * FROM item_table WHERE item_category in (5) ORDER BY item_name DESC")
+    LiveData<List<Item>> getAllArmors();
+
+    @Query("SELECT * FROM item_table WHERE item_category in (6) ORDER BY item_name DESC")
+    LiveData<List<Item>> getAllBoots();
 }

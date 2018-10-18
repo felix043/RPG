@@ -1,7 +1,6 @@
 package ch.rpg.felix.rpg.Item;
 
 import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,14 +46,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
         private TextView itemname;
         private TextView itemdescription;
         private Button equipitem;
-        private CardView cardView;
-
         public ItemHolder(View itemView) {
             super(itemView);
             itemname = itemView.findViewById(R.id.txt_itemname);
             itemdescription = itemView.findViewById(R.id.txt_details);
             equipitem = itemView.findViewById(R.id.btn_equip);
-            cardView = itemView.findViewById(R.id.cardview);
         }
     }
 }

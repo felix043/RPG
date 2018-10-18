@@ -16,11 +16,16 @@ public class Item {
     private int item_basedamage;
     private int item_damagemodifier;
 
-    public Item(String item_name, String item_description, int item_basedamage, int item_damagemodifier) {
+    private int item_category;
+    private int item_hpincrement;
+
+    public Item(int item_category, String item_name, String item_description, int item_basedamage, int item_damagemodifier, int item_hpincrement) {
+        this.item_category = item_category;
         this.item_name = item_name;
         this.item_description = item_description;
         this.item_basedamage = item_basedamage;
         this.item_damagemodifier = item_damagemodifier;
+        this.item_hpincrement = item_hpincrement;
     }
 
     public int getId() {
@@ -29,6 +34,14 @@ public class Item {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getItem_category() {
+        return item_category;
+    }
+
+    public int getItem_hpincrement() {
+        return item_hpincrement;
     }
 
     public String getItem_name() {
