@@ -5,16 +5,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
-
-import ch.rpg.felix.rpg.BattleSystem.BattleActivity;
-import ch.rpg.felix.rpg.WorldFragmentChildren.PrologueFragment;
 
 public class InventoryFragment extends Fragment {
 

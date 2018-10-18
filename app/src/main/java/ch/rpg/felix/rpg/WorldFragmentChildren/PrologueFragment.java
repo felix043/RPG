@@ -9,10 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import ch.rpg.felix.rpg.BattleSystem.BattleActivity;
-import ch.rpg.felix.rpg.BattleSystem.Enemies;
 import ch.rpg.felix.rpg.R;
 
 public class PrologueFragment extends Fragment {

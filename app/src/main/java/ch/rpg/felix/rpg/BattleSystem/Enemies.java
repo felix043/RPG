@@ -1,7 +1,5 @@
 package ch.rpg.felix.rpg.BattleSystem;
 
-import java.util.Random;
-
 public class Enemies {
 
     private int enemy_hp;
