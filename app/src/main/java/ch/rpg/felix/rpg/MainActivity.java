@@ -1,5 +1,6 @@
 package ch.rpg.felix.rpg;
 
+import android.arch.lifecycle.LiveData;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Player player = new Player();
     LevelAlgorithm la = new LevelAlgorithm();
     private DrawerLayout drawer;
+    private LiveData<ProgressBar> exp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

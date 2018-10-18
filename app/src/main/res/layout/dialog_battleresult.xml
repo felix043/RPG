@@ -24,13 +24,62 @@
         android:layout_marginRight="20dp"
         android:background="#000" />
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_above="@id/linearlayout_back"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp">
+
+        <ProgressBar
+            android:id="@+id/player_xpoptainedafterbattle"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="200dp"
+            android:layout_height="20dp"
+            android:background="#C0C0C0"
+            android:progressDrawable="@drawable/style_progressbar_health"
+            android:progressTint="#0000FF"
+            android:visibility="visible" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+
+            <TextView
+                android:id="@+id/current_playerxp_dialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="2dp"
+                android:textColor="#000" />
+
+            <TextView
+                android:id="@+id/slash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="/"
+                android:textColor="#000" />
+
+            <TextView
+                android:id="@+id/xpforlevelup_dialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:layout_toEndOf="@+id/slash"
+                android:textColor="#000" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:id="@+id/linearlayout_back"
         android:layout_gravity="bottom"
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="0dp">
 
         <Button

@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import ch.rpg.felix.rpg.Player.LevelAlgorithm;
 import ch.rpg.felix.rpg.Player.Player;
 import ch.rpg.felix.rpg.R;
 
@@ -19,15 +20,29 @@ public class BattleActivity extends AppCompatActivity {
     Player player = new Player();
     Enemies enemies = new Enemies();
     Skills skills = new Skills();
+    LevelAlgorithm la = new LevelAlgorithm();
 
     private int current_enemyHp;
     private int current_playerHp;
 
     private void showBattleresult() {
-        dialog.setContentView(R.layout.popup_battleresult);
+        int xpForNextLevel;
+        int currentXpObtained;
+
+        dialog.setContentView(R.layout.dialog_battleresult);
         Button btn_home = (Button) dialog.findViewById(R.id.btn_home);
         Button btn_nextstage = (Button) dialog.findViewById(R.id.btn_nextstage);
+        TextView txt_currentPlayerxp = (TextView) dialog.findViewById(R.id.current_playerxp_dialog);
+        TextView txt_xpForNextLevel = (TextView) dialog.findViewById(R.id.xpforlevelup_dialog);
         TextView battleresult = (TextView) dialog.findViewById(R.id.txt_battleresult);
+        ProgressBar pb_xpoptainedafterbattle = (ProgressBar) dialog.findViewById(R.id.player_xpoptainedafterbattle);
+
+        xpForNextLevel = la.getExpForNextLv();
+        currentXpObtained = la.getExpObtained();
+        txt_currentPlayerxp.setText(String.valueOf(currentXpObtained));
+        txt_xpForNextLevel.setText(String.valueOf(xpForNextLevel));
+        pb_xpoptainedafterbattle.setMax(xpForNextLevel);
+        pb_xpoptainedafterbattle.setProgress(currentXpObtained);
 
         if (current_enemyHp == 0) {
             battleresult.setText("You won!");
@@ -154,6 +169,7 @@ public class BattleActivity extends AppCompatActivity {
             current_enemyHp = 0;
             enemyHp.setText(current_enemyHp + " / " + String.valueOf(enemies.getEnemy_hp()));
             showBattleresult();
+            la.setExpObtained(la.getExpObtained() + 10);
         } else if (current_playerHp <= 0) {
             current_playerHp = 0;
             playerHp.setText(current_playerHp + " / " + String.valueOf(player.getPlayer_max_hp()));

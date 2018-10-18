@@ -34,10 +34,19 @@ public class LevelAlgorithm {
     }
 
     public int getExpForNextLv() {
+        if (currentPlayerlevel <= 200) {
+            expForNextLv = (int) Math.pow(currentPlayerlevel * currentPlayerlevel * 3.5, 1.001) + 10;
+        } else if (currentPlayerlevel > 200 && currentPlayerlevel < 250) {
+            expForNextLv = (int) Math.pow(currentPlayerlevel * currentPlayerlevel * 5, 1.003);
+        }
         return expForNextLv;
     }
 
     public int getExpObtained() {
         return expObtained;
+    }
+
+    public void setExpObtained(int expObtained) {
+        this.expObtained = expObtained;
     }
 }
