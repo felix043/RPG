@@ -1,4 +1,4 @@
-package ch.rpg.felix.rpg.Item;
+package ch.rpg.felix.rpg.Database;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;

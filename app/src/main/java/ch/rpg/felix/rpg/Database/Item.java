@@ -1,4 +1,4 @@
-package ch.rpg.felix.rpg.Item;
+package ch.rpg.felix.rpg.Database;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
@@ -19,13 +19,21 @@ public class Item {
     private int item_category;
     private int item_hpincrement;
 
-    public Item(int item_category, String item_name, String item_description, int item_basedamage, int item_damagemodifier, int item_hpincrement) {
+    private int item_costbronze;
+    private int item_costsilver;
+    private int item_costgold;
+
+
+    public Item(int item_category, String item_name, String item_description, int item_basedamage, int item_damagemodifier, int item_hpincrement, int item_costbronze, int item_costsilver, int item_costgold) {
         this.item_category = item_category;
         this.item_name = item_name;
         this.item_description = item_description;
         this.item_basedamage = item_basedamage;
         this.item_damagemodifier = item_damagemodifier;
         this.item_hpincrement = item_hpincrement;
+        this.item_costbronze = item_costbronze;
+        this.item_costsilver = item_costsilver;
+        this.item_costgold = item_costgold;
     }
 
     public int getId() {
@@ -58,5 +66,17 @@ public class Item {
 
     public int getItem_damagemodifier() {
         return item_damagemodifier;
+    }
+
+    public int getItem_costbronze() {
+        return item_costbronze;
+    }
+
+    public int getItem_costsilver() {
+        return item_costsilver;
+    }
+
+    public int getItem_costgold() {
+        return item_costgold;
     }
 }

@@ -1,4 +1,4 @@
-package ch.rpg.felix.rpg.Item;
+package ch.rpg.felix.rpg.Database;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +13,7 @@ import java.util.List;
 
 import ch.rpg.felix.rpg.R;
 
-public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
+public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ItemHolder> {
 
     private List<Item> items = new ArrayList<>();
 
@@ -29,7 +29,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
     public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
         Item currentItem = items.get(position);
         holder.itemname.setText(currentItem.getItem_name());
-        holder.itemdescription.setText("+ " + String.valueOf(currentItem.getItem_basedamage()) + " ATK");
+        holder.itemdescription.setText(currentItem.getItem_description());
+        holder.equipitem.setText("Buy");
     }
 
     @Override
@@ -46,6 +47,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
         private TextView itemname;
         private TextView itemdescription;
         private Button equipitem;
+
         public ItemHolder(View itemView) {
             super(itemView);
             itemname = itemView.findViewById(R.id.txt_itemname);

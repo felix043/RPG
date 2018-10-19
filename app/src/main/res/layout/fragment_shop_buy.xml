@@ -1,45 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
 
-        <android.support.design.widget.AppBarLayout
-            android:id="@+id/appbar"
+    <RelativeLayout
+        android:id="@+id/rel_stats"
             android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <TextView
+            android:id="@+id/txt_shop"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/appbar_padding_top"
-            android:theme="@style/AppTheme.AppBarOverlay">
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Shop"
+            android:textColor="#000"
+            android:textSize="30dp" />
 
-            <android.support.design.widget.TabLayout
-                android:id="@+id/tabs"
+        <LinearLayout
+            android:id="@+id/lin_money"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_shop"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal">
 
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
 
-                <android.support.design.widget.TabItem
-                    android:id="@+id/tabShopBuy"
+                <ImageView
+                    android:id="@+id/ic_bronzecoin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/ic_bronzecoin" />
+
+                <TextView
+                    android:id="@+id/bronzecoin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Buy" />
+                    android:layout_alignBottom="@+id/ic_bronzecoin"
+                    android:layout_marginStart="6dp"
+                    android:layout_toEndOf="@+id/ic_bronzecoin"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:text="0"
+                    android:textColor="#000" />
 
-                <android.support.design.widget.TabItem
-                    android:id="@+id/tabShopSell"
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/ic_silvercoin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/ic_silvercoin" />
+
+                <TextView
+                    android:id="@+id/silvercoin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Sell" />
+                    android:layout_alignBottom="@+id/ic_silvercoin"
+                    android:layout_marginStart="6dp"
+                    android:layout_toEndOf="@+id/ic_silvercoin"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:text="0"
+                    android:textColor="#000" />
 
-            </android.support.design.widget.TabLayout>
-        </android.support.design.widget.AppBarLayout>
-    </LinearLayout>
+            </RelativeLayout>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/pafger"
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/id_goldcoin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/ic_goldcoin" />
+
+                <TextView
+                    android:id="@+id/goldcoin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/id_goldcoin"
+                    android:layout_marginStart="6dp"
+                    android:layout_toEndOf="@+id/id_goldcoin"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:text="0"
+                    android:textColor="#000" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/blackline"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v4.view.ViewPager>
+        android:layout_height="1dp"
+        android:layout_alignBottom="@+id/rel_stats"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#000" />
 
-</android.support.constraint.ConstraintLayout>
+    <RelativeLayout
+        android:id="@+id/rel_shoplist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list_shop"
+            android:layout_width="match_parent"
+
+            android:layout_height="match_parent"
+            tools:listitem="@layout/list_shop"></android.support.v7.widget.RecyclerView>
+
+    </RelativeLayout>
+
+</LinearLayout>

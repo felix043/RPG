@@ -10,6 +10,9 @@ import android.support.v7.widget.RecyclerView;
 
 import java.util.List;
 
+import ch.rpg.felix.rpg.Database.Item;
+import ch.rpg.felix.rpg.Database.ItemAdapter;
+import ch.rpg.felix.rpg.Database.ItemViewModel;
 import ch.rpg.felix.rpg.R;
 
 public class EquipmentActivity extends AppCompatActivity {
