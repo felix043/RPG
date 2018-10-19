@@ -9,6 +9,7 @@ import java.util.List;
 
 public class ItemViewModel extends AndroidViewModel {
 
+    private ItemRepository repository;
     private LiveData<List<Item>> allItems;
     private LiveData<List<Item>> allWeapons;
     private LiveData<List<Item>> allOffhands;
@@ -16,7 +17,14 @@ public class ItemViewModel extends AndroidViewModel {
     private LiveData<List<Item>> allGauntlets;
     private LiveData<List<Item>> allArmors;
     private LiveData<List<Item>> allBoots;
-    private ItemRepository repository;
+
+    private LiveData<List<ItemsOwnedEntity>> allOwnedItems;
+    private LiveData<List<ItemsOwnedEntity>> allOwnedWeapons;
+    private LiveData<List<ItemsOwnedEntity>> allOwnedOffhands;
+    private LiveData<List<ItemsOwnedEntity>> allOwnedHelmets;
+    private LiveData<List<ItemsOwnedEntity>> allOwnedGauntlets;
+    private LiveData<List<ItemsOwnedEntity>> allOwnedArmors;
+    private LiveData<List<ItemsOwnedEntity>> allOwnedBoots;
 
     public ItemViewModel(@NonNull Application application) {
         super(application);
@@ -28,6 +36,15 @@ public class ItemViewModel extends AndroidViewModel {
         allGauntlets = repository.getAllGauntlets();
         allArmors = repository.getAllArmors();
         allBoots = repository.getAllBoots();
+        allOwnedItems = repository.getAllOwnedItems();
+
+        allOwnedItems = repository.getAllOwnedItems();
+        allOwnedWeapons = repository.getAllOwnedWeapons();
+        allOwnedOffhands = repository.getAllOwnedOffhands();
+        allOwnedHelmets = repository.getAllOwnedHelmets();
+        allOwnedGauntlets = repository.getAllOwnedGauntlets();
+        allOwnedArmors = repository.getAllOwnedArmors();
+        allOwnedBoots = repository.getAllOwnedBoots();
     }
 
     public void insert(Item item) {
@@ -41,6 +58,20 @@ public class ItemViewModel extends AndroidViewModel {
     public void delete(Item item) {
         repository.delete(item);
     }
+
+    public void insertO(ItemsOwnedEntity itemsOwnedEntity) {
+        repository.insertO(itemsOwnedEntity);
+    }
+
+    public void updateO(ItemsOwnedEntity itemsOwnedEntity) {
+        repository.updateO(itemsOwnedEntity);
+    }
+
+    public void deleteO(ItemsOwnedEntity itemsOwnedEntity) {
+        repository.deleteO(itemsOwnedEntity);
+    }
+
+
 
     public LiveData<List<Item>> getAllItems() {
         return allItems;
@@ -68,5 +99,34 @@ public class ItemViewModel extends AndroidViewModel {
 
     public LiveData<List<Item>> getAllBoots() {
         return allBoots;
+    }
+
+
+    public LiveData<List<ItemsOwnedEntity>> allOwnedItems() {
+        return allOwnedItems;
+    }
+
+    public LiveData<List<ItemsOwnedEntity>> getAllOwnedWeapons() {
+        return allOwnedWeapons;
+    }
+
+    public LiveData<List<ItemsOwnedEntity>> getAllOwnedOffhands() {
+        return allOwnedOffhands;
+    }
+
+    public LiveData<List<ItemsOwnedEntity>> getAllOwnedHelmets() {
+        return allOwnedHelmets;
+    }
+
+    public LiveData<List<ItemsOwnedEntity>> getAllOwnedGauntlets() {
+        return allOwnedGauntlets;
+    }
+
+    public LiveData<List<ItemsOwnedEntity>> getAllOwnedArmors() {
+        return allOwnedArmors;
+    }
+
+    public LiveData<List<ItemsOwnedEntity>> getAllOwnedBoots() {
+        return allOwnedBoots;
     }
 }

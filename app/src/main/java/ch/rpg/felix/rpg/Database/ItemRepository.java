@@ -8,6 +8,17 @@ import java.util.List;
 
 public class ItemRepository {
 
+    //Items which player owns
+    private ItemsOwnedDao itemsOwnedDao;
+    private LiveData<List<ItemsOwnedEntity>> allOwnedItems;
+    private LiveData<List<ItemsOwnedEntity>> allOwnedWeapons;
+    private LiveData<List<ItemsOwnedEntity>> allOwnedOffhands;
+    private LiveData<List<ItemsOwnedEntity>> allOwnedHelmets;
+    private LiveData<List<ItemsOwnedEntity>> allOwnedGauntlet;
+    private LiveData<List<ItemsOwnedEntity>> allOwnedArmors;
+    private LiveData<List<ItemsOwnedEntity>> allOwnedBoots;
+
+    //All Items ingame
     private ItemDao itemDao;
     private LiveData<List<Item>> allItems;
     private LiveData<List<Item>> allWeapons;
@@ -19,6 +30,16 @@ public class ItemRepository {
 
     public ItemRepository(Application application) {
         ItemDatabase db = ItemDatabase.getInstance(application);
+
+        itemsOwnedDao = db.itemsOwnedDao();
+        allOwnedItems = itemsOwnedDao.getAllOwnedItems();
+        allOwnedWeapons = itemsOwnedDao.getAllOwnedWeapons();
+        allOwnedOffhands = itemsOwnedDao.getAllOwnedOffhands();
+        allOwnedHelmets = itemsOwnedDao.getAllOwnedHelmets();
+        allOwnedGauntlet = itemsOwnedDao.getAllOwnedGauntlets();
+        allOwnedArmors = itemsOwnedDao.getAllOwnedArmors();
+        allOwnedBoots = itemsOwnedDao.getAllOwnedBoots();
+
         itemDao = db.itemDao();
         allItems = itemDao.getAllItems();
         allWeapons = itemDao.getAllWeapons();
@@ -40,6 +61,48 @@ public class ItemRepository {
     public void delete(Item item) {
         new DeleteItemAsyncTask(itemDao).execute(item);
     }
+
+    public void insertO(ItemsOwnedEntity itemsOwnedEntity) {
+        new InsertOwnedItemAsyncTask(itemsOwnedDao).execute(itemsOwnedEntity);
+    }
+
+    public void updateO(ItemsOwnedEntity itemsOwnedEntity) {
+        new UpdateOwnedItemAsyncTask(itemsOwnedDao).execute(itemsOwnedEntity);
+    }
+
+    public void deleteO(ItemsOwnedEntity itemsOwnedEntity) {
+        new DeleteOwnedItemAsyncTask(itemsOwnedDao).execute(itemsOwnedEntity);
+    }
+
+
+    public LiveData<List<ItemsOwnedEntity>> getAllOwnedItems() {
+        return allOwnedItems;
+    }
+
+    public LiveData<List<ItemsOwnedEntity>> getAllOwnedWeapons() {
+        return allOwnedWeapons;
+    }
+
+    public LiveData<List<ItemsOwnedEntity>> getAllOwnedOffhands() {
+        return allOwnedOffhands;
+    }
+
+    public LiveData<List<ItemsOwnedEntity>> getAllOwnedHelmets() {
+        return allOwnedHelmets;
+    }
+
+    public LiveData<List<ItemsOwnedEntity>> getAllOwnedGauntlets() {
+        return allOwnedGauntlet;
+    }
+
+    public LiveData<List<ItemsOwnedEntity>> getAllOwnedArmors() {
+        return allOwnedArmors;
+    }
+
+    public LiveData<List<ItemsOwnedEntity>> getAllOwnedBoots() {
+        return allOwnedBoots;
+    }
+
 
     public LiveData<List<Item>> getAllItems() {
         return allItems;
@@ -110,6 +173,51 @@ public class ItemRepository {
         @Override
         protected Void doInBackground(Item... items) {
             itemDao.delete(items[0]);
+            return null;
+        }
+    }
+
+    private static class InsertOwnedItemAsyncTask extends AsyncTask<ItemsOwnedEntity, Void, Void> {
+
+        private ItemsOwnedDao ItemsOwnedDao;
+
+        private InsertOwnedItemAsyncTask(ItemsOwnedDao itemsOwnedDao) {
+            this.ItemsOwnedDao = itemsOwnedDao;
+        }
+
+        @Override
+        protected Void doInBackground(ItemsOwnedEntity... itemsOwnedEntities) {
+            ItemsOwnedDao.insertO(itemsOwnedEntities[0]);
+            return null;
+        }
+    }
+
+    private static class UpdateOwnedItemAsyncTask extends AsyncTask<ItemsOwnedEntity, Void, Void> {
+
+        private ItemsOwnedDao ItemsOwnedDao;
+
+        private UpdateOwnedItemAsyncTask(ItemsOwnedDao itemsOwnedDao) {
+            this.ItemsOwnedDao = itemsOwnedDao;
+        }
+
+        @Override
+        protected Void doInBackground(ItemsOwnedEntity... itemsOwnedEntities) {
+            ItemsOwnedDao.insertO(itemsOwnedEntities[0]);
+            return null;
+        }
+    }
+
+    private static class DeleteOwnedItemAsyncTask extends AsyncTask<ItemsOwnedEntity, Void, Void> {
+
+        private ItemsOwnedDao ItemsOwnedDao;
+
+        private DeleteOwnedItemAsyncTask(ItemsOwnedDao itemsOwnedDao) {
+            this.ItemsOwnedDao = itemsOwnedDao;
+        }
+
+        @Override
+        protected Void doInBackground(ItemsOwnedEntity... itemsOwnedEntities) {
+            ItemsOwnedDao.insertO(itemsOwnedEntities[0]);
             return null;
         }
     }

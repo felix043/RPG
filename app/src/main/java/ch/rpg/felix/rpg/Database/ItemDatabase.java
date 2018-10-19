@@ -7,18 +7,24 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.os.AsyncTask;
 
-@Database(entities = Item.class, version = 4)
+@Database(entities = {Item.class, ItemsOwnedEntity.class}, version = 5)
 public abstract class ItemDatabase extends RoomDatabase {
 
-    private static ItemDatabase instance;
     private static RoomDatabase.Callback itemCallback = new RoomDatabase.Callback() {
 
         @Override
         public void onCreate(SupportSQLiteDatabase db) {
             super.onCreate(db);
-            new PopulateDbAsyncTask(instance).execute();
+            new PopulateItemAsyncTask(instance).execute();
+            new PopulateItemsOwnedAsyncTask(instance).execute();
         }
     };
+
+    public abstract ItemDao itemDao();
+
+    private static ItemDatabase instance;
+
+    public abstract ItemsOwnedDao itemsOwnedDao();
 
     public static synchronized ItemDatabase getInstance(Context context) {
         if (instance == null) {
@@ -31,12 +37,10 @@ public abstract class ItemDatabase extends RoomDatabase {
         return instance;
     }
 
-    public abstract ItemDao itemDao();
-
-    private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void> {
+    private static class PopulateItemAsyncTask extends AsyncTask<Void, Void, Void> {
         private ItemDao itemDao;
 
-        private PopulateDbAsyncTask(ItemDatabase db) {
+        private PopulateItemAsyncTask(ItemDatabase db) {
             itemDao = db.itemDao();
         }
 
@@ -50,6 +54,21 @@ public abstract class ItemDatabase extends RoomDatabase {
             itemDao.insert(new Item(4, "Leather Gauntlet", "Tough leather gauntlet", 0, 1, 2, 15, 0, 0));
             itemDao.insert(new Item(5, "Leather Armor", "Tough leather armor", 0, 1, 5, 25, 0, 0));
             itemDao.insert(new Item(6, "Leather Boots", "Tough leather boots", 0, 1, 3, 15, 0, 0));
+
+            return null;
+        }
+    }
+
+    private static class PopulateItemsOwnedAsyncTask extends AsyncTask<Void, Void, Void> {
+        private ItemsOwnedDao itemsOwnedDao;
+
+        private PopulateItemsOwnedAsyncTask(ItemDatabase db) {
+            itemsOwnedDao = db.itemsOwnedDao();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            itemsOwnedDao.insertO(new ItemsOwnedEntity(1, "Wooden Sword", "A sturdy wooden sword", 3, 1, 0, 25, 0, 0));
 
             return null;
         }

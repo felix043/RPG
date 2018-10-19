@@ -10,9 +10,9 @@ import android.support.v7.widget.RecyclerView;
 
 import java.util.List;
 
-import ch.rpg.felix.rpg.Database.Item;
-import ch.rpg.felix.rpg.Database.ItemAdapter;
+import ch.rpg.felix.rpg.Database.ItemOwnedAdapter;
 import ch.rpg.felix.rpg.Database.ItemViewModel;
+import ch.rpg.felix.rpg.Database.ItemsOwnedEntity;
 import ch.rpg.felix.rpg.R;
 
 public class EquipmentActivity extends AppCompatActivity {
@@ -28,7 +28,7 @@ public class EquipmentActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 
-        final ItemAdapter adapter = new ItemAdapter();
+        final ItemOwnedAdapter adapter = new ItemOwnedAdapter();
         recyclerView.setAdapter(adapter);
 
         viewModel = ViewModelProviders.of(this).get(ItemViewModel.class);
@@ -36,45 +36,45 @@ public class EquipmentActivity extends AppCompatActivity {
 
         int equipID = Integer.parseInt(getIntent().getStringExtra("equipID"));
         if (equipID == 1) {
-            viewModel.getAllWeapons().observe(this, new Observer<List<Item>>() {
+            viewModel.getAllOwnedWeapons().observe(this, new Observer<List<ItemsOwnedEntity>>() {
                 @Override
-                public void onChanged(@Nullable List<Item> items) {
-                    adapter.setNotes(items);
+                public void onChanged(@Nullable List<ItemsOwnedEntity> itemsOwnedEntities) {
+                    adapter.setOwnedNotes(itemsOwnedEntities);
                 }
             });
         } else if (equipID == 2) {
-            viewModel.getAllOffhands().observe(this, new Observer<List<Item>>() {
+            viewModel.getAllOwnedOffhands().observe(this, new Observer<List<ItemsOwnedEntity>>() {
                 @Override
-                public void onChanged(@Nullable List<Item> items) {
-                    adapter.setNotes(items);
+                public void onChanged(@Nullable List<ItemsOwnedEntity> itemsOwnedEntities) {
+                    adapter.setOwnedNotes(itemsOwnedEntities);
                 }
             });
         } else if (equipID == 3) {
-            viewModel.getAllHelmets().observe(this, new Observer<List<Item>>() {
+            viewModel.getAllOwnedHelmets().observe(this, new Observer<List<ItemsOwnedEntity>>() {
                 @Override
-                public void onChanged(@Nullable List<Item> items) {
-                    adapter.setNotes(items);
+                public void onChanged(@Nullable List<ItemsOwnedEntity> itemsOwnedEntities) {
+                    adapter.setOwnedNotes(itemsOwnedEntities);
                 }
             });
         } else if (equipID == 4) {
-            viewModel.getAllGauntlets().observe(this, new Observer<List<Item>>() {
+            viewModel.getAllOwnedGauntlets().observe(this, new Observer<List<ItemsOwnedEntity>>() {
                 @Override
-                public void onChanged(@Nullable List<Item> items) {
-                    adapter.setNotes(items);
+                public void onChanged(@Nullable List<ItemsOwnedEntity> itemsOwnedEntities) {
+                    adapter.setOwnedNotes(itemsOwnedEntities);
                 }
             });
         } else if (equipID == 5) {
-            viewModel.getAllArmors().observe(this, new Observer<List<Item>>() {
+            viewModel.getAllOwnedArmors().observe(this, new Observer<List<ItemsOwnedEntity>>() {
                 @Override
-                public void onChanged(@Nullable List<Item> items) {
-                    adapter.setNotes(items);
+                public void onChanged(@Nullable List<ItemsOwnedEntity> itemsOwnedEntities) {
+                    adapter.setOwnedNotes(itemsOwnedEntities);
                 }
             });
         } else if (equipID == 6) {
-            viewModel.getAllBoots().observe(this, new Observer<List<Item>>() {
+            viewModel.getAllOwnedBoots().observe(this, new Observer<List<ItemsOwnedEntity>>() {
                 @Override
-                public void onChanged(@Nullable List<Item> items) {
-                    adapter.setNotes(items);
+                public void onChanged(@Nullable List<ItemsOwnedEntity> itemsOwnedEntities) {
+                    adapter.setOwnedNotes(itemsOwnedEntities);
                 }
             });
         }

@@ -26,11 +26,18 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ItemHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ItemHolder holder, final int position) {
         Item currentItem = items.get(position);
         holder.itemname.setText(currentItem.getItem_name());
         holder.itemdescription.setText(currentItem.getItem_description());
         holder.equipitem.setText("Buy");
+
+        holder.equipitem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder.equipitem.setText(String.valueOf(position));
+            }
+        });
     }
 
     @Override

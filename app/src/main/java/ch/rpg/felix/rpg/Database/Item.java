@@ -15,14 +15,11 @@ public class Item {
     private String item_description;
     private int item_basedamage;
     private int item_damagemodifier;
-
     private int item_category;
     private int item_hpincrement;
-
     private int item_costbronze;
     private int item_costsilver;
     private int item_costgold;
-
 
     public Item(int item_category, String item_name, String item_description, int item_basedamage, int item_damagemodifier, int item_hpincrement, int item_costbronze, int item_costsilver, int item_costgold) {
         this.item_category = item_category;

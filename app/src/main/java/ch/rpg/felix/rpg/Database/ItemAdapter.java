@@ -16,6 +16,7 @@ import ch.rpg.felix.rpg.R;
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
 
     private List<Item> items = new ArrayList<>();
+    private List<ItemsOwnedEntity> itemsOwnedEntity = new ArrayList<>();
 
     @NonNull
     @Override
@@ -40,6 +41,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
 
     public void setNotes(List<Item> items) {
         this.items = items;
+        notifyDataSetChanged();
+    }
+
+    public void setOwnedNotes(List<ItemsOwnedEntity> itemsOwnedEntity) {
+        this.itemsOwnedEntity = itemsOwnedEntity;
         notifyDataSetChanged();
     }
 
