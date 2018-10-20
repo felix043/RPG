@@ -1,14 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@android:color/holo_red_light">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/gridlayout">
 
 
-    <TextView
-        android:id="@+id/textView4"
+    </RelativeLayout>
+
+    <GridLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/gridlayout"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="Skilltree" />
+        android:layout_alignParentBottom="true"
+        android:columnCount="2"
+        android:rowCount="2">
+
+        <Button
+            android:id="@+id/btn_offenseskill"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/style_btn_round"
+            android:backgroundTint="@color/offense"
+            android:text="Offense"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_defenseskill"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/style_btn_round"
+            android:backgroundTint="@color/defense"
+            android:text="Defense"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_utilityskill"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/style_btn_round"
+            android:backgroundTint="@color/utility"
+            android:text="Utility"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_passiveskill"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/style_btn_round"
+            android:backgroundTint="@color/passive"
+            android:text="Passive"
+            android:textAllCaps="false" />
+
+    </GridLayout>
+
+
 </RelativeLayout>

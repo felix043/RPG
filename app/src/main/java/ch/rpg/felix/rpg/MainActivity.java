@@ -14,9 +14,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import ch.rpg.felix.rpg.BattleSystem.Player;
 import ch.rpg.felix.rpg.Player.LevelAlgorithm;
-import ch.rpg.felix.rpg.Player.Player;
 import ch.rpg.felix.rpg.ShopSystem.ShopBuyFragment;
+import ch.rpg.felix.rpg.Skills.SkilltreeFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 

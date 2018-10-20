@@ -43,8 +43,8 @@ public class ShopBuyFragment extends Fragment {
 
         viewModel.getAllItems().observe(this, new Observer<List<Item>>() {
             @Override
-            public void onChanged(@Nullable List<Item> items) {
-                adapter.setNotes(items);
+            public void onChanged(@Nullable List<Item> itemEntities) {
+                adapter.setNotes(itemEntities);
             }
         });
 

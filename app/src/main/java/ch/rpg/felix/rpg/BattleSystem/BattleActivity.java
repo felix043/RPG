@@ -1,29 +1,25 @@
 package ch.rpg.felix.rpg.BattleSystem;
 
-import android.app.Dialog;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-
-import ch.rpg.felix.rpg.Player.LevelAlgorithm;
-import ch.rpg.felix.rpg.Player.Player;
-import ch.rpg.felix.rpg.R;
 
 public class BattleActivity extends AppCompatActivity {
 
     //TODO Rewrite class at a later point for more flexibility (e.g different skills)
-
+/*
     Dialog dialog;
-    Player player = new Player();
-    Enemies enemies = new Enemies();
-    Skills skills = new Skills();
+    Player player;
+    Enemies enemies;
+    Skills skills;
     LevelAlgorithm la = new LevelAlgorithm();
+    DamageCalculation dc = new DamageCalculation();
 
     private int current_enemyHp;
     private int current_playerHp;
+    private int round;
+
+    public BattleActivity(){
+
+    }
 
     private void showBattleresult() {
         int xpForNextLevel;
@@ -177,6 +173,28 @@ public class BattleActivity extends AppCompatActivity {
         }
     }
 
+    public boolean fight(){
+        while(player.getCurrent_hp() > 0 && enemies.getCurrent_hp() > 0 ){
+            if(player.getCurrent_hp() <= 0){
+                break;
+            }else{
+                dc.attackEnemy(enemy);
+            }
+
+            if(enemies.getCurrent_hp() <= 0){
+                break;
+            }else{
+                enemies.chooseSkill(player);
+            }
+        }
+
+        if(player.getCurrent_hp() > 0 && enemies.getCurrent_hp() <= 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -186,5 +204,5 @@ public class BattleActivity extends AppCompatActivity {
         showPlayer();
         setSkillnames();
         BtnSkill();
-    }
+    }*/
 }

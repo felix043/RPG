@@ -3,4 +3,9 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="offense">#FF0800</color>
+    <color name="defense">#1E90FF</color>
+    <color name="utility">#7FFF00</color>
+    <color name="passive">#A9A9A9</color>
 </resources>

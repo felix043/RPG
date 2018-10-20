@@ -7,7 +7,7 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.os.AsyncTask;
 
-@Database(entities = {Item.class, ItemsOwnedEntity.class}, version = 5)
+@Database(entities = {Item.class, ItemsOwnedEntity.class}, version = 6)
 public abstract class ItemDatabase extends RoomDatabase {
 
     private static RoomDatabase.Callback itemCallback = new RoomDatabase.Callback() {
@@ -69,6 +69,12 @@ public abstract class ItemDatabase extends RoomDatabase {
         @Override
         protected Void doInBackground(Void... voids) {
             itemsOwnedDao.insertO(new ItemsOwnedEntity(1, "Wooden Sword", "A sturdy wooden sword", 3, 1, 0, 25, 0, 0));
+            itemsOwnedDao.insertO(new ItemsOwnedEntity(1, "Bronze Sword", "An old bronze sword", 5, 1, 0, 55, 0, 0));
+            itemsOwnedDao.insertO(new ItemsOwnedEntity(2, "Wooden Shield", "Weak wooden shield", 0, 1, 3, 10, 0, 0));
+            itemsOwnedDao.insertO(new ItemsOwnedEntity(3, "Leather Helmet", "Tough leather helmet", 0, 1, 2, 15, 0, 0));
+            itemsOwnedDao.insertO(new ItemsOwnedEntity(4, "Leather Gauntlet", "Tough leather gauntlet", 0, 1, 2, 15, 0, 0));
+            itemsOwnedDao.insertO(new ItemsOwnedEntity(5, "Leather Armor", "Tough leather armor", 0, 1, 5, 25, 0, 0));
+            itemsOwnedDao.insertO(new ItemsOwnedEntity(6, "Leather Boots", "Tough leather boots", 0, 1, 3, 15, 0, 0));
 
             return null;
         }

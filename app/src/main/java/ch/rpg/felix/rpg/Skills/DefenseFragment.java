@@ -1,4 +1,5 @@
-package ch.rpg.felix.rpg;
+package ch.rpg.felix.rpg.Skills;
+
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,11 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class SkilltreeFragment extends Fragment {
+import ch.rpg.felix.rpg.R;
+
+public class DefenseFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_skilltree, container, false);
-        return view;    }
+        View view = inflater.inflate(R.layout.fragment_defense, container, false);
+        return view;
+    }
 }

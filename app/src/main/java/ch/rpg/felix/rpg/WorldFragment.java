@@ -25,7 +25,8 @@ public class WorldFragment extends Fragment{
 
     private void chapterBtn(View view){
         final FragmentManager fm = getFragmentManager();
-        final Button prologueBtn = (Button) view.findViewById(R.id.btn_prologue);
+        Button prologueBtn = (Button) view.findViewById(R.id.btn_prologue);
+
         prologueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

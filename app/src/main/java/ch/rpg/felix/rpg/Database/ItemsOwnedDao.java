@@ -21,6 +21,10 @@ public interface ItemsOwnedDao {
     @Delete
     void deleteO(ItemsOwnedEntity itemsOwnedEntity);
 
+    /*
+    @Query("INSERT INTO item_table SELECT item_id FROM ownedItemsTable")
+    void transferO(ItemsOwnedEntity itemsOwnedEntity);*/
+
     @Query("SELECT * FROM ownedItemsTable ORDER BY itemOwned_name DESC")
     LiveData<List<ItemsOwnedEntity>> getAllOwnedItems();
 

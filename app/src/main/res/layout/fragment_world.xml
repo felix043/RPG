@@ -19,7 +19,7 @@
                 android:layout_height="70dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:text="Prologue"
+                android:text="World 1"
                 android:textAllCaps="false" />
 
             <Button
@@ -28,8 +28,9 @@
                 android:layout_height="70dp"
                 android:layout_below="@+id/btn_prologue"
                 android:layout_marginTop="5dp"
-                android:text="Chapter 1"
-                android:textAllCaps="false" />
+                android:text="World 2"
+                android:textAllCaps="false"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/btn_chapterTwo"
@@ -37,8 +38,9 @@
                 android:layout_height="70dp"
                 android:layout_below="@+id/btn_chapterOne"
                 android:layout_marginTop="5dp"
-                android:text="Chapter 2"
-                android:textAllCaps="false" />
+                android:text="World 3"
+                android:textAllCaps="false"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/btn_chapterThree"
@@ -46,8 +48,9 @@
                 android:layout_height="70dp"
                 android:layout_below="@+id/btn_chapterTwo"
                 android:layout_marginTop="5dp"
-                android:text="Chapter 3"
-                android:textAllCaps="false" />
+                android:text="World 4"
+                android:textAllCaps="false"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/btn_chapterFour"
@@ -55,8 +58,9 @@
                 android:layout_height="70dp"
                 android:layout_below="@+id/btn_chapterThree"
                 android:layout_marginTop="5dp"
-                android:text="Chapter 4"
-                android:textAllCaps="false" />
+                android:text="World 5"
+                android:textAllCaps="false"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/btn_chapterFive"
@@ -64,8 +68,9 @@
                 android:layout_height="70dp"
                 android:layout_below="@+id/btn_chapterFour"
                 android:layout_marginTop="5dp"
-                android:text="Chapter 5"
-                android:textAllCaps="false" />
+                android:text="World 6"
+                android:textAllCaps="false"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/btn_chapterSix"
@@ -73,8 +78,9 @@
                 android:layout_height="70dp"
                 android:layout_below="@+id/btn_chapterFive"
                 android:layout_marginTop="5dp"
-                android:text="Chapter 6"
-                android:textAllCaps="false" />
+                android:text="World 7"
+                android:textAllCaps="false"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/btn_chapterSeven"
@@ -82,8 +88,9 @@
                 android:layout_height="70dp"
                 android:layout_below="@+id/btn_chapterSix"
                 android:layout_marginTop="5dp"
-                android:text="Chapter 7"
-                android:textAllCaps="false" />
+                android:text="World 8"
+                android:textAllCaps="false"
+                android:visibility="gone" />
 
 
         </RelativeLayout>

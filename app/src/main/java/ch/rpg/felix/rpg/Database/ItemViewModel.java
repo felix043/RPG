@@ -71,7 +71,11 @@ public class ItemViewModel extends AndroidViewModel {
         repository.deleteO(itemsOwnedEntity);
     }
 
-
+    /*
+    public void transferO(ItemsOwnedEntity itemsOwnedEntity) {
+        repository.transferO(itemsOwnedEntity);
+    }
+    */
 
     public LiveData<List<Item>> getAllItems() {
         return allItems;

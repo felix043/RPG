@@ -74,6 +74,11 @@ public class ItemRepository {
         new DeleteOwnedItemAsyncTask(itemsOwnedDao).execute(itemsOwnedEntity);
     }
 
+    /*
+    public void transferO(ItemsOwnedEntity itemsOwnedEntity) {
+        new TransferOwnedItemAsyncTask(itemsOwnedDao).execute(itemsOwnedEntity);
+    }*/
+
 
     public LiveData<List<ItemsOwnedEntity>> getAllOwnedItems() {
         return allOwnedItems;
@@ -141,8 +146,8 @@ public class ItemRepository {
         }
 
         @Override
-        protected Void doInBackground(Item... items) {
-            itemDao.insert(items[0]);
+        protected Void doInBackground(Item... itemEntities) {
+            itemDao.insert(itemEntities[0]);
             return null;
         }
     }
@@ -156,8 +161,8 @@ public class ItemRepository {
         }
 
         @Override
-        protected Void doInBackground(Item... items) {
-            itemDao.update(items[0]);
+        protected Void doInBackground(Item... itemEntities) {
+            itemDao.update(itemEntities[0]);
             return null;
         }
     }
@@ -171,8 +176,8 @@ public class ItemRepository {
         }
 
         @Override
-        protected Void doInBackground(Item... items) {
-            itemDao.delete(items[0]);
+        protected Void doInBackground(Item... itemEntities) {
+            itemDao.delete(itemEntities[0]);
             return null;
         }
     }
@@ -202,7 +207,7 @@ public class ItemRepository {
 
         @Override
         protected Void doInBackground(ItemsOwnedEntity... itemsOwnedEntities) {
-            ItemsOwnedDao.insertO(itemsOwnedEntities[0]);
+            ItemsOwnedDao.updateO(itemsOwnedEntities[0]);
             return null;
         }
     }
@@ -217,8 +222,23 @@ public class ItemRepository {
 
         @Override
         protected Void doInBackground(ItemsOwnedEntity... itemsOwnedEntities) {
-            ItemsOwnedDao.insertO(itemsOwnedEntities[0]);
+            ItemsOwnedDao.deleteO(itemsOwnedEntities[0]);
             return null;
         }
     }
+    /*
+    private static class TransferOwnedItemAsyncTask extends AsyncTask<ItemsOwnedEntity, Void, Void> {
+
+        private ItemsOwnedDao ItemsOwnedDao;
+
+        private TransferOwnedItemAsyncTask(ItemsOwnedDao itemsOwnedDao) {
+            this.ItemsOwnedDao = itemsOwnedDao;
+        }
+
+        @Override
+        protected Void doInBackground(ItemsOwnedEntity... itemsOwnedEntities) {
+            ItemsOwnedDao.transferO(itemsOwnedEntities[0]);
+            return null;
+        }
+    }*/
 }

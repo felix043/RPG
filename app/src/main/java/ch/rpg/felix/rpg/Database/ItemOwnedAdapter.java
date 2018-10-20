@@ -1,5 +1,6 @@
 package ch.rpg.felix.rpg.Database;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +16,8 @@ import ch.rpg.felix.rpg.R;
 
 public class ItemOwnedAdapter extends RecyclerView.Adapter<ItemOwnedAdapter.ItemHolder> {
 
+    private SQLiteDatabase db;
+    private int i;
     private List<ItemsOwnedEntity> itemsOwnedEntity = new ArrayList<>();
 
     @NonNull
@@ -26,7 +29,7 @@ public class ItemOwnedAdapter extends RecyclerView.Adapter<ItemOwnedAdapter.Item
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ItemHolder holder, final int position) {
         ItemsOwnedEntity currentItem = itemsOwnedEntity.get(position);
         holder.itemname.setText(currentItem.getItemOwned_name());
         holder.itemdescription.setText("+ " + String.valueOf(currentItem.getItemOwned_basedamage()) + " ATK");
