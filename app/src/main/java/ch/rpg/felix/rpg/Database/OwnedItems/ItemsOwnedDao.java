@@ -1,4 +1,4 @@
-package ch.rpg.felix.rpg.Database;
+package ch.rpg.felix.rpg.Database.OwnedItems;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;

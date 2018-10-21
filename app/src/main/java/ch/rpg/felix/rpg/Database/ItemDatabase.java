@@ -7,6 +7,11 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import ch.rpg.felix.rpg.Database.AllItems.Item;
+import ch.rpg.felix.rpg.Database.AllItems.ItemDao;
+import ch.rpg.felix.rpg.Database.OwnedItems.ItemsOwnedDao;
+import ch.rpg.felix.rpg.Database.OwnedItems.ItemsOwnedEntity;
+
 @Database(entities = {Item.class, ItemsOwnedEntity.class}, version = 5)
 public abstract class ItemDatabase extends RoomDatabase {
 

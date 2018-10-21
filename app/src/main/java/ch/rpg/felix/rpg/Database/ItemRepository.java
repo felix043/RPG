@@ -6,6 +6,11 @@ import android.os.AsyncTask;
 
 import java.util.List;
 
+import ch.rpg.felix.rpg.Database.AllItems.Item;
+import ch.rpg.felix.rpg.Database.AllItems.ItemDao;
+import ch.rpg.felix.rpg.Database.OwnedItems.ItemsOwnedDao;
+import ch.rpg.felix.rpg.Database.OwnedItems.ItemsOwnedEntity;
+
 public class ItemRepository {
 
     //Items which player owns
@@ -209,7 +214,7 @@ public class ItemRepository {
 
     private static class DeleteOwnedItemAsyncTask extends AsyncTask<ItemsOwnedEntity, Void, Void> {
 
-        private ItemsOwnedDao ItemsOwnedDao;
+        private ch.rpg.felix.rpg.Database.OwnedItems.ItemsOwnedDao ItemsOwnedDao;
 
         private DeleteOwnedItemAsyncTask(ItemsOwnedDao itemsOwnedDao) {
             this.ItemsOwnedDao = itemsOwnedDao;

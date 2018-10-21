@@ -1,4 +1,4 @@
-package ch.rpg.felix.rpg.Database;
+package ch.rpg.felix.rpg.Database.AllItems;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;

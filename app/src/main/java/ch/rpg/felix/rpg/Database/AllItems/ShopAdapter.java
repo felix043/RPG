@@ -1,4 +1,4 @@
-package ch.rpg.felix.rpg.Database;
+package ch.rpg.felix.rpg.Database.AllItems;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -13,10 +13,9 @@ import java.util.List;
 
 import ch.rpg.felix.rpg.R;
 
-public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
+public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ItemHolder> {
 
     private List<Item> items = new ArrayList<>();
-    private List<ItemsOwnedEntity> itemsOwnedEntity = new ArrayList<>();
 
     @NonNull
     @Override
@@ -27,11 +26,18 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ItemHolder holder, final int position) {
         Item currentItem = items.get(position);
         holder.itemname.setText(currentItem.getItem_name());
-        holder.itemdescription.setText("+ " + String.valueOf(currentItem.getItem_basedamage()) + " ATK");
-        holder.equipitem.setText("Equip");
+        holder.itemdescription.setText(currentItem.getItem_description());
+        holder.equipitem.setText("Buy");
+
+        holder.equipitem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder.equipitem.setText(String.valueOf(position));
+            }
+        });
     }
 
     @Override
@@ -44,15 +50,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
         notifyDataSetChanged();
     }
 
-    public void setOwnedNotes(List<ItemsOwnedEntity> itemsOwnedEntity) {
-        this.itemsOwnedEntity = itemsOwnedEntity;
-        notifyDataSetChanged();
-    }
-
     public class ItemHolder extends RecyclerView.ViewHolder {
         private TextView itemname;
         private TextView itemdescription;
         private Button equipitem;
+
         public ItemHolder(View itemView) {
             super(itemView);
             itemname = itemView.findViewById(R.id.txt_itemname);

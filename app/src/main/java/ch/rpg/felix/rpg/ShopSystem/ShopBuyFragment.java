@@ -14,9 +14,9 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-import ch.rpg.felix.rpg.Database.Item;
+import ch.rpg.felix.rpg.Database.AllItems.Item;
+import ch.rpg.felix.rpg.Database.AllItems.ShopAdapter;
 import ch.rpg.felix.rpg.Database.ItemViewModel;
-import ch.rpg.felix.rpg.Database.ShopAdapter;
 import ch.rpg.felix.rpg.R;
 
 public class ShopBuyFragment extends Fragment {

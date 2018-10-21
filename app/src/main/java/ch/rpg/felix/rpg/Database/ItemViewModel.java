@@ -7,6 +7,9 @@ import android.support.annotation.NonNull;
 
 import java.util.List;
 
+import ch.rpg.felix.rpg.Database.AllItems.Item;
+import ch.rpg.felix.rpg.Database.OwnedItems.ItemsOwnedEntity;
+
 public class ItemViewModel extends AndroidViewModel {
 
     private ItemRepository repository;
