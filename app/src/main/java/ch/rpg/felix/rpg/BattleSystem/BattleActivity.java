@@ -15,14 +15,28 @@ public class BattleActivity extends AppCompatActivity {
 
     Dialog dialog;
     Player player;
-    Enemies enemy;
+    Enemy enemy;
     Skills skills;
     LevelAlgorithm la = new LevelAlgorithm();
     DamageCalculation dc = new DamageCalculation();
-
-    private int current_enemyHp;
-    private int current_playerHp;
     private int round;
+
+    Skills basic = new Skills("Basic Attack", 0.5, 1, 1, 0, 1);
+    Skills punch = new Skills("Punch", 1, 1, 1, 2, 1);
+    Skills slash = new Skills("Slash", 1.2, 1, 1, 3, 1);
+    Skills stab = new Skills("Stab", 1.3, 1, 1, 4, 1);
+    Skills bodycheck = new Skills("Bodycheck", 1.4, 1, 1, 4, 1);
+
+    Skills icelance = new Skills("Icelance", 1.5, 1, 1, 5, 2);
+    Skills fireball = new Skills("Fireball", 1.6, 1, 1, 10, 2);
+    Skills lightning = new Skills("Lightning Strike", 1.7, 1, 1, 15, 2);
+
+    //Stats: [1, enemyhealth, maxenemyhealth, enemy_atk, enemy_mag, enemy_def, enemy_spr, round]
+    AI more50hp = new AI(1, 2, 1, 0.5, true, new AI[0], 2, 0);
+    AI more75hp = new AI(1, 2, 1, 0.75, true, new AI[0], 2, 1);
+    AI goblinAI = new AI(0, 0, 0, 0, false, new AI[]{more75hp, more50hp}, 0, -1);
+
+    Enemy goblin = new Enemy("Goblin", 1, 10, 5, 10, 5, 2, 1, 3, 1, new Skills[]{basic, punch, bodycheck}, goblinAI);
 
     private void showBattleresult() {
         int xpForNextLevel;
@@ -75,6 +89,7 @@ public class BattleActivity extends AppCompatActivity {
         ProgressBar enemy_hpbar = (ProgressBar) findViewById(R.id.enemy_healthBar);
         TextView enemyName = (TextView) findViewById(R.id.enemy_name);
         TextView enemyHp = (TextView) findViewById(R.id.enemy_maxHp);
+
         enemyName.setText(enemies.getEnemy_name());
         current_enemyHp = enemies.getEnemy_hp();
         enemyHp.setText(current_enemyHp + " / " + String.valueOf(enemies.getEnemy_hp()));
@@ -165,21 +180,21 @@ public class BattleActivity extends AppCompatActivity {
         while (player.getPlayer_current_hp() > 0 && enemy.getEnemy_current_hp() > 0) {
             if (player.getPlayer_current_hp() <= 0) {
                 break;
-            }else{
+            } else {
                 playerAttack();
             }
 
             if (enemy.getEnemy_current_hp() <= 0) {
                 break;
-            }else{
-                enemyAttack();
+            } else {
+                int damagetoplayer = goblin.attack(new int[]{1, goblin.getCurrent_hp(), goblin.getMax_hp()});
             }
         }
 
         if (player.getPlayer_current_hp() > 0 && enemy.getEnemy_current_hp() <= 0) {
             showBattleresult();
             return true;
-        }else{
+        } else {
             showBattleresult();
             return false;
         }

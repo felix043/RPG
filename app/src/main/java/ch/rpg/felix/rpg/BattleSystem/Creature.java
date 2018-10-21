@@ -1,6 +1,8 @@
 package ch.rpg.felix.rpg.BattleSystem;
 
-public class Creature {
+import android.support.v7.app.AppCompatActivity;
+
+public class Creature extends AppCompatActivity {
 
     private String name;
     private int level;
@@ -16,9 +18,9 @@ public class Creature {
     private int def;
     private int spr;
 
-    private boolean alive;
+    private Skills[] skillArray;
 
-    public Creature(String name, int level, int max_hp, int max_mp, int current_hp, int current_mp, int atk, int mag, int def, int spr) {
+    public Creature(String name, int level, int max_hp, int max_mp, int current_hp, int current_mp, int atk, int mag, int def, int spr, Skills[] skillArray) {
         this.name = name;
         this.level = level;
         this.max_hp = max_hp;
@@ -29,8 +31,15 @@ public class Creature {
         this.mag = mag;
         this.def = def;
         this.spr = spr;
+        this.skillArray = skillArray;
+    }
 
-        alive = true;
+    public Creature(String name) {
+        this(name, 1, 10, 1, 10, 10, 5, 5, 5, 5, new Skills[0]);
+    }
+
+    public Creature() {
+        this("Enemy", 1, 10, 1, 10, 10, 5, 5, 5, 5, new Skills[0]);
     }
 
     public String getName() {
@@ -57,6 +66,14 @@ public class Creature {
         return current_mp;
     }
 
+    public void setCurrent_hp(int current_hp) {
+        this.current_hp = current_hp;
+    }
+
+    public void setCurrent_mp(int current_mp) {
+        this.current_mp = current_mp;
+    }
+
     public int getAtk() {
         return atk;
     }
@@ -73,20 +90,7 @@ public class Creature {
         return spr;
     }
 
-    public boolean isAlive() {
-        return alive;
-    }
-
-    public void castSlash(Creature enemy) {
-        enemy.sustainDamage(1);
-    }
-
-    public void sustainDamage(int value) {
-        if (value > 0) {
-            current_hp -= value;
-        }
-        if (current_hp <= 0) {
-            alive = false;
-        }
+    public Skills[] getSkillArray() {
+        return skillArray;
     }
 }
