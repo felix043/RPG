@@ -21,7 +21,7 @@ import ch.rpg.felix.rpg.Skills.SkilltreeFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    Player player = new Player();
+    Player player;
     LevelAlgorithm la = new LevelAlgorithm();
     private DrawerLayout drawer;
     private LiveData<ProgressBar> exp;

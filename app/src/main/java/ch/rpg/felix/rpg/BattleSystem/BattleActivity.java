@@ -1,14 +1,21 @@
 package ch.rpg.felix.rpg.BattleSystem;
 
+import android.app.Dialog;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import ch.rpg.felix.rpg.Player.LevelAlgorithm;
+import ch.rpg.felix.rpg.R;
 
 public class BattleActivity extends AppCompatActivity {
 
-    //TODO Rewrite class at a later point for more flexibility (e.g different skills)
-/*
     Dialog dialog;
     Player player;
-    Enemies enemies;
+    Enemies enemy;
     Skills skills;
     LevelAlgorithm la = new LevelAlgorithm();
     DamageCalculation dc = new DamageCalculation();
@@ -16,10 +23,6 @@ public class BattleActivity extends AppCompatActivity {
     private int current_enemyHp;
     private int current_playerHp;
     private int round;
-
-    public BattleActivity(){
-
-    }
 
     private void showBattleresult() {
         int xpForNextLevel;
@@ -82,6 +85,7 @@ public class BattleActivity extends AppCompatActivity {
     private void showPlayer() {
         ProgressBar player_hpbar = (ProgressBar) findViewById(R.id.player_healthBar);
         TextView playerHp = (TextView) findViewById(R.id.player_maxHp);
+
         player_hpbar.setMax(player.getPlayer_max_hp());
         player_hpbar.setProgress(player.getPlayer_max_hp());
         current_playerHp = player.getPlayer_max_hp();
@@ -91,13 +95,13 @@ public class BattleActivity extends AppCompatActivity {
     private void showEnemy() {
         int stage1 = Integer.parseInt(getIntent().getStringExtra("stage"));
         if (stage1 == 11) {
-            enemies.Rat();
+            enemy.Rat();
             getEnemyStats();
         } else if (stage1 == 12) {
-            enemies.Goblin();
+            enemy.Goblin();
             getEnemyStats();
         } else if (stage1 == 13) {
-            enemies.Ogre();
+            enemy.Ogre();
             getEnemyStats();
         }
     }
@@ -109,7 +113,7 @@ public class BattleActivity extends AppCompatActivity {
         current_enemyHp = enemy_hpbar.getProgress();
         current_enemyHp = current_enemyHp - skills.getDamage();
         enemy_hpbar.setProgress(current_enemyHp);
-        enemyHp.setText(current_enemyHp + " / " + String.valueOf(enemies.getEnemy_hp()));
+        enemyHp.setText(current_enemyHp + " / " + String.valueOf(enemy.getEnemy_current_hp()));
     }
 
     private void enemyAttack() {
@@ -126,10 +130,10 @@ public class BattleActivity extends AppCompatActivity {
         final Button btnSkill1 = (Button) findViewById(R.id.btn_skillone);
         final Button btnSkill2 = (Button) findViewById(R.id.btn_skilltwo);
 
-        skills.slash();
-        btnSkill1.setText(skills.getName());
-        skills.punch();
-        btnSkill2.setText(skills.getName());
+        skills.useFireball();
+        btnSkill1.setText(skills.getSpellname());
+        skills.useSlash();
+        btnSkill2.setText(skills.getSpellname());
     }
 
     private void BtnSkill() {
@@ -139,7 +143,7 @@ public class BattleActivity extends AppCompatActivity {
         btnSkill1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                skills.slash();
+                skills.usePunch();
                 playerAttack();
                 enemyAttack();
                 endBattle();
@@ -150,47 +154,33 @@ public class BattleActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 playerAttack();
-                skills.punch();
+                skills.useFireball();
                 enemyAttack();
                 endBattle();
             }
         });
     }
 
-    private void endBattle() {
-        TextView playerHp = (TextView) findViewById(R.id.player_maxHp);
-        TextView enemyHp = (TextView) findViewById(R.id.enemy_maxHp);
-
-        if (current_enemyHp <= 0) {
-            current_enemyHp = 0;
-            enemyHp.setText(current_enemyHp + " / " + String.valueOf(enemies.getEnemy_hp()));
-            showBattleresult();
-            la.setExpObtained(la.getExpObtained() + 10);
-        } else if (current_playerHp <= 0) {
-            current_playerHp = 0;
-            playerHp.setText(current_playerHp + " / " + String.valueOf(player.getPlayer_max_hp()));
-            showBattleresult();
-        }
-    }
-
     public boolean fight(){
-        while(player.getCurrent_hp() > 0 && enemies.getCurrent_hp() > 0 ){
-            if(player.getCurrent_hp() <= 0){
+        while (player.getPlayer_current_hp() > 0 && enemy.getEnemy_current_hp() > 0) {
+            if (player.getPlayer_current_hp() <= 0) {
                 break;
             }else{
-                dc.attackEnemy(enemy);
+                playerAttack();
             }
 
-            if(enemies.getCurrent_hp() <= 0){
+            if (enemy.getEnemy_current_hp() <= 0) {
                 break;
             }else{
-                enemies.chooseSkill(player);
+                enemyAttack();
             }
         }
 
-        if(player.getCurrent_hp() > 0 && enemies.getCurrent_hp() <= 0){
+        if (player.getPlayer_current_hp() > 0 && enemy.getEnemy_current_hp() <= 0) {
+            showBattleresult();
             return true;
         }else{
+            showBattleresult();
             return false;
         }
     }
@@ -204,5 +194,5 @@ public class BattleActivity extends AppCompatActivity {
         showPlayer();
         setSkillnames();
         BtnSkill();
-    }*/
+    }
 }
