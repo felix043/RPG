@@ -105,7 +105,7 @@ public class ItemViewModel extends AndroidViewModel {
     }
 
 
-    public LiveData<List<ItemsOwnedEntity>> allOwnedItems() {
+    public LiveData<List<ItemsOwnedEntity>> getallOwnedItems() {
         return allOwnedItems;
     }
 
