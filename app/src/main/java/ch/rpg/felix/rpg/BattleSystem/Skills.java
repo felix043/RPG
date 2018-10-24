@@ -2,10 +2,6 @@ package ch.rpg.felix.rpg.BattleSystem;
 
 public class Skills {
 
-    DamageCalculation dc;
-    private Player player;
-    private Enemy enemy;
-
     private String spellname;
     private int mp_cost;
     private double modifier;

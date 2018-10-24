@@ -18,9 +18,9 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="backgroundLayerName" value="ic_slashIb" />
-                                      <entry key="foregroundImage" value="C:\Users\felix043\Desktop\Neuer Ordner\slashI.png" />
-                                      <entry key="foregroundLayerName" value="ic_slashI" />
+                                      <entry key="backgroundLayerName" value="ic_launcher3" />
+                                      <entry key="foregroundImage" value="C:\Users\felix043\Desktop\ic_launcher_foreground.png" />
+                                      <entry key="foregroundLayerName" value="ic_launcher2" />
                                     </map>
                                   </option>
                                 </PersistentState>

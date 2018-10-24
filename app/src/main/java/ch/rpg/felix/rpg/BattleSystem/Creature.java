@@ -4,21 +4,21 @@ import android.support.v7.app.AppCompatActivity;
 
 public class Creature extends AppCompatActivity {
 
-    private String name;
-    private int level;
+    protected String name;
+    protected int level;
 
-    private int max_hp;
-    private int max_mp;
+    protected int max_hp;
+    protected int max_mp;
 
-    private int current_hp;
-    private int current_mp;
+    protected int current_hp;
+    protected int current_mp;
 
-    private int atk;
-    private int mag;
-    private int def;
-    private int spr;
+    protected int atk;
+    protected int mag;
+    protected int def;
+    protected int spr;
 
-    private Skills[] skillArray;
+    protected Skills[] skillArray;
 
     public Creature(String name, int level, int max_hp, int max_mp, int current_hp, int current_mp, int atk, int mag, int def, int spr, Skills[] skillArray) {
         this.name = name;

@@ -5,12 +5,16 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import ch.rpg.felix.rpg.Item.EquipmentActivity;
+import ch.rpg.felix.rpg.Player.ChangeSkillsFragment;
 
 public class CharacterFragment extends Fragment {
 
@@ -22,6 +26,7 @@ public class CharacterFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_character, container, false);
         selectEquip(view);
+        switchFragment(view);
         return view;
     }
 
@@ -86,6 +91,18 @@ public class CharacterFragment extends Fragment {
             public void onClick(View view) {
                 equipID = 6;
                 changeActivity();
+            }
+        });
+    }
+
+    private void switchFragment(View v) {
+        Button switchFragment = (Button) v.findViewById(R.id.changeskills);
+        final FragmentManager fm = getFragmentManager();
+        switchFragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.addToBackStack(null).replace(R.id.fragment_container, new ChangeSkillsFragment()).commit();
             }
         });
     }

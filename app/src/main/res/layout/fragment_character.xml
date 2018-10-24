@@ -65,4 +65,15 @@
         android:layout_marginRight="20dp"
         android:background="@drawable/style_btn_equipment" />
 
+    <Button
+        android:id="@+id/changeskills"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="30dp"
+        android:text="Change Skills"
+        android:textAllCaps="false" />
+
 </RelativeLayout>

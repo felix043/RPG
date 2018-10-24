@@ -3,64 +3,52 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/gridlayout">
+    <Button
+        android:id="@+id/btn_offenseskill"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignStart="@+id/btn_utilityskill"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/offense"
+        android:text="Offense"
+        android:textAllCaps="false" />
 
+    <Button
+        android:id="@+id/btn_defenseskill"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignTop="@+id/btn_utilityskill"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="-214dp"
+        android:layout_toEndOf="@+id/btn_offenseskill"
+        android:backgroundTint="@color/defense"
+        android:text="Defense"
+        android:textAllCaps="false" />
 
-    </RelativeLayout>
-
-    <GridLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/gridlayout"
-        android:layout_centerHorizontal="true"
+    <Button
+        android:id="@+id/btn_utilityskill"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:columnCount="2"
-        android:rowCount="2">
+        android:layout_marginStart="25dp"
+        android:layout_marginBottom="128dp"
+        android:backgroundTint="@color/utility"
+        android:text="Utility"
+        android:textAllCaps="false" />
 
-        <Button
-            android:id="@+id/btn_offenseskill"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/style_btn_round"
-            android:backgroundTint="@color/offense"
-            android:text="Offense"
-            android:textAllCaps="false" />
-
-        <Button
-            android:id="@+id/btn_defenseskill"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/style_btn_round"
-            android:backgroundTint="@color/defense"
-            android:text="Defense"
-            android:textAllCaps="false" />
-
-        <Button
-            android:id="@+id/btn_utilityskill"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/style_btn_round"
-            android:backgroundTint="@color/utility"
-            android:text="Utility"
-            android:textAllCaps="false" />
-
-        <Button
-            android:id="@+id/btn_passiveskill"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/style_btn_round"
-            android:backgroundTint="@color/passive"
-            android:text="Passive"
-            android:textAllCaps="false" />
-
-    </GridLayout>
-
+    <Button
+        android:id="@+id/btn_passiveskill"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="236dp"
+        android:layout_marginEnd="26dp"
+        android:backgroundTint="@color/passive"
+        android:text="Passive"
+        android:textAllCaps="false" />
 
 </RelativeLayout>

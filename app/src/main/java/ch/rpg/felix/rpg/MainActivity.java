@@ -1,6 +1,6 @@
 package ch.rpg.felix.rpg;
 
-import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.ViewModel;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -15,16 +15,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import ch.rpg.felix.rpg.BattleSystem.Player;
-import ch.rpg.felix.rpg.Player.LevelAlgorithm;
+import ch.rpg.felix.rpg.BattleSystem.Skills;
 import ch.rpg.felix.rpg.ShopSystem.ShopBuyFragment;
 import ch.rpg.felix.rpg.Skills.SkilltreeFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    Player player;
-    LevelAlgorithm la = new LevelAlgorithm();
+    ViewModel viewmodel;
     private DrawerLayout drawer;
-    private LiveData<ProgressBar> exp;
+    private Player player = new Player("Player", 1, 10, 10, 10, 10, 2, 2, 4, 4, new Skills[]{}, 0);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new WorldFragment()).commit();
             navigationView.setCheckedItem(R.id.world);
         }
-        la.expNeededForNextLv();
         showPlayerLevel();
     }
 
@@ -82,15 +80,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void showPlayerLevel() {
         NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
         View hView = navView.getHeaderView(0);
-        TextView navPlayername = (TextView) hView.findViewById(R.id.currentPlayerlevel);
+        TextView playerlevel = (TextView) hView.findViewById(R.id.currentPlayerlevel);
         TextView current_playerxp = (TextView) hView.findViewById(R.id.current_playerxp);
         TextView xpforlevelup = (TextView) hView.findViewById(R.id.xpforlevelup);
         ProgressBar pb = (ProgressBar) hView.findViewById(R.id.player_xpbar);
 
-        navPlayername.setText(String.valueOf(player.getPlayer_level()));
-        current_playerxp.setText(String.valueOf(la.getExpObtained()));
-        xpforlevelup.setText(String.valueOf(la.getExpForNextLv()));
-        pb.setMax(la.getExpForNextLv());
-        pb.setProgress(la.getExpObtained());
+        playerlevel.setText(String.valueOf(player.calculateLevel()));
+        current_playerxp.setText(String.valueOf(player.getExpObtained()));
+        xpforlevelup.setText(String.valueOf(player.getExpForNextLv()));
+        pb.setMax(player.getExpForNextLv());
+        pb.setProgress(player.getExpObtained());
     }
 }

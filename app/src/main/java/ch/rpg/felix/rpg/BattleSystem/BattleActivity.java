@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import ch.rpg.felix.rpg.Player.LevelAlgorithm;
 import ch.rpg.felix.rpg.R;
 
 public class BattleActivity extends AppCompatActivity {
@@ -17,8 +16,7 @@ public class BattleActivity extends AppCompatActivity {
     Player player;
     Enemy enemy;
     Skills skills;
-    LevelAlgorithm la = new LevelAlgorithm();
-    DamageCalculation dc = new DamageCalculation();
+
     private int round;
 
     Skills basic = new Skills("Basic Attack", 0.5, 1, 1, 0, 1);
@@ -34,6 +32,7 @@ public class BattleActivity extends AppCompatActivity {
     //Stats: [1, enemyhealth, maxenemyhealth, enemy_atk, enemy_mag, enemy_def, enemy_spr, round]
     AI more50hp = new AI(1, 2, 1, 0.5, true, new AI[0], 2, 0);
     AI more75hp = new AI(1, 2, 1, 0.75, true, new AI[0], 2, 1);
+
     AI goblinAI = new AI(0, 0, 0, 0, false, new AI[]{more75hp, more50hp}, 0, -1);
 
     Enemy goblin = new Enemy("Goblin", 1, 10, 5, 10, 5, 2, 1, 3, 1, new Skills[]{basic, punch, bodycheck}, goblinAI);
@@ -50,14 +49,14 @@ public class BattleActivity extends AppCompatActivity {
         TextView battleresult = (TextView) dialog.findViewById(R.id.txt_battleresult);
         ProgressBar pb_xpoptainedafterbattle = (ProgressBar) dialog.findViewById(R.id.player_xpoptainedafterbattle);
 
-        xpForNextLevel = la.getExpForNextLv();
-        currentXpObtained = la.getExpObtained();
+        xpForNextLevel = player.getExpForNextLv();
+        currentXpObtained = player.getExpObtained();
         txt_currentPlayerxp.setText(String.valueOf(currentXpObtained));
         txt_xpForNextLevel.setText(String.valueOf(xpForNextLevel));
         pb_xpoptainedafterbattle.setMax(xpForNextLevel);
         pb_xpoptainedafterbattle.setProgress(currentXpObtained);
 
-        if (current_enemyHp == 0) {
+        if (enemy.getCurrent_hp() <= 0) {
             battleresult.setText("You won!");
         } else {
             battleresult.setText("You lost!");
@@ -85,113 +84,33 @@ public class BattleActivity extends AppCompatActivity {
         finish();
     }
 
-    private void getEnemyStats() {
-        ProgressBar enemy_hpbar = (ProgressBar) findViewById(R.id.enemy_healthBar);
-        TextView enemyName = (TextView) findViewById(R.id.enemy_name);
-        TextView enemyHp = (TextView) findViewById(R.id.enemy_maxHp);
-
-        enemyName.setText(enemies.getEnemy_name());
-        current_enemyHp = enemies.getEnemy_hp();
-        enemyHp.setText(current_enemyHp + " / " + String.valueOf(enemies.getEnemy_hp()));
-        enemy_hpbar.setMax(enemies.getEnemy_hp());
-        enemy_hpbar.setProgress(enemies.getEnemy_hp());
-    }
-
-    private void showPlayer() {
-        ProgressBar player_hpbar = (ProgressBar) findViewById(R.id.player_healthBar);
-        TextView playerHp = (TextView) findViewById(R.id.player_maxHp);
-
-        player_hpbar.setMax(player.getPlayer_max_hp());
-        player_hpbar.setProgress(player.getPlayer_max_hp());
-        current_playerHp = player.getPlayer_max_hp();
-        playerHp.setText(current_playerHp + " / " + String.valueOf(player.getPlayer_max_hp()));
-    }
-
-    private void showEnemy() {
-        int stage1 = Integer.parseInt(getIntent().getStringExtra("stage"));
-        if (stage1 == 11) {
-            enemy.Rat();
-            getEnemyStats();
-        } else if (stage1 == 12) {
-            enemy.Goblin();
-            getEnemyStats();
-        } else if (stage1 == 13) {
-            enemy.Ogre();
-            getEnemyStats();
-        }
-    }
-
-    private void playerAttack() {
-        TextView enemyHp = (TextView) findViewById(R.id.enemy_maxHp);
-        ProgressBar enemy_hpbar = (ProgressBar) findViewById(R.id.enemy_healthBar);
-
-        current_enemyHp = enemy_hpbar.getProgress();
-        current_enemyHp = current_enemyHp - skills.getDamage();
-        enemy_hpbar.setProgress(current_enemyHp);
-        enemyHp.setText(current_enemyHp + " / " + String.valueOf(enemy.getEnemy_current_hp()));
-    }
-
-    private void enemyAttack() {
-        TextView playerHp = (TextView) findViewById(R.id.player_maxHp);
-        ProgressBar player_hpbar = (ProgressBar) findViewById(R.id.player_healthBar);
-
-        current_playerHp = player_hpbar.getProgress();
-        current_playerHp = current_playerHp - 2;
-        player_hpbar.setProgress(current_playerHp);
-        playerHp.setText(current_playerHp + " / " + String.valueOf(player.getPlayer_max_hp()));
-    }
-
-    private void setSkillnames() {
-        final Button btnSkill1 = (Button) findViewById(R.id.btn_skillone);
-        final Button btnSkill2 = (Button) findViewById(R.id.btn_skilltwo);
-
-        skills.useFireball();
-        btnSkill1.setText(skills.getSpellname());
-        skills.useSlash();
-        btnSkill2.setText(skills.getSpellname());
-    }
-
-    private void BtnSkill() {
-        final Button btnSkill1 = (Button) findViewById(R.id.btn_skillone);
-        final Button btnSkill2 = (Button) findViewById(R.id.btn_skilltwo);
-
-        btnSkill1.setOnClickListener(new View.OnClickListener() {
+    public void playerAttack() {
+        Button test = (Button) findViewById(R.id.btn_skillone);
+        test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                skills.usePunch();
-                playerAttack();
-                enemyAttack();
-                endBattle();
-            }
-        });
-
-        btnSkill2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                playerAttack();
-                skills.useFireball();
-                enemyAttack();
-                endBattle();
+                int damage;
+                damage = enemy.getCurrent_hp() - 5;
             }
         });
     }
 
     public boolean fight(){
-        while (player.getPlayer_current_hp() > 0 && enemy.getEnemy_current_hp() > 0) {
-            if (player.getPlayer_current_hp() <= 0) {
+        while (true) {
+            if (player.getCurrent_hp() <= 0) {
                 break;
             } else {
                 playerAttack();
             }
 
-            if (enemy.getEnemy_current_hp() <= 0) {
+            if (enemy.getCurrent_hp() <= 0) {
                 break;
             } else {
-                int damagetoplayer = goblin.attack(new int[]{1, goblin.getCurrent_hp(), goblin.getMax_hp()});
+                int damagetoplayer = goblin.attack(new int[]{1, goblin.getCurrent_hp(), goblin.getMax_hp(), goblin.getCurrent_mp(), goblin.getMax_mp()});
             }
         }
 
-        if (player.getPlayer_current_hp() > 0 && enemy.getEnemy_current_hp() <= 0) {
+        if (player.getCurrent_hp() > 0 && enemy.getCurrent_hp() <= 0) {
             showBattleresult();
             return true;
         } else {
@@ -205,9 +124,5 @@ public class BattleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_battle);
         dialog = new Dialog(this);
-        showEnemy();
-        showPlayer();
-        setSkillnames();
-        BtnSkill();
     }
 }
