@@ -4,7 +4,6 @@ public class Player extends Creature {
 
     private int expObtained;
     private int expNeeded;
-    private int expExcess;
 
     public Player(String name, int level, int max_hp, int max_mp, int current_hp, int current_mp,
                   int atk, int mag, int def, int spr, Skills[] skillArray, int expObtained) {
@@ -13,30 +12,23 @@ public class Player extends Creature {
 
         //Player player = new Player("Player", 1, 10, 10, 10, 10, 2, 2, 4, 4, new Skills[]{}, 10, 0, 0);
 
-        this.expObtained = 38;
+        this.expObtained = expObtained;
         calculateLevel();
     }
 
     public int calculateLevel() {
-        if (level <= 200) {
-            expNeeded = (int) Math.pow(Math.sqrt(level) * 3.5, 1.001) + 10;
-            if (expExcess > 0) {
-                expObtained += expExcess;
-                expExcess = 0;
+        while (expObtained > expNeeded) {
+            if (level <= 200) {
+                expNeeded = (int) Math.pow(Math.sqrt(level) * 3.5, 1.001) + 10;
+            } else if (level <= 250) {
+                expNeeded = (int) Math.pow(Math.sqrt(level) * 5, 1.003);
             }
-        } else if (level <= 250) {
-            expNeeded = (int) Math.pow(Math.sqrt(level) * 5, 1.003);
-            if (expExcess > 0) {
-                expObtained += expExcess;
-                expExcess = 0;
-            }
-        }
 
-        if (expObtained >= expNeeded) {
-            level++;
-            statGrowth();
-            expExcess = expObtained - expNeeded;
-            expObtained = 0;
+            if (expObtained >= expNeeded) {
+                level++;
+                statGrowth();
+                expObtained -= expNeeded;
+            }
         }
         return level;
     }

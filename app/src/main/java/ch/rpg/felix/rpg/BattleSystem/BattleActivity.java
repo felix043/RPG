@@ -11,7 +11,6 @@ import android.widget.TextView;
 import ch.rpg.felix.rpg.R;
 
 public class BattleActivity extends AppCompatActivity {
-
     Dialog dialog;
     Player player;
     Enemy enemy;
