@@ -23,8 +23,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ItemHolder> {
     @NonNull
     @Override
     public ItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_equipment, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_equipment, parent, false);
         return new ItemHolder(itemView);
     }
 
@@ -34,7 +33,6 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ItemHolder> {
         holder.itemname.setText(currentItem.getItem_name());
         holder.itemdescription.setText(currentItem.getItem_description());
         holder.buyitem.setText("Buy");
-
     }
 
     @Override

@@ -11,22 +11,25 @@ import android.widget.TextView;
 import ch.rpg.felix.rpg.R;
 
 public class BattleActivity extends AppCompatActivity {
+
     Dialog dialog;
     Player player;
     Enemy enemy;
-    Skills skills;
 
     private int round;
 
-    Skills basic = new Skills("Basic Attack", 0.5, 1, 1, 0, 1);
-    Skills punch = new Skills("Punch", 1, 1, 1, 2, 1);
-    Skills slash = new Skills("Slash", 1.2, 1, 1, 3, 1);
-    Skills stab = new Skills("Stab", 1.3, 1, 1, 4, 1);
-    Skills bodycheck = new Skills("Bodycheck", 1.4, 1, 1, 4, 1);
 
-    Skills icelance = new Skills("Icelance", 1.5, 1, 1, 5, 2);
-    Skills fireball = new Skills("Fireball", 1.6, 1, 1, 10, 2);
-    Skills lightning = new Skills("Lightning Strike", 1.7, 1, 1, 15, 2);
+    Skills basic = new Skills(1, "Basic Attack", 0.5, 1, 1, 0, 1);
+    Skills punch = new Skills(2, "Punch", 1, 1, 1, 2, 1);
+    Skills slash = new Skills(3, "Slash", 1.2, 1, 1, 3, 1);
+    Skills stab = new Skills(4, "Stab", 1.3, 1, 1, 4, 1);
+    Skills bodycheck = new Skills(5, "Bodycheck", 1.4, 1, 1, 4, 1);
+
+    Skills icelance = new Skills(6, "Icelance", 1.5, 1, 1, 5, 2);
+    Skills fireball = new Skills(7, "Fireball", 1.6, 1, 1, 10, 2);
+    Skills lightning = new Skills(8, "Lightning Strike", 1.7, 1, 1, 15, 2);
+
+    public Skills[] skills = new Skills[]{basic, punch, slash, stab, bodycheck, icelance, fireball, lightning};
 
     //Stats: [1, enemyhealth, maxenemyhealth, enemy_atk, enemy_mag, enemy_def, enemy_spr, round]
     AI more50hp = new AI(1, 2, 1, 0.5, true, new AI[0], 2, 0);

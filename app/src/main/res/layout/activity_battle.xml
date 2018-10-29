@@ -33,15 +33,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enemy_name" />
 
-    <TextView
-        android:id="@+id/enemy_maxHp"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="18dp"
-        android:textColor="#000"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         app:layout_constraintBottom_toBottomOf="@+id/enemy_healthBar"
         app:layout_constraintEnd_toEndOf="@+id/enemy_healthBar"
         app:layout_constraintStart_toStartOf="@+id/enemy_healthBar"
-        app:layout_constraintTop_toTopOf="@+id/enemy_healthBar" />
+        app:layout_constraintTop_toTopOf="@+id/enemy_healthBar">
+
+        <TextView
+            android:id="@+id/current_enemyhp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="2dp"
+            android:textColor="#000" />
+
+        <TextView
+            android:id="@+id/enemy_hpdivider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"
+            android:textColor="#000" />
+
+        <TextView
+            android:id="@+id/max_enemyhp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:textColor="#000" />
+    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/enemy_manaBar"
@@ -58,6 +79,37 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enemy_healthBar" />
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintBottom_toBottomOf="@+id/enemy_manaBar"
+        app:layout_constraintEnd_toEndOf="@+id/enemy_manaBar"
+        app:layout_constraintStart_toStartOf="@+id/enemy_manaBar"
+        app:layout_constraintTop_toTopOf="@+id/enemy_manaBar">
+
+        <TextView
+            android:id="@+id/current_enemymp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="2dp"
+            android:textColor="#000" />
+
+        <TextView
+            android:id="@+id/enemy_mpdivider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"
+            android:textColor="#000" />
+
+        <TextView
+            android:id="@+id/max_enemymp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_toEndOf="@+id/slash"
+            android:textColor="#000" />
+    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/player_healthBar"
@@ -74,6 +126,38 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintBottom_toBottomOf="@+id/player_healthBar"
+        app:layout_constraintEnd_toEndOf="@+id/player_healthBar"
+        app:layout_constraintStart_toStartOf="@+id/player_healthBar"
+        app:layout_constraintTop_toTopOf="@+id/player_healthBar">
+
+        <TextView
+            android:id="@+id/current_playerhp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="2dp"
+            android:textColor="#000" />
+
+        <TextView
+            android:id="@+id/player_hpdivider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"
+            android:textColor="#000" />
+
+        <TextView
+            android:id="@+id/max_playerhp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_toEndOf="@+id/slash"
+            android:textColor="#000" />
+    </LinearLayout>
+
     <ProgressBar
         android:id="@+id/player_manaBar"
         style="?android:attr/progressBarStyleHorizontal"
@@ -88,6 +172,38 @@
         app:layout_constraintBottom_toTopOf="@+id/linearlayout_skillbtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintBottom_toBottomOf="@+id/player_manaBar"
+        app:layout_constraintEnd_toEndOf="@+id/player_manaBar"
+        app:layout_constraintStart_toStartOf="@+id/player_manaBar"
+        app:layout_constraintTop_toTopOf="@+id/player_manaBar">
+
+        <TextView
+            android:id="@+id/current_playermp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="2dp"
+            android:textColor="#000" />
+
+        <TextView
+            android:id="@+id/player_mpdivider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"
+            android:textColor="#000" />
+
+        <TextView
+            android:id="@+id/max_playermp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_toEndOf="@+id/slash"
+            android:textColor="#000" />
+    </LinearLayout>
 
     <GridLayout
         android:id="@+id/linearlayout_skillbtn"
@@ -168,18 +284,6 @@
                 android:textAllCaps="false"/>
         </LinearLayout>
 
-
     </GridLayout>
-
-    <TextView
-        android:id="@+id/player_maxHp"
-        android:layout_width="wrap_content"
-        android:layout_height="18dp"
-        android:textColor="#000"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/player_manaBar"
-        app:layout_constraintEnd_toEndOf="@+id/player_healthBar"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="@+id/player_healthBar" />
 
 </android.support.constraint.ConstraintLayout>

@@ -1,13 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Player.ChangeSkillsFragment">
 
-    <TextView
+    <RelativeLayout
+        android:id="@+id/rel_skillset"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <GridLayout
+            android:id="@+id/linlay_skillset"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="1"
+            android:orientation="horizontal"
+            android:rowCount="2"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/btn_skillsetone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_weight="1"
+                    android:textAllCaps="false" />
+
+                <Button
+                    android:id="@+id/btn_skillsettwo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_weight="1"
+                    android:textAllCaps="false" />
+
+                <Button
+                    android:id="@+id/btn_skillsetthree"
+                    android:layout_width="wrap_content"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_weight="1"
+                    android:textAllCaps="false" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/btn_skillsetfour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_weight="1"
+                    android:textAllCaps="false" />
+
+                <Button
+                    android:id="@+id/btn_skillsetfive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_weight="1"
+                    android:textAllCaps="false" />
+
+                <Button
+                    android:id="@+id/btn_skillsetsix"
+                    android:layout_width="wrap_content"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_weight="1"
+                    android:textAllCaps="false" />
+            </LinearLayout>
+
+        </GridLayout>
+
+        <View
+            android:id="@+id/blackline"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignBottom="@id/linlay_skillset"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+
+            android:background="#000" />
+    </RelativeLayout>
+
+
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/skill_recyclerview"
+        android:layout_below="@+id/rel_skillset"
+        tools:listitem="@layout/list_skills"></android.support.v7.widget.RecyclerView>
 
-</FrameLayout>
+</RelativeLayout>
