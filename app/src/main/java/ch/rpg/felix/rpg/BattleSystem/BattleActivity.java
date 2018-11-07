@@ -12,12 +12,11 @@ import ch.rpg.felix.rpg.R;
 
 public class BattleActivity extends AppCompatActivity {
 
-    Dialog dialog;
-    Player player;
-    Enemy enemy;
+    private Dialog dialog;
+    private Player player;
+    private Enemy enemy;
 
     private int round;
-
 
     Skills basic = new Skills(1, "Basic Attack", 0.5, 1, 1, 0, 1);
     Skills punch = new Skills(2, "Punch", 1, 1, 1, 2, 1);
@@ -108,7 +107,7 @@ public class BattleActivity extends AppCompatActivity {
             if (enemy.getCurrent_hp() <= 0) {
                 break;
             } else {
-                int damagetoplayer = goblin.attack(new int[]{1, goblin.getCurrent_hp(), goblin.getMax_hp(), goblin.getCurrent_mp(), goblin.getMax_mp()});
+                int damagetoplayer = enemy.attack(new int[]{1, enemy.getCurrent_hp(), enemy.getMax_hp(), enemy.getCurrent_mp(), enemy.getMax_mp()});
             }
         }
 

@@ -89,4 +89,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         pb.setMax(player.getExpForNextLv());
         pb.setProgress(player.getExpObtained());
     }
+
+
 }
