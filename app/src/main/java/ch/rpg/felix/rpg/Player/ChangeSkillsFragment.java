@@ -29,6 +29,7 @@ public class ChangeSkillsFragment extends Fragment {
     private Button btn_skill4;
     private Button btn_skill5;
     private Button btn_skill6;
+
     private Skills[] skilllist = as.skills;
 
     @Nullable
@@ -62,107 +63,64 @@ public class ChangeSkillsFragment extends Fragment {
         btn_skill1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (sa.getId() != 0) {
-                    skillarray[1][0] = sa.getId();
-                    for (int i = 0; i <= skilllist.length; i++) {
-                        if (sa.getId() == skilllist[i].getSkillid()) {
-                            btn_skill1.setText(String.valueOf(skilllist[i].getSpellname()));
-                            break;
-                        }
-                    }
-                } else {
-                    showToast();
-                }
+                setSkill(0, 0);
             }
         });
 
         btn_skill2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (sa.getId() != 0) {
-                    skillarray[1][1] = sa.getId();
-                    for (int i = 0; i <= skilllist.length; i++) {
-                        if (sa.getId() == skilllist[i].getSkillid()) {
-                            btn_skill2.setText(String.valueOf(skilllist[i].getSpellname()));
-                            break;
-                        }
-                    }
-                } else {
-                    showToast();
-                }
+                setSkill(1, 1);
             }
         });
 
         btn_skill3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (sa.getId() != 0) {
-                    skillarray[1][2] = sa.getId();
-                    for (int i = 0; i <= skilllist.length; i++) {
-                        if (sa.getId() == skilllist[i].getSkillid()) {
-                            btn_skill3.setText(String.valueOf(skilllist[i].getSpellname()));
-                            break;
-                        }
-                    }
-                } else {
-                    showToast();
-                }
+                setSkill(2, 2);
             }
         });
 
         btn_skill4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (sa.getId() != 0) {
-                    skillarray[1][3] = sa.getId();
-                    for (int i = 0; i <= skilllist.length; i++) {
-                        if (sa.getId() == skilllist[i].getSkillid()) {
-                            btn_skill4.setText(String.valueOf(skilllist[i].getSpellname()));
-                            break;
-                        }
-                    }
-                } else {
-                    showToast();
-                }
+                setSkill(3, 3);
             }
         });
 
         btn_skill5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (sa.getId() != 0) {
-                    skillarray[1][4] = sa.getId();
-                    for (int i = 0; i <= skilllist.length; i++) {
-                        if (sa.getId() == skilllist[i].getSkillid()) {
-                            btn_skill5.setText(String.valueOf(skilllist[i].getSpellname()));
-                            break;
-                        }
-                    }
-                } else {
-                    showToast();
-                }
+                setSkill(4, 4);
             }
         });
 
         btn_skill6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (sa.getId() != 0) {
-                    skillarray[1][5] = sa.getId();
-                    for (int i = 0; i <= skilllist.length; i++) {
-                        if (sa.getId() == skilllist[i].getSkillid()) {
-                            btn_skill6.setText(String.valueOf(skilllist[i].getSpellname()));
-                            break;
-                        }
-                    }
-                } else {
-                    showToast();
-                }
+                setSkill(5, 5);
             }
         });
     }
 
-    protected void showToast() {
+    private void setSkill(int bpos, int apos) {
+        Button[] buttonarray = new Button[]{btn_skill1, btn_skill2, btn_skill3, btn_skill4, btn_skill5, btn_skill6};
+
+        for (int j = 0; j <= skilllist.length; j++) {
+            if (sa.getId() != 0) {
+                if (sa.getId() == skilllist[j].getSkillid()) {
+                    skillarray[1][apos] = sa.getId();
+                    buttonarray[bpos].setText(String.valueOf(skilllist[j].getSpellname()));
+                    break;
+                }
+            } else {
+                showToast();
+                break;
+            }
+        }
+    }
+
+    private void showToast() {
         Toast.makeText(getContext(), "No skill selected", Toast.LENGTH_SHORT).show();
     }
 
