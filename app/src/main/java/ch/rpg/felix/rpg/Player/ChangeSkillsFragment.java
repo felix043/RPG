@@ -12,18 +12,24 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import ch.rpg.felix.rpg.BattleSystem.BattleActivity;
+import ch.rpg.felix.rpg.BattleSystem.Data.AllSkills;
 import ch.rpg.felix.rpg.BattleSystem.Skills;
 import ch.rpg.felix.rpg.R;
 
 public class ChangeSkillsFragment extends Fragment {
 
     protected int skillarray[][] = new int[2][6]; //[row][colums]
-    private BattleActivity ba = new BattleActivity();
+    private AllSkills as = new AllSkills();
     private SkillAdapter sa = new SkillAdapter();
 
-    private Button btn_skill1, btn_skill2, btn_skill3, btn_skill4, btn_skill5, btn_skill6;
-    private Skills[] skilllist = ba.skills;
+    private Button btn_skill1;
+
+    private Button btn_skill2;
+    private Button btn_skill3;
+    private Button btn_skill4;
+    private Button btn_skill5;
+    private Button btn_skill6;
+    private Skills[] skilllist = as.skills;
 
     @Nullable
     @Override
@@ -58,7 +64,12 @@ public class ChangeSkillsFragment extends Fragment {
             public void onClick(View view) {
                 if (sa.getId() != 0) {
                     skillarray[1][0] = sa.getId();
-                    btn_skill1.setText(String.valueOf(skilllist[sa.getId()].getSpellname()));
+                    for (int i = 0; i <= skilllist.length; i++) {
+                        if (sa.getId() == skilllist[i].getSkillid()) {
+                            btn_skill1.setText(String.valueOf(skilllist[i].getSpellname()));
+                            break;
+                        }
+                    }
                 } else {
                     showToast();
                 }
@@ -70,7 +81,12 @@ public class ChangeSkillsFragment extends Fragment {
             public void onClick(View view) {
                 if (sa.getId() != 0) {
                     skillarray[1][1] = sa.getId();
-                    btn_skill2.setText(String.valueOf(skilllist[sa.getId()].getSpellname()));
+                    for (int i = 0; i <= skilllist.length; i++) {
+                        if (sa.getId() == skilllist[i].getSkillid()) {
+                            btn_skill2.setText(String.valueOf(skilllist[i].getSpellname()));
+                            break;
+                        }
+                    }
                 } else {
                     showToast();
                 }
@@ -82,7 +98,12 @@ public class ChangeSkillsFragment extends Fragment {
             public void onClick(View view) {
                 if (sa.getId() != 0) {
                     skillarray[1][2] = sa.getId();
-                    btn_skill3.setText(String.valueOf(skilllist[sa.getId()].getSpellname()));
+                    for (int i = 0; i <= skilllist.length; i++) {
+                        if (sa.getId() == skilllist[i].getSkillid()) {
+                            btn_skill3.setText(String.valueOf(skilllist[i].getSpellname()));
+                            break;
+                        }
+                    }
                 } else {
                     showToast();
                 }
@@ -94,7 +115,12 @@ public class ChangeSkillsFragment extends Fragment {
             public void onClick(View view) {
                 if (sa.getId() != 0) {
                     skillarray[1][3] = sa.getId();
-                    btn_skill4.setText(String.valueOf(skilllist[sa.getId()].getSpellname()));
+                    for (int i = 0; i <= skilllist.length; i++) {
+                        if (sa.getId() == skilllist[i].getSkillid()) {
+                            btn_skill4.setText(String.valueOf(skilllist[i].getSpellname()));
+                            break;
+                        }
+                    }
                 } else {
                     showToast();
                 }
@@ -106,7 +132,12 @@ public class ChangeSkillsFragment extends Fragment {
             public void onClick(View view) {
                 if (sa.getId() != 0) {
                     skillarray[1][4] = sa.getId();
-                    btn_skill5.setText(String.valueOf(skilllist[sa.getId()].getSpellname()));
+                    for (int i = 0; i <= skilllist.length; i++) {
+                        if (sa.getId() == skilllist[i].getSkillid()) {
+                            btn_skill5.setText(String.valueOf(skilllist[i].getSpellname()));
+                            break;
+                        }
+                    }
                 } else {
                     showToast();
                 }
@@ -118,7 +149,12 @@ public class ChangeSkillsFragment extends Fragment {
             public void onClick(View view) {
                 if (sa.getId() != 0) {
                     skillarray[1][5] = sa.getId();
-                    btn_skill6.setText(String.valueOf(skilllist[sa.getId()].getSpellname()));
+                    for (int i = 0; i <= skilllist.length; i++) {
+                        if (sa.getId() == skilllist[i].getSkillid()) {
+                            btn_skill6.setText(String.valueOf(skilllist[i].getSpellname()));
+                            break;
+                        }
+                    }
                 } else {
                     showToast();
                 }
@@ -126,8 +162,11 @@ public class ChangeSkillsFragment extends Fragment {
         });
     }
 
-
     protected void showToast() {
         Toast.makeText(getContext(), "No skill selected", Toast.LENGTH_SHORT).show();
+    }
+
+    public int[][] getSkillarray() {
+        return skillarray;
     }
 }

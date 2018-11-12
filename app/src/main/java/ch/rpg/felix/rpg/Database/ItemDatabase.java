@@ -55,6 +55,8 @@ public abstract class ItemDatabase extends RoomDatabase {
             itemDao.insert(new Item(5, "Leather Armor", "Tough leather armor", 0, 1, 5, 25, 0, 0));
             itemDao.insert(new Item(6, "Leather Boots", "Tough leather boots", 0, 1, 3, 15, 0, 0));
 
+            itemDao.insert(new Item(1, "Fullen Biscuit", "Tough cookie", -5, 1, 5, 10, 10, 10));
+
             return null;
         }
     }

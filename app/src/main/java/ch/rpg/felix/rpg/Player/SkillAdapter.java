@@ -9,17 +9,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import ch.rpg.felix.rpg.BattleSystem.BattleActivity;
+import ch.rpg.felix.rpg.BattleSystem.Data.AllSkills;
 import ch.rpg.felix.rpg.BattleSystem.Skills;
 import ch.rpg.felix.rpg.R;
 
-import static android.content.ContentValues.TAG;
-
 public class SkillAdapter extends RecyclerView.Adapter<SkillAdapter.SkillHolder> {
 
-    private BattleActivity ba = new BattleActivity();
+    private AllSkills as = new AllSkills();
     private int id;
-    private Skills[] skilllist = ba.skills;
+    private Skills[] skilllist = as.skills;
 
     @NonNull
     @Override
@@ -34,21 +32,19 @@ public class SkillAdapter extends RecyclerView.Adapter<SkillAdapter.SkillHolder>
 
         holder.skillname.setText(skills.getSpellname());
         holder.skilldescription.setText(String.valueOf("Mod: " + skills.getModifier() + " Mp cost: " + skills.getMp_cost()));
-        holder.skillequipbutton.setText(String.valueOf(skills.getSkillid()));
+        holder.skillequipbutton.setText(String.valueOf("id: " + skills.getSkillid() + "p: " + position));
 
         holder.skillequipbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 id = skilllist[position].getSkillid();
-                id = getId();
-                Log.d(TAG, String.valueOf("id isch: " + id + "          position isch: " + position));
+
             }
         });
-
     }
 
     public int getId() {
-        Log.d(TAG, String.valueOf("id isch: " + id));
+        Log.d("test", String.valueOf("id isch: " + id));
         return id;
     }
 

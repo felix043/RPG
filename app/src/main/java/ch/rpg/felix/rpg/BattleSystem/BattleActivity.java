@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import ch.rpg.felix.rpg.Player.ChangeSkillsFragment;
 import ch.rpg.felix.rpg.R;
 
 public class BattleActivity extends AppCompatActivity {
@@ -15,28 +16,15 @@ public class BattleActivity extends AppCompatActivity {
     private Dialog dialog;
     private Player player;
     private Enemy enemy;
+    private ChangeSkillsFragment csf = new ChangeSkillsFragment();
+
+    private int[][] skilllist = csf.getSkillarray();
 
     private int round;
 
-    Skills basic = new Skills(1, "Basic Attack", 0.5, 1, 1, 0, 1);
-    Skills punch = new Skills(2, "Punch", 1, 1, 1, 2, 1);
-    Skills slash = new Skills(3, "Slash", 1.2, 1, 1, 3, 1);
-    Skills stab = new Skills(4, "Stab", 1.3, 1, 1, 4, 1);
-    Skills bodycheck = new Skills(5, "Bodycheck", 1.4, 1, 1, 4, 1);
+    private void showSkills() {
 
-    Skills icelance = new Skills(6, "Icelance", 1.5, 1, 1, 5, 2);
-    Skills fireball = new Skills(7, "Fireball", 1.6, 1, 1, 10, 2);
-    Skills lightning = new Skills(8, "Lightning Strike", 1.7, 1, 1, 15, 2);
-
-    public Skills[] skills = new Skills[]{basic, punch, slash, stab, bodycheck, icelance, fireball, lightning};
-
-    //Stats: [1, enemyhealth, maxenemyhealth, enemy_atk, enemy_mag, enemy_def, enemy_spr, round]
-    AI more50hp = new AI(1, 2, 1, 0.5, true, new AI[0], 2, 0);
-    AI more75hp = new AI(1, 2, 1, 0.75, true, new AI[0], 2, 1);
-
-    AI goblinAI = new AI(0, 0, 0, 0, false, new AI[]{more75hp, more50hp}, 0, -1);
-
-    Enemy goblin = new Enemy("Goblin", 1, 10, 5, 10, 5, 2, 1, 3, 1, new Skills[]{basic, punch, bodycheck}, goblinAI);
+    }
 
     private void showBattleresult() {
         int xpForNextLevel;
@@ -119,6 +107,7 @@ public class BattleActivity extends AppCompatActivity {
             return false;
         }
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
