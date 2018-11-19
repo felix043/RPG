@@ -2,7 +2,6 @@ package ch.rpg.felix.rpg.Player;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,19 +31,17 @@ public class SkillAdapter extends RecyclerView.Adapter<SkillAdapter.SkillHolder>
 
         holder.skillname.setText(skills.getSpellname());
         holder.skilldescription.setText(String.valueOf("Mod: " + skills.getModifier() + " Mp cost: " + skills.getMp_cost()));
-        holder.skillequipbutton.setText(String.valueOf("id: " + skills.getSkillid() + "p: " + position));
+        holder.skillequipbutton.setText(String.valueOf("Equip"));
 
         holder.skillequipbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 id = skilllist[position].getSkillid();
-
             }
         });
     }
 
     public int getId() {
-        Log.d("test", String.valueOf("id isch: " + id));
         return id;
     }
 

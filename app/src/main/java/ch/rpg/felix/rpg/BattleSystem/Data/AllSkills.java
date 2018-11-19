@@ -14,16 +14,7 @@ public class AllSkills {
     Skills fireball = new Skills(7, "Fireball", 1.6, 1, 1, 10, 2);
     Skills lightning = new Skills(8, "Lightning Strike", 1.7, 1, 1, 15, 2);
 
-
-    Skills test1 = new Skills(9, "1", 1.7, 1, 1, 15, 2);
-    Skills test2 = new Skills(10, "2", 1.7, 1, 1, 15, 2);
-    Skills test3 = new Skills(11, "3", 1.7, 1, 1, 15, 2);
-    Skills test4 = new Skills(12, "4", 1.7, 1, 1, 15, 2);
-    Skills test5 = new Skills(13, "5", 1.7, 1, 1, 15, 2);
-    Skills test6 = new Skills(14, "6", 1.7, 1, 1, 15, 2);
-
-
-    public Skills[] skills = new Skills[]{punch, slash, stab, bodycheck, icelance, fireball, lightning, test5, test3, test1, test4, test2, test6};
+    public Skills[] skills = new Skills[]{punch, slash, stab, bodycheck, icelance, fireball, lightning};
 
     public Skills[] getSkills() {
         return skills;
