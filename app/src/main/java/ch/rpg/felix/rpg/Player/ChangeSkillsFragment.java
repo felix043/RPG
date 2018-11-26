@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import ch.rpg.felix.rpg.BattleSystem.Data.AllSkills;
@@ -28,11 +29,14 @@ public class ChangeSkillsFragment extends Fragment {
     private int equippedSkills[] = new int[6];
     private Skills[] skilllist = as.skills;
 
+    ArrayList<Skills> arrayList;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_change_skills, container, false);
         btn_Skills(view);
+
         showSkillsOnCreate();
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.skill_recyclerview);
@@ -138,6 +142,28 @@ public class ChangeSkillsFragment extends Fragment {
         }
     }
 
+    /*
+    private void saveData(){
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("sharedPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(arrayList);
+        editor.putString("list", json);
+        editor.apply();
+    }
+
+    private void loadData(){
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("sharedPref", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("task", null);
+        Type type = new TypeToken<ArrayList<Skills>>() {}.getType();
+        arrayList = gson.fromJson(json, type);
+
+        if(arrayList == null){
+            arrayList = new ArrayList<>();
+        }
+    }
+*/
     private void showToast() {
         Toast.makeText(getContext(), "No skill selected", Toast.LENGTH_SHORT).show();
     }
