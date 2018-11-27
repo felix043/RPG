@@ -3,14 +3,14 @@ package ch.rpg.felix.rpg.BattleSystem;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import java.util.Arrays;
+import com.google.gson.Gson;
 
+import ch.rpg.felix.rpg.BattleSystem.Data.AllSkills;
 import ch.rpg.felix.rpg.Player.ChangeSkillsFragment;
 import ch.rpg.felix.rpg.R;
 
@@ -19,21 +19,26 @@ public class BattleActivity extends AppCompatActivity {
     private Dialog dialog;
     private Player player;
     private Enemy enemy;
+    private Gson gson = new Gson();
     private ChangeSkillsFragment csf = new ChangeSkillsFragment();
+    private AllSkills as = new AllSkills();
     private int round;
 
+    private Button btn_skill1, btn_skill2, btn_skill3, btn_skill4, btn_skill5, btn_skill6;
     private int equippedSkills[] = csf.getEquippedSkills();
+    private Skills[] skilllist = as.skills;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_battle);
+        showSkills();
+
+        dialog = new Dialog(this);
+    }
 
     private void showSkills() {
-        Button test = (Button) findViewById(R.id.btn_skillone);
-        test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                for (int i = 0; i < csf.getEquippedSkills().length; i++) {
-                    Log.d("testtesttest12", Arrays.toString(equippedSkills));
-                }
-            }
-        });
+
     }
 
     private void showBattleresult() {
@@ -116,14 +121,5 @@ public class BattleActivity extends AppCompatActivity {
             showBattleresult();
             return false;
         }
-    }
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_battle);
-        showSkills();
-        dialog = new Dialog(this);
     }
 }

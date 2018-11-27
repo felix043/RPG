@@ -1,5 +1,7 @@
 package ch.rpg.felix.rpg.Player;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,7 +15,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import com.google.gson.Gson;
+
 import java.util.Arrays;
 
 import ch.rpg.felix.rpg.BattleSystem.Data.AllSkills;
@@ -24,39 +27,50 @@ public class ChangeSkillsFragment extends Fragment {
 
     private AllSkills as = new AllSkills();
     private SkillAdapter sa = new SkillAdapter();
+    private Gson gson = new Gson();
 
     private Button btn_skill1, btn_skill2, btn_skill3, btn_skill4, btn_skill5, btn_skill6;
+    private String json;
+
     private int equippedSkills[] = new int[6];
     private Skills[] skilllist = as.skills;
-
-    ArrayList<Skills> arrayList;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_change_skills, container, false);
-        btn_Skills(view);
-
+        loadData();
+        initializeBtn(view);
         showSkillsOnCreate();
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.skill_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setHasFixedSize(true);
-
         recyclerView.setAdapter(sa);
 
         Button button = (Button) view.findViewById(R.id.testbutton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("testtesttest12", Arrays.toString(equippedSkills));
+                Log.d("12345array", Arrays.toString(equippedSkills));
             }
         });
 
         return view;
     }
 
-    private void btn_Skills(View v) {
+    private void showSkillsOnCreate() {
+        Button[] buttonarray = new Button[]{btn_skill1, btn_skill2, btn_skill3, btn_skill4, btn_skill5, btn_skill6};
+
+        for (int i = 0; i < equippedSkills.length; i++) {
+            if (equippedSkills[i] != 0) {
+                Log.d("12345oncreate", Arrays.toString(equippedSkills));
+                buttonarray[i].setText(String.valueOf(skilllist[equippedSkills[i] - 2].getSpellname()));
+            }
+        }
+    }
+
+    private void initializeBtn(View v) {
 
         btn_skill1 = (Button) v.findViewById(R.id.btn_skillsetone);
         btn_skill2 = (Button) v.findViewById(R.id.btn_skillsettwo);
@@ -116,6 +130,7 @@ public class ChangeSkillsFragment extends Fragment {
                 if (sa.getId() == skilllist[j].getSkillid()) {
                     equippedSkills[pos] = sa.getId();
                     buttonarray[pos].setText(String.valueOf(skilllist[j].getSpellname()));
+                    saveData();
                     break;
                 }
             } else {
@@ -125,46 +140,29 @@ public class ChangeSkillsFragment extends Fragment {
         }
     }
 
-    public int[] getEquippedSkills() {
-        return equippedSkills;
-    }
-
-    private void showSkillsOnCreate() {
-        Button[] buttonarray = new Button[]{btn_skill1, btn_skill2, btn_skill3, btn_skill4, btn_skill5, btn_skill6};
-
-        for (int i = 0; i < equippedSkills.length; i++) {
-
-            if (equippedSkills[i] != 0) {
-                buttonarray[i].setText(String.valueOf(skilllist[equippedSkills[i]].getSpellname()));
-            } else {
-                buttonarray[i].setText("No Skills");
-            }
-        }
-    }
-
-    /*
     private void saveData(){
-        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("sharedPref", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(arrayList);
-        editor.putString("list", json);
+        SharedPreferences sharedPref = this.getActivity().getSharedPreferences("sharedPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        json = gson.toJson(equippedSkills);
+        editor.putString("skill list", json);
         editor.apply();
     }
 
     private void loadData(){
-        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("sharedPref", Context.MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = sharedPreferences.getString("task", null);
-        Type type = new TypeToken<ArrayList<Skills>>() {}.getType();
-        arrayList = gson.fromJson(json, type);
-
-        if(arrayList == null){
-            arrayList = new ArrayList<>();
-        }
+        SharedPreferences sharedPref = this.getActivity().getSharedPreferences("sharedPref", Context.MODE_PRIVATE);
+        json = sharedPref.getString("skill list", null);
+        equippedSkills = gson.fromJson(json, int[].class);
     }
-*/
+
     private void showToast() {
         Toast.makeText(getContext(), "No skill selected", Toast.LENGTH_SHORT).show();
+    }
+
+    public int[] getEquippedSkills() {
+        return equippedSkills;
+    }
+
+    public String getJson() {
+        return json;
     }
 }
