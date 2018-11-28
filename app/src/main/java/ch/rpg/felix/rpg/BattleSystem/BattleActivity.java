@@ -1,14 +1,19 @@
 package ch.rpg.felix.rpg.BattleSystem;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+
+import java.util.Arrays;
 
 import ch.rpg.felix.rpg.BattleSystem.Data.AllSkills;
 import ch.rpg.felix.rpg.Player.ChangeSkillsFragment;
@@ -19,14 +24,17 @@ public class BattleActivity extends AppCompatActivity {
     private Dialog dialog;
     private Player player;
     private Enemy enemy;
-    private Gson gson = new Gson();
     private ChangeSkillsFragment csf = new ChangeSkillsFragment();
     private AllSkills as = new AllSkills();
-    private int round;
 
-    private Button btn_skill1, btn_skill2, btn_skill3, btn_skill4, btn_skill5, btn_skill6;
+    private Gson gson = new Gson();
+
+    private int round;
+    private String json = csf.getJson();
     private int equippedSkills[] = csf.getEquippedSkills();
     private Skills[] skilllist = as.skills;
+
+    private Button btn_skill1, btn_skill2, btn_skill3, btn_skill4, btn_skill5, btn_skill6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +46,30 @@ public class BattleActivity extends AppCompatActivity {
     }
 
     private void showSkills() {
+        initializeBtn();
+        Button[] buttonarray = new Button[]{btn_skill1, btn_skill2, btn_skill3, btn_skill4, btn_skill5, btn_skill6};
+        loadData();
+        for (int i = 0; i < equippedSkills.length; i++) {
+            if (equippedSkills[i] != 0) {
+                Log.d("12345oncreate", Arrays.toString(equippedSkills));
+                buttonarray[i].setText(String.valueOf(skilllist[equippedSkills[i] - 2].getSpellname()));
+            }
+        }
+    }
 
+    private void initializeBtn() {
+        btn_skill1 = (Button) findViewById(R.id.btn_skillone);
+        btn_skill2 = (Button) findViewById(R.id.btn_skilltwo);
+        btn_skill3 = (Button) findViewById(R.id.btn_skillthree);
+        btn_skill4 = (Button) findViewById(R.id.btn_skillfour);
+        btn_skill5 = (Button) findViewById(R.id.btn_skillfive);
+        btn_skill6 = (Button) findViewById(R.id.btn_skillsix);
+    }
+
+    private void loadData() {
+        SharedPreferences sharedPref = getSharedPreferences("sharedPref", Context.MODE_PRIVATE);
+        json = sharedPref.getString("skill list", null);
+        equippedSkills = gson.fromJson(json, int[].class);
     }
 
     private void showBattleresult() {
