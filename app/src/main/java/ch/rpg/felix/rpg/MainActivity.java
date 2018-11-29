@@ -21,7 +21,7 @@ import ch.rpg.felix.rpg.Skills.SkilltreeFragment;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
-    private Player player = new Player("Player", 1, 10, 10, 10, 10, 2, 2, 4, 4, new Skills[]{}, 0);
+    private Player player = new Player("Player", 1, 10, 10, 10, 10, 2, 2, new Skills[]{}, 0);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

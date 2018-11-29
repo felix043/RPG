@@ -15,7 +15,8 @@ import ch.rpg.felix.rpg.R;
 
 public class PrologueFragment extends Fragment {
 
-    private int stage;
+    private Intent intent = new Intent();
+    private Bundle extras = new Bundle();
 
     @Nullable
     @Override
@@ -25,11 +26,12 @@ public class PrologueFragment extends Fragment {
         return view;
     }
 
-    private void switchActivity() {
-        Intent i = new Intent();
-        i.setClass(getActivity(), BattleActivity.class);
-        i.putExtra("stage", String.valueOf(stage));
-        getActivity().startActivity(i);
+    private void switchActivity(int x, int y) {
+        intent.setClass(getActivity(), BattleActivity.class);
+        extras.putString("x", String.valueOf(x));
+        extras.putString("y", String.valueOf(y));
+        intent.putExtras(extras);
+        getActivity().startActivity(intent);
     }
 
     private void battleBtn(View view){
@@ -41,8 +43,7 @@ public class PrologueFragment extends Fragment {
         btn1_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                stage = 11;
-                switchActivity();
+                switchActivity(0, 0);
                 btn1_2.setVisibility(View.VISIBLE);
             }
         });
@@ -50,8 +51,7 @@ public class PrologueFragment extends Fragment {
         btn1_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                stage = 12;
-                switchActivity();
+                switchActivity(0, 1);
                 btn1_3.setVisibility(View.VISIBLE);
             }
         });
@@ -59,8 +59,7 @@ public class PrologueFragment extends Fragment {
         btn1_3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                stage = 13;
-                switchActivity();
+                switchActivity(0, 2);
                 //btn1_4.setVisibility(View.VISIBLE);       fourth stage not implemented yet
             }
         });

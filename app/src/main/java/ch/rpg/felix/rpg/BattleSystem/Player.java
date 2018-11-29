@@ -5,12 +5,11 @@ public class Player extends Creature {
     private int expObtained;
     private int expNeeded;
 
-    public Player(String name, int level, int max_hp, int max_mp, int current_hp, int current_mp,
+    public Player(String name, int level, int max_hp, int max_mp,
                   int atk, int mag, int def, int spr, Skills[] skillArray, int expObtained) {
+        super(name, level, max_hp, max_mp, atk, mag, def, spr, skillArray);
 
-        super(name, level, max_hp, max_mp, current_hp, current_mp, atk, mag, def, spr, skillArray);
-
-        //Player player = new Player("Player", 1, 10, 10, 10, 10, 2, 2, 4, 4, new Skills[]{}, 10, 0, 0);
+        this.max_hp = 1;
 
         this.expObtained = expObtained;
         calculateLevel();
@@ -52,7 +51,7 @@ public class Player extends Creature {
     }
 
     public int[] getAllStats() {
-        int[] playerstats = new int[]{level, max_hp, max_mp, current_hp, current_mp, atk, mag, def, spr};
+        int[] playerstats = new int[]{level, max_hp, max_mp, atk, mag, def, spr};
         return playerstats;
     }
 
