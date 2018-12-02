@@ -6,17 +6,44 @@
     android:layout_height="match_parent"
     tools:context=".BattleSystem.BattleActivity">
 
-    <TextView
-        android:id="@+id/enemy_name"
+    <LinearLayout
+        android:id="@+id/linlayout_enemytext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:textColor="#000"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/enemy_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Goblin"
+            android:textColor="#000"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/enemy_level_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Lv. "
+            android:textColor="#000"
+            app:layout_constraintStart_toEndOf="@+id/enemy_name"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/enemy_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/enemy_healthBar"
@@ -31,7 +58,7 @@
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enemy_name" />
+        app:layout_constraintTop_toBottomOf="@+id/linlayout_enemytext" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -287,5 +314,19 @@
         </LinearLayout>
 
     </GridLayout>
+
+    <Button
+        android:id="@+id/testtest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
 </android.support.constraint.ConstraintLayout>

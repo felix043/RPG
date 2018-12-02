@@ -9,10 +9,24 @@ public class Player extends Creature {
                   int atk, int mag, int def, int spr, Skills[] skillArray, int expObtained) {
         super(name, level, max_hp, max_mp, atk, mag, def, spr, skillArray);
 
-        this.max_hp = 1;
+        this.max_hp = 15;
+        this.max_mp = 10;
+        this.atk = 3;
+        this.mag = 3;
+        this.def = 2;
+        this.spr = 2;
 
         this.expObtained = expObtained;
         calculateLevel();
+    }
+
+    public Player() {
+        this.max_hp = 15;
+        this.max_mp = 10;
+        this.atk = 3;
+        this.mag = 3;
+        this.def = 2;
+        this.spr = 2;
     }
 
     public int calculateLevel() {

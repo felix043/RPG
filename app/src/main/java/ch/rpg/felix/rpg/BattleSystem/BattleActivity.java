@@ -23,22 +23,27 @@ import ch.rpg.felix.rpg.R;
 public class BattleActivity extends AppCompatActivity {
 
     private Dialog dialog;
-    private Player player;
-    private Enemy enemy;
+    private Player player = new Player();
+    private Enemy enemy = new Enemy();
     private ChangeSkillsFragment csf = new ChangeSkillsFragment();
     private AllEnemies ae = new AllEnemies();
     private AllSkills as = new AllSkills();
-
     private Gson gson = new Gson();
+    private EnemyStatsCalc enemyStatsCalc = new EnemyStatsCalc();
 
     private String json = csf.getJson();
     private int equippedSkills[] = csf.getEquippedSkills();
     private Skills[] skilllist = as.skills;
+
     private int current_playerhp;
     private int current_enemyhp;
 
+    //Get data for enemy level and type from button
+    private int enemy_level;
+    private int enemy_type;
+
     private Button btn_skill1, btn_skill2, btn_skill3, btn_skill4, btn_skill5, btn_skill6;
-    private TextView currentPlayerHp, currentPlayerMp, currentEnemyHp, currentEnemyMp, maxPlayerHp, maxPlayerMp, maxEnemyHp, maxEnemyMp;
+    private TextView maxPlayerHp, currentPlayerHp, maxPlayerMp, currentPlayerMp, maxEnemyHp, currentEnemyHp, maxEnemyMp, currentEnemyMp, enemyname, enemylevel;
     private ProgressBar playerhpbar, playermpbar, enemyhpbar, enemympbar;
 
     @Override
@@ -46,22 +51,36 @@ public class BattleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_battle);
         loadEnemy();
-        //loadPlayerEnemyStats();
+        loadPlayerEnemyStats();
         showSkills();
         showBattleprogress();
         dialog = new Dialog(this);
     }
 
     private void loadEnemy() {
-        Button testtest = (Button) findViewById(R.id.testtest);
+        Button btn_test = (Button) findViewById(R.id.testtest);
 
         Bundle extras = getIntent().getExtras();
         final String x = extras.getString("x");
         final String y = extras.getString("y");
 
+        enemy_level = ae.getEnemyComposition()[Integer.parseInt(x)][Integer.parseInt(y)].getLevel();
+        enemy_type = ae.getEnemyComposition()[Integer.parseInt(x)][Integer.parseInt(y)].getEnemy();
+
+        enemyStatsCalc.statscalc(enemy_type, enemy_level);
+
+        btn_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("testtest", String.valueOf(player.getMax_hp()));
+            }
+        });
     }
 
     private void loadPlayerEnemyStats() {
+        enemyname = (TextView) findViewById(R.id.enemy_name);
+        enemylevel = (TextView) findViewById(R.id.enemy_level);
+
         maxPlayerHp = (TextView) findViewById(R.id.max_playerhp);
         maxPlayerMp = (TextView) findViewById(R.id.max_playermp);
         maxEnemyHp = (TextView) findViewById(R.id.max_enemyhp);
@@ -77,25 +96,28 @@ public class BattleActivity extends AppCompatActivity {
         enemyhpbar = (ProgressBar) findViewById(R.id.enemy_healthBar);
         enemympbar = (ProgressBar) findViewById(R.id.enemy_manaBar);
 
+        enemyname.setText(ae.getEnemies()[enemy_type - 1].getName());
+        enemylevel.setText(String.valueOf(enemy_level));
+
         maxPlayerHp.setText(String.valueOf(player.getMax_hp()));
         maxPlayerMp.setText(String.valueOf(player.getMax_mp()));
-        maxEnemyHp.setText(String.valueOf(enemy.getMax_hp()));
-        maxEnemyMp.setText(String.valueOf(enemy.getMax_mp()));
+        maxEnemyHp.setText(String.valueOf(enemyStatsCalc.getStats()[4]));
+        maxEnemyMp.setText(String.valueOf(enemyStatsCalc.getStats()[5]));
 
         currentPlayerHp.setText(String.valueOf(player.getMax_hp()));
         currentPlayerMp.setText(String.valueOf(player.getMax_mp()));
-        currentEnemyHp.setText(String.valueOf(enemy.getMax_hp()));
-        currentEnemyMp.setText(String.valueOf(enemy.getMax_mp()));
+        currentEnemyHp.setText(String.valueOf(enemyStatsCalc.getStats()[4]));
+        currentEnemyMp.setText(String.valueOf(enemyStatsCalc.getStats()[5]));
 
         playerhpbar.setMax(player.getMax_hp());
         playermpbar.setMax(player.getMax_mp());
-        enemyhpbar.setMax(enemy.getMax_hp());
-        enemympbar.setMax(enemy.getMax_mp());
+        enemyhpbar.setMax(enemyStatsCalc.getStats()[4]);
+        enemympbar.setMax(enemyStatsCalc.getStats()[5]);
 
         playerhpbar.setProgress(player.getMax_hp());
         playermpbar.setProgress(player.getMax_mp());
-        enemyhpbar.setProgress(enemy.getMax_hp());
-        enemympbar.setProgress(enemy.getMax_mp());
+        enemyhpbar.setProgress(enemyStatsCalc.getStats()[4]);
+        enemympbar.setProgress(enemyStatsCalc.getStats()[5]);
     }
 
     private void showBattleprogress() {
@@ -214,5 +236,13 @@ public class BattleActivity extends AppCompatActivity {
             }
         });
         dialog.show();
+    }
+
+    public int getEnemy_level() {
+        return enemy_level;
+    }
+
+    public int getEnemy_type() {
+        return enemy_type;
     }
 }

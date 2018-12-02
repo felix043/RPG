@@ -51,7 +51,7 @@ public class PrologueFragment extends Fragment {
         btn1_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switchActivity(0, 1);
+                switchActivity(1, 0);
                 btn1_3.setVisibility(View.VISIBLE);
             }
         });
@@ -59,7 +59,7 @@ public class PrologueFragment extends Fragment {
         btn1_3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switchActivity(0, 2);
+                switchActivity(2, 0);
                 //btn1_4.setVisibility(View.VISIBLE);       fourth stage not implemented yet
             }
         });

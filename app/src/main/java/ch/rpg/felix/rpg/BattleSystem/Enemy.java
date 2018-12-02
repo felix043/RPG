@@ -3,19 +3,25 @@ package ch.rpg.felix.rpg.BattleSystem;
 public class Enemy extends Creature {
 
     private AI ai;
-
-    DamageCalculation dc = new DamageCalculation();
+    private DamageCalculation dc = new DamageCalculation();
     private Skills skills;
 
-    public Enemy(String name, int level, int max_hp, int max_mp, int current_hp, int current_mp,
+    private int enemyId;
+
+    public Enemy(int enemyId, String name, int level, int max_hp, int max_mp, int current_hp, int current_mp,
                  int atk, int mag, int def, int spr, Skills[] skillArray, AI ai) {
 
         super(name, level, max_hp, max_mp, atk, mag, def, spr, skillArray);
         this.ai = ai;
+        this.enemyId = enemyId;
     }
 
     public Enemy(int enemy, int level) {
         super(enemy, level);
+    }
+
+    public Enemy() {
+
     }
 
     /*
@@ -36,5 +42,9 @@ public class Enemy extends Creature {
 
     public AI getAi() {
         return ai;
+    }
+
+    public int getEnemyId() {
+        return enemyId;
     }
 }

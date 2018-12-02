@@ -35,6 +35,10 @@ public class Creature extends AppCompatActivity {
         this.level = level;
     }
 
+    public Creature() {
+
+    }
+
     public String getName() {
         return name;
     }
@@ -65,6 +69,10 @@ public class Creature extends AppCompatActivity {
 
     public int getSpr() {
         return spr;
+    }
+
+    public int getEnemy() {
+        return enemy;
     }
 
     public Skills[] getSkillArray() {
