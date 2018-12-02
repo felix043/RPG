@@ -22,7 +22,7 @@ public class Player extends Creature {
 
     public Player() {
         this.max_hp = 15;
-        this.max_mp = 10;
+        this.max_mp = 1000;
         this.atk = 3;
         this.mag = 3;
         this.def = 2;

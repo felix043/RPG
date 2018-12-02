@@ -32,23 +32,27 @@ public class ChangeSkillsFragment extends Fragment {
     private Button btn_skill1, btn_skill2, btn_skill3, btn_skill4, btn_skill5, btn_skill6;
     private String json;
 
-    private int equippedSkills[] = new int[6];
+    private int[] equippedSkills = new int[6];
     private Skills[] skilllist = as.skills;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_change_skills, container, false);
+
+        Log.d("testtest", Arrays.toString(equippedSkills));
+
         loadData();
+
         initializeBtn(view);
         showSkillsOnCreate();
 
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.skill_recyclerview);
+        RecyclerView recyclerView = view.findViewById(R.id.skill_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(sa);
 
-        Button button = (Button) view.findViewById(R.id.testbutton);
+        Button button = view.findViewById(R.id.testbutton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,10 +66,15 @@ public class ChangeSkillsFragment extends Fragment {
     private void showSkillsOnCreate() {
         Button[] buttonarray = new Button[]{btn_skill1, btn_skill2, btn_skill3, btn_skill4, btn_skill5, btn_skill6};
 
-        for (int i = 0; i < equippedSkills.length; i++) {
-            if (equippedSkills[i] != 0) {
-                Log.d("12345oncreate", Arrays.toString(equippedSkills));
-                buttonarray[i].setText(String.valueOf(skilllist[equippedSkills[i] - 2].getSpellname()));
+        if (equippedSkills == null) {
+            for (int i = 0; i < 6; i++) {
+                equippedSkills[i] = 0;
+            }
+        } else {
+            for (int i = 0; i < equippedSkills.length; i++) {
+                if (equippedSkills[i] != 0) {
+                    buttonarray[i].setText(String.valueOf(skilllist[equippedSkills[i] - 2].getSpellname()));
+                }
             }
         }
     }

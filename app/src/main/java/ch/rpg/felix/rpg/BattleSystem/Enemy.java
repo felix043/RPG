@@ -3,7 +3,6 @@ package ch.rpg.felix.rpg.BattleSystem;
 public class Enemy extends Creature {
 
     private AI ai;
-    private DamageCalculation dc = new DamageCalculation();
     private Skills skills;
 
     private int enemyId;

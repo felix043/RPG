@@ -36,9 +36,9 @@ public class PrologueFragment extends Fragment {
 
     private void battleBtn(View view){
 
-        final Button btn1_1 = (Button) view.findViewById(R.id.btn_1_1);
-        final Button btn1_2 = (Button) view.findViewById(R.id.btn_1_2);
-        final Button btn1_3 = (Button) view.findViewById(R.id.btn_1_3);
+        final Button btn1_1 = view.findViewById(R.id.btn_1_1);
+        final Button btn1_2 = view.findViewById(R.id.btn_1_2);
+        final Button btn1_3 = view.findViewById(R.id.btn_1_3);
 
         btn1_1.setOnClickListener(new View.OnClickListener() {
             @Override

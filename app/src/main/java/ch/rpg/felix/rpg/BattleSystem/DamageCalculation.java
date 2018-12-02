@@ -1,45 +1,57 @@
 package ch.rpg.felix.rpg.BattleSystem;
 
+import ch.rpg.felix.rpg.BattleSystem.Data.AllEnemies;
+
 public class DamageCalculation {
 
-    private Player player;
-    private Enemy enemy;
-    private Skills skills;
+    private Player player = new Player();
+    private Enemy enemy = new Enemy();
+    private AllEnemies as = new AllEnemies();
 
+    private int damage;
 
-    protected int calculatePlayerMagicDamage() {
-        int magic_dmg;
-        magic_dmg = (int) ((Math.sqrt(player.getMag()) / enemy.getSpr()) * skills.getModifier());
-        return magic_dmg;
+    protected int calcPlMagDmg(double modifier, int enemytype) {
+        for (int i = 0; i < as.getEnemies().length; i++) {
+            if (as.getEnemies()[i].getEnemyId() == enemytype) {
+                damage = (int) (Math.pow(player.getMag(), 2) / as.getEnemies()[i].getSpr() * modifier);
+                break;
+            }
+        }
+        return damage;
     }
 
-    protected int calculatePlayerPhysicalDamage() {
-        int pysical_dmg;
-        pysical_dmg = (int) ((Math.sqrt(player.getAtk()) / enemy.getDef()) * skills.getModifier());
-        return pysical_dmg;
+    protected int calcPlPhyDmg(double modifier, int enemytype) {
+        for (int i = 0; i < as.getEnemies().length; i++) {
+            if (as.getEnemies()[i].getEnemyId() == enemytype) {
+                damage = (int) (Math.pow(player.getAtk(), 2) / as.getEnemies()[i].getDef() * modifier);
+                break;
+            }
+        }
+        return damage;
     }
 
-    protected int calculatePlayerHybridDamage() {
-        int pysical_dmg;
-        pysical_dmg = (int) (((Math.sqrt(player.getMag()) / enemy.getSpr()) * skills.getModifier() + (Math.sqrt(player.getAtk()) / enemy.getDef()) * skills.getModifier()) / 2);
-        return pysical_dmg;
+    protected int calcPlHybDmg(double modifier, int enemytype) {
+        for (int i = 0; i < as.getEnemies().length; i++) {
+            if (as.getEnemies()[i].getEnemyId() == enemytype) {
+                damage = (int) ((Math.pow(player.getAtk(), 2) / as.getEnemies()[i].getDef() * modifier + Math.pow(player.getMag(), 2) / as.getEnemies()[i].getSpr() * modifier) / 2);
+                break;
+            }
+        }
+        return damage;
     }
 
-    protected int calculateEnemyMagicDamage() {
-        int magic_dmg;
-        magic_dmg = (int) ((Math.sqrt(enemy.getMag()) / player.getSpr()) * skills.getModifier());
-        return magic_dmg;
+    protected int calcEnMagDmg(double modifier, int enemytype) {
+        damage = (int) ((Math.pow(enemy.getMag(), 2) / player.getSpr()) * modifier);
+        return damage;
     }
 
-    protected int calculateEnemyPhysicalDamage() {
-        int pysical_dmg;
-        pysical_dmg = (int) ((Math.sqrt(enemy.getAtk()) / player.getDef()) * skills.getModifier());
-        return pysical_dmg;
+    protected int calcEnPhyDmg(double modifier, int enemytype) {
+        damage = (int) ((Math.pow(enemy.getAtk(), 2) / player.getDef()) * modifier);
+        return damage;
     }
 
-    protected int calculateEnemyHybridDamage() {
-        int pysical_dmg;
-        pysical_dmg = (int) (((Math.sqrt(player.getMag()) / enemy.getSpr()) * skills.getModifier() + (Math.sqrt(player.getAtk()) / enemy.getDef()) * skills.getModifier()) / 2);
-        return pysical_dmg;
+    protected int calcEnHybDmg(double modifier, int enemytype) {
+        damage = (int) (((Math.pow(player.getMag(), 2) / enemy.getSpr()) * modifier + (Math.pow(player.getAtk(), 2) / enemy.getDef()) * modifier) / 2);
+        return damage;
     }
 }

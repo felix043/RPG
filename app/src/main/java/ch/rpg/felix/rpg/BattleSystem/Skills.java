@@ -13,11 +13,16 @@ public class Skills {
     public Skills(int skillid, String spellname, double modifier, int def_pen, int spr_pen, int mp_cost, int type) {
         this.skillid = skillid;
         this.spellname = spellname;
+
         this.modifier = modifier;
         this.def_pen = def_pen;
         this.spr_pen = spr_pen;
         this.mp_cost = mp_cost;
         this.type = type;
+    }
+
+    public Skills() {
+
     }
 
     public int getSkillid() {
