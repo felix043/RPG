@@ -159,6 +159,10 @@ public class BattleActivity extends AppCompatActivity {
     }
 
     public boolean fight() {
+
+        //enemy.getAi().checkRule(new int[1]);
+        int index = new AI(0, 0, 0, 0, 0, 0, true, new AI[0], 0, 0).checkRule(new int[][]{new int[]{current_enemyhp, current_playerhp}});
+
         /*
         while (true) {
             if (current_playerhp <= 0) {
@@ -245,7 +249,7 @@ public class BattleActivity extends AppCompatActivity {
     }
 
     private int calculateDmg(double modifier, int type, int enemy_type) {
-        if (type == 0) {
+        if (type == 2) {
             return dc.calcPlMagDmg(modifier, enemy_type);
         }
         if (type == 1) {

@@ -43,6 +43,10 @@ public class Enemy extends Creature {
         return ai;
     }
 
+    public void setAi(AI ai) {
+        this.ai = ai;
+    }
+
     public int getEnemyId() {
         return enemyId;
     }
