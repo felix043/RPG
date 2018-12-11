@@ -8,6 +8,13 @@ public class AllConditions {
     //AI more50hp = new AI(1, 2, 1, 0.5, true, new AI[0], 2, 0);
     //AI more75hp = new AI(1, 2, 1, 0.75, true, new AI[0], 2, 1);
 
+    // [1, currentplayerhp, maxplayerhp, currentplayermp, maxplayerhp,
+    // playeratk, playermag, playerdef, playerspr,
+    // currentenemyhp, maxenemyhp, currentenemymp, maxenemymp,
+    // enemyatk, enemymag, enemydef, enemyspr, lastplayerdmg, lastenemydmg,
+    // currentplayerailment, currentenemyailment, lastplayerattacktype,
+    // turncount, random],
+
     AI doPunch = new AI(0, 3, 1, 1, 0, 1, true, new AI[0], 3, 2);
     AI doStab = new AI(0, 3, 1, 1, 1, 1, true, new AI[0], 3, 3);
     AI doSlash = new AI(0, 3, 1, 1, 2, 1, true, new AI[0], 3, 4);
@@ -53,10 +60,26 @@ public class AllConditions {
 
     AI turn4 = new AI(0, 22, 1, 1, 0, 4, false, new AI[]{doLightning, failLightningB}, 6, -1);
     AI turnNot4 = new AI(0, 22, 1, 1, 0, 4, false, new AI[]{randomMore30, randomLess30}, 7, -1);
+
     AI eHpMore10pc = new AI(0, 9, 1, 0, 9, 0.1, false, new AI[]{randomMore50b, randomLess50b}, 4, -1);
     AI eHpLess10pc = new AI(0, 9, 1, 0, 9, 0.1, false, new AI[]{playerMoreHp, playerLessHp}, 1, -1);
+
     AI eHpMore50pc = new AI(0, 9, 1, 0, 9, 0.5, false, new AI[]{turn4, turnNot4}, 4, -1);
     AI eHpLess50pc = new AI(0, 9, 1, 0, 9, 0.5, false, new AI[]{eHpMore10pc, eHpLess10pc}, 1, -1);
-    AI eHpMore70pc = new AI(0, 9, 1, 0, 9, 0.7, false, new AI[]{pAttackMagic, pAttackNotMagic}, 4, -1);
-    AI eHpLess70pc = new AI(0, 9, 1, 0, 9, 0.7, false, new AI[]{eHpMore50pc, eHpLess50pc}, 1, -1);
+
+    AI eHpMore70pc = new AI(0, 9, 1, 0, 10, 0.7, false, new AI[]{pAttackMagic, pAttackNotMagic}, 4, -1);
+    AI eHpLess70pc = new AI(0, 9, 1, 0, 10, 0.7, false, new AI[]{eHpMore50pc, eHpLess50pc}, 1, -1);
+
+    //0: ==, 1: <, 2: >, 3: <=, 4: >=, 5: !=, 6: % == 0, 7: % != 0
+
+    //Goblin
+    AI goblinSlash = new AI(0, 11, 1, 1, 11, 1, true, new AI[0], 4, 1);
+    AI goblinPunch = new AI(0, 11, 1, 1, 11, 1, true, new AI[0], 4, 2);
+
+
+    AI goblinBasic = new AI(0, 11, 1, 0, 11, 1, true, new AI[0], 0, 0);
+
+
+    AI goblinLess50 = new AI(0, 9, 1, 0, 10, 0.5, false, new AI[]{goblinPunch, goblinBasic}, 1, -1);
+    AI goblinMore50 = new AI(0, 9, 1, 0, 10, 0.5, false, new AI[]{goblinSlash, goblinBasic}, 4, -1);
 }

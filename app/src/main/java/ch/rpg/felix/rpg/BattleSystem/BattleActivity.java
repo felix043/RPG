@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
-import java.util.Arrays;
+import java.util.concurrent.ThreadLocalRandom;
 
 import ch.rpg.felix.rpg.BattleSystem.Data.AllEnemies;
 import ch.rpg.felix.rpg.BattleSystem.Data.AllSkills;
@@ -24,8 +24,8 @@ import ch.rpg.felix.rpg.R;
 public class BattleActivity extends AppCompatActivity {
 
     private Dialog dialog;
-    private Player player = new Player();
-    private Enemy enemy = new Enemy();
+    private Player p = new Player();
+    private Enemy e = new Enemy();
     private ChangeSkillsFragment csf = new ChangeSkillsFragment();
     private AllEnemies ae = new AllEnemies();
     private AllSkills as = new AllSkills();
@@ -33,27 +33,34 @@ public class BattleActivity extends AppCompatActivity {
     private EnemyStatsCalc enemyStatsCalc = new EnemyStatsCalc();
     private DamageCalculation dc = new DamageCalculation();
 
-    private String json = csf.getJson();
-    private int equippedSkills[];
-    private Skills[] skilllist = as.skills;
-
     private int current_playerhp;
     private int current_playermp;
     private int current_enemyhp;
+    private int current_enemymp;
+
+    private int lastplayerdmg;
+    private int lastenemydmg;
+    private int lastplayerattacktype;
+    private int turncount;
+
+    private Button btn_skill1, btn_skill2, btn_skill3, btn_skill4, btn_skill5, btn_skill6;
+    private TextView maxPlayerHp, currentPlayerHp, maxPlayerMp, currentPlayerMp, maxEnemyHp, currentEnemyHp, maxEnemyMp, currentEnemyMp, enemyname, enemylevel;
+    private ProgressBar playerhpbar, playermpbar, enemyhpbar, enemympbar;
 
     //Get data for enemy level and type from button
     private int enemy_level;
     private int enemy_type;
 
-    private Button btn_skill1, btn_skill2, btn_skill3, btn_skill4, btn_skill5, btn_skill6;
-    private TextView maxPlayerHp, currentPlayerHp, maxPlayerMp, currentPlayerMp, maxEnemyHp, currentEnemyHp, maxEnemyMp, currentEnemyMp, enemyname, enemylevel;
-    private ProgressBar playerhpbar, playermpbar, enemyhpbar, enemympbar;
+    private String json = csf.getJson();
+    private int equippedSkills[];
+    private Skills[] skilllist = as.skills;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_battle);
         loadEnemy();
+
         loadPlayerEnemyStats();
         showSkills();
         showBattleprogress();
@@ -61,12 +68,15 @@ public class BattleActivity extends AppCompatActivity {
         dialog = new Dialog(this);
     }
 
+
     private void loadEnemy() {
         Button btn_test = findViewById(R.id.testtest);
 
         Bundle extras = getIntent().getExtras();
         final String x = extras.getString("x");
         final String y = extras.getString("y");
+
+        e = ae.getEnemies()[enemyStatsCalc.getEnemynr()];
 
         enemy_level = ae.getEnemyComposition()[Integer.parseInt(x)][Integer.parseInt(y)].getLevel();
         enemy_type = ae.getEnemyComposition()[Integer.parseInt(x)][Integer.parseInt(y)].getEnemy();
@@ -76,15 +86,16 @@ public class BattleActivity extends AppCompatActivity {
         btn_test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("testtest", String.valueOf("EnemyHp: " + current_enemyhp + " EquippedSkill: " + csf.getEquippedSkills()[0] + " Skilllist: " + as.getSkills()[6].getSpellname()));
+                Log.d("testtest", String.valueOf(ThreadLocalRandom.current().nextInt(0, 100 + 1)));
             }
         });
     }
 
     private void loadPlayerEnemyStats() {
         current_enemyhp = enemyStatsCalc.getStats()[4];
-        current_playerhp = player.getMax_hp();
-        current_playermp = player.getMax_mp();
+        current_enemymp = enemyStatsCalc.getStats()[5];
+        current_playerhp = p.getMax_hp();
+        current_playermp = p.getMax_mp();
         enemyname = findViewById(R.id.enemy_name);
         enemylevel = findViewById(R.id.enemy_level);
 
@@ -106,23 +117,23 @@ public class BattleActivity extends AppCompatActivity {
         enemyname.setText(ae.getEnemies()[enemy_type - 1].getName());
         enemylevel.setText(String.valueOf(enemy_level));
 
-        maxPlayerHp.setText(String.valueOf(player.getMax_hp()));
-        maxPlayerMp.setText(String.valueOf(player.getMax_mp()));
+        maxPlayerHp.setText(String.valueOf(p.getMax_hp()));
+        maxPlayerMp.setText(String.valueOf(p.getMax_mp()));
         maxEnemyHp.setText(String.valueOf(enemyStatsCalc.getStats()[4]));
         maxEnemyMp.setText(String.valueOf(enemyStatsCalc.getStats()[5]));
 
-        currentPlayerHp.setText(String.valueOf(player.getMax_hp()));
-        currentPlayerMp.setText(String.valueOf(player.getMax_mp()));
+        currentPlayerHp.setText(String.valueOf(p.getMax_hp()));
+        currentPlayerMp.setText(String.valueOf(p.getMax_mp()));
         currentEnemyHp.setText(String.valueOf(current_enemyhp));
         currentEnemyMp.setText(String.valueOf(enemyStatsCalc.getStats()[5]));
 
-        playerhpbar.setMax(player.getMax_hp());
-        playermpbar.setMax(player.getMax_mp());
+        playerhpbar.setMax(p.getMax_hp());
+        playermpbar.setMax(p.getMax_mp());
         enemyhpbar.setMax(enemyStatsCalc.getStats()[4]);
         enemympbar.setMax(enemyStatsCalc.getStats()[5]);
 
-        playerhpbar.setProgress(player.getMax_hp());
-        playermpbar.setProgress(player.getMax_mp());
+        playerhpbar.setProgress(p.getMax_hp());
+        playermpbar.setProgress(p.getMax_mp());
         enemyhpbar.setProgress(enemyStatsCalc.getStats()[4]);
         enemympbar.setProgress(enemyStatsCalc.getStats()[5]);
     }
@@ -134,7 +145,13 @@ public class BattleActivity extends AppCompatActivity {
         currentEnemyMp = findViewById(R.id.current_enemymp);
     }
 
-    private void showSkills() {
+    private void loadData() {
+        SharedPreferences sharedPref = getSharedPreferences("sharedPref", Context.MODE_PRIVATE);
+        json = sharedPref.getString("skill list", null);
+        equippedSkills = gson.fromJson(json, int[].class);
+    }
+
+    protected void showSkills() {
         btn_skill1 = findViewById(R.id.btn_skillone);
         btn_skill2 = findViewById(R.id.btn_skilltwo);
         btn_skill3 = findViewById(R.id.btn_skillthree);
@@ -146,48 +163,27 @@ public class BattleActivity extends AppCompatActivity {
         loadData();
         for (int i = 0; i < equippedSkills.length; i++) {
             if (equippedSkills[i] != 0) {
-                Log.d("12345oncreate", Arrays.toString(equippedSkills));
                 buttonarray[i].setText(String.valueOf(skilllist[equippedSkills[i] - 2].getSpellname()));
             }
         }
     }
 
-    private void loadData() {
-        SharedPreferences sharedPref = getSharedPreferences("sharedPref", Context.MODE_PRIVATE);
-        json = sharedPref.getString("skill list", null);
-        equippedSkills = gson.fromJson(json, int[].class);
-    }
+    protected void updateStats() {
+        currentEnemyHp.setText(String.valueOf(current_enemyhp));
+        enemyhpbar.setProgress(current_enemyhp);
 
-    public boolean fight() {
+        currentEnemyMp.setText(String.valueOf(current_enemymp));
+        enemympbar.setProgress(current_enemymp);
 
-        //enemy.getAi().checkRule(new int[1]);
-        int index = new AI(0, 0, 0, 0, 0, 0, true, new AI[0], 0, 0).checkRule(new int[][]{new int[]{current_enemyhp, current_playerhp}});
+        currentPlayerHp.setText(String.valueOf(current_playerhp));
+        playerhpbar.setProgress(current_playerhp);
 
-        /*
-        while (true) {
-            if (current_playerhp <= 0) {
-                break;
-            } else {
-
-            }
-
-            if (current_enemyhp <= 0) {
-                break;
-            } else {
-                //int damagetoplayer = enemy.attack(new int[]{1, current_enemyhp, enemy.getMax_hp(), current_enemyhp, enemy.getMax_mp()});
-            }
-        }*/
-
-        if (current_playerhp > 0 && current_enemyhp <= 0) {
-            showBattleresult();
-            return true;
-        } else {
-            showBattleresult();
-            return false;
-        }
+        currentPlayerMp.setText(String.valueOf(current_playermp));
+        playermpbar.setProgress(current_playermp);
     }
 
     private void playerAttack() {
+        showSkills();
         btn_skill1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -231,24 +227,45 @@ public class BattleActivity extends AppCompatActivity {
         });
     }
 
+    private void enemyattack() {
+        int enemy = e.getAi().checkRule(new int[][]{new int[]{1, current_playerhp, p.getMax_hp(), current_playermp, p.getMax_mp(), p.getAtk(), p.getMag(), p.getDef(), p.getSpr(), current_enemyhp, enemyStatsCalc.getStats()[4], current_enemymp, enemyStatsCalc.getStats()[5], enemyStatsCalc.getStats()[0], enemyStatsCalc.getStats()[1], enemyStatsCalc.getStats()[2], enemyStatsCalc.getStats()[3], lastplayerdmg, lastenemydmg, 0, 0, lastplayerattacktype, turncount, generateRandomNr(),},
+                new int[]{10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10}});
+
+        if (e.getSkillArray()[enemy].getType() == 0) {
+            current_playerhp -= dc.calcEnHybDmg(e.getSkillArray()[enemy].getModifier(), enemy_type);
+        } else if (e.getSkillArray()[enemy].getType() == 1) {
+            current_playerhp -= dc.calcEnPhyDmg(e.getSkillArray()[enemy].getModifier(), enemy_type);
+        } else {
+            current_playerhp -= dc.calcEnMagDmg(e.getSkillArray()[enemy].getModifier(), enemy_type);
+        }
+        updateStats();
+    }
+
     private void playerattackloop(int equippedSkillPos) {
         for (int i = 0; i < as.getSkills().length; i++) {
             if (as.getSkills()[i].getSkillid() == equippedSkills[equippedSkillPos]) {
                 if (as.getSkills()[i].getMp_cost() > current_playermp) {
                     Toast.makeText(this, "You do not have enough mana lol", Toast.LENGTH_SHORT).show();
                 } else {
+
                     double modifier = as.getSkills()[i].getModifier();
                     int type = as.getSkills()[i].getType();
-                    calculateDmg(modifier, type, enemy_type);
+
+                    calculatePDmg(modifier, type, enemy_type);
                     current_playermp -= as.getSkills()[i].getMp_cost();
-                    current_enemyhp -= calculateDmg(modifier, type, enemy_type);
+                    current_enemyhp -= calculatePDmg(modifier, type, enemy_type);
                 }
                 updateStats();
+                if (isEnemyAlive()) {
+                    enemyattack();
+                } else {
+                    showBattleresult();
+                }
             }
         }
     }
 
-    private int calculateDmg(double modifier, int type, int enemy_type) {
+    private int calculatePDmg(double modifier, int type, int enemy_type) {
         if (type == 2) {
             return dc.calcPlMagDmg(modifier, enemy_type);
         }
@@ -258,12 +275,12 @@ public class BattleActivity extends AppCompatActivity {
         return dc.calcPlHybDmg(modifier, enemy_type);
     }
 
-    private void updateStats() {
-        currentEnemyHp.setText(String.valueOf(current_enemyhp));
-        enemyhpbar.setProgress(current_enemyhp);
-
-        currentPlayerMp.setText(String.valueOf(current_playermp));
-        playermpbar.setProgress(current_playermp);
+    private boolean isEnemyAlive() {
+        boolean isEnemyalive = true;
+        if (current_enemyhp <= 0) {
+            isEnemyalive = false;
+        }
+        return isEnemyalive;
     }
 
     @Override
@@ -284,8 +301,8 @@ public class BattleActivity extends AppCompatActivity {
         TextView battleresult = dialog.findViewById(R.id.txt_battleresult);
         ProgressBar pb_xpoptainedafterbattle = dialog.findViewById(R.id.player_xpoptainedafterbattle);
 
-        xpForNextLevel = player.getExpForNextLv();
-        currentXpObtained = player.getExpObtained();
+        xpForNextLevel = p.getExpForNextLv();
+        currentXpObtained = p.getExpObtained();
         txt_currentPlayerxp.setText(String.valueOf(currentXpObtained));
         txt_xpForNextLevel.setText(String.valueOf(xpForNextLevel));
         pb_xpoptainedafterbattle.setMax(xpForNextLevel);
@@ -311,6 +328,10 @@ public class BattleActivity extends AppCompatActivity {
             }
         });
         dialog.show();
+    }
+
+    private int generateRandomNr() {
+        return ThreadLocalRandom.current().nextInt(0, 100 + 1);
     }
 
     public int getEnemy_level() {

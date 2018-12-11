@@ -7,8 +7,7 @@ public class Enemy extends Creature {
 
     private int enemyId;
 
-    public Enemy(int enemyId, String name, int level, int max_hp, int max_mp, int current_hp, int current_mp,
-                 int atk, int mag, int def, int spr, Skills[] skillArray, AI ai) {
+    public Enemy(int enemyId, String name, int level, int max_hp, int max_mp, int atk, int mag, int def, int spr, Skills[] skillArray, AI ai) {
 
         super(name, level, max_hp, max_mp, atk, mag, def, spr, skillArray);
         this.ai = ai;
