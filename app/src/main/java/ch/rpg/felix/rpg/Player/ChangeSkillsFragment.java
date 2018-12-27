@@ -73,7 +73,11 @@ public class ChangeSkillsFragment extends Fragment {
         } else {
             for (int i = 0; i < equippedSkills.length; i++) {
                 if (equippedSkills[i] != 0) {
-                    buttonarray[i].setText(String.valueOf(skilllist[equippedSkills[i] - 2].getSpellname()));
+                    for (int j = 0; j < skilllist.length; j++) {
+                        if (equippedSkills[i] == as.getSkills()[j].getSkillid()) {
+                            buttonarray[i].setText(String.valueOf(skilllist[j].getSpellname()));
+                        }
+                    }
                 }
             }
         }

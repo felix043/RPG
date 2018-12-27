@@ -28,8 +28,7 @@
                 android:layout_below="@+id/btn_1-1"
                 android:layout_marginTop="5dp"
                 android:text="1-2"
-                android:textAllCaps="false"
-                android:visibility="gone"/>
+                android:textAllCaps="false" />
 
             <Button
                 android:id="@+id/btn_1-3"
@@ -38,8 +37,70 @@
                 android:layout_below="@+id/btn_1-2"
                 android:layout_marginTop="5dp"
                 android:text="1-3"
-                android:textAllCaps="false"
-                android:visibility="gone"/>
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/btn_1-4"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_below="@+id/btn_1-3"
+                android:layout_marginTop="5dp"
+                android:text="1-4"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/btn_1-5"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_below="@+id/btn_1-4"
+                android:layout_marginTop="5dp"
+                android:text="1-5"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/btn_1-6"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_below="@+id/btn_1-5"
+                android:layout_marginTop="5dp"
+                android:text="1-6"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/btn_1-7"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_below="@+id/btn_1-6"
+                android:layout_marginTop="5dp"
+                android:text="1-7"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/btn_1-8"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_below="@+id/btn_1-7"
+                android:layout_marginTop="5dp"
+                android:text="1-8"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/btn_1-9"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_below="@+id/btn_1-8"
+                android:layout_marginTop="5dp"
+                android:text="1-9"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/btn_1-10"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_below="@+id/btn_1-9"
+                android:layout_marginTop="5dp"
+                android:text="1-10"
+                android:textAllCaps="false" />
 
         </RelativeLayout>
     </FrameLayout>

@@ -1,11 +1,14 @@
 package ch.rpg.felix.rpg;
 
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,14 +17,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import ch.rpg.felix.rpg.BattleSystem.Player;
-import ch.rpg.felix.rpg.BattleSystem.Skills;
 import ch.rpg.felix.rpg.ShopSystem.ShopBuyFragment;
 import ch.rpg.felix.rpg.Skills.SkilltreeFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
-    private Player player = new Player("Player", 1, 10, 10, 10, 10, 2, 2, new Skills[]{}, 0);
+    private Player player = new Player();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navigationView.setCheckedItem(R.id.world);
         }
         showPlayerLevel();
+
+        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+        boolean firstStart = prefs.getBoolean("firstStart", true);
+
+        if (firstStart) {
+            showStartDialog();
+        }
     }
 
     @Override
@@ -90,5 +99,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         pb.setProgress(player.getExpObtained());
     }
 
+    private void showStartDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("Upcoming features")
+                .setMessage("- XP gained from killing enemies \n" +
+                        "- Data consistency \n" +
+                        "- Equip Equipment \n" +
+                        "- More skills and enemies \n" +
+                        "- Depending on my mood: Quest, Inventory, Money system, new combat mechanics, settings, skilltree \n" +
+                        "- Maybe some other stuff as well xD")
+                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .create().show();
 
+        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean("firstStart", false).apply();
+    }
 }

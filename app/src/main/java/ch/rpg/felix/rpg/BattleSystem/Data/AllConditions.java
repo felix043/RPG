@@ -75,11 +75,40 @@ public class AllConditions {
     //Goblin
     AI goblinSlash = new AI(0, 11, 1, 1, 11, 1, true, new AI[0], 4, 1);
     AI goblinPunch = new AI(0, 11, 1, 1, 11, 1, true, new AI[0], 4, 2);
+    AI basicattack = new AI(0, 11, 1, 0, 11, 1, true, new AI[0], 0, 0);
+
+    AI goblinLess50 = new AI(0, 9, 1, 0, 10, 0.5, false, new AI[]{goblinPunch, basicattack}, 1, -1);
+    AI goblinMore50 = new AI(0, 9, 1, 0, 10, 0.5, false, new AI[]{goblinSlash, basicattack}, 4, -1);
 
 
-    AI goblinBasic = new AI(0, 11, 1, 0, 11, 1, true, new AI[0], 0, 0);
+    AI spiderScratch = new AI(0, 11, 1, 1, 11, 1, true, new AI[0], 4, 1);
+    AI spiderPoisonFang = new AI(0, 11, 1, 1, 11, 1, true, new AI[0], 4, 2);
 
+    AI spiderMore60 = new AI(0, 9, 1, 0, 10, 0.6, false, new AI[]{spiderScratch, basicattack}, 4, -1);
+    AI spiderLess60 = new AI(0, 9, 1, 0, 10, 0.6, false, new AI[]{goblinPunch, basicattack}, 1, -1);
 
-    AI goblinLess50 = new AI(0, 9, 1, 0, 10, 0.5, false, new AI[]{goblinPunch, goblinBasic}, 1, -1);
-    AI goblinMore50 = new AI(0, 9, 1, 0, 10, 0.5, false, new AI[]{goblinSlash, goblinBasic}, 4, -1);
+    AI phantomSpiderDepression = new AI(0, 11, 1, 1, 11, 1, true, new AI[0], 4, 2);
+    AI phantomSpiderLifesplitter = new AI(0, 11, 1, 1, 11, 1, true, new AI[0], 4, 1);
+    AI phantomSpiderVenomspit = new AI(0, 11, 1, 1, 11, 1, true, new AI[0], 4, 4);
+    AI phantomSpiderPhantomsting = new AI(0, 11, 1, 1, 11, 1, true, new AI[0], 4, 3);
+
+    AI phantomSpider = new AI(0, 23, 1, 0, 24, 1, false, new AI[]{phantomSpiderDepression}, 2, -1);
+
+    AI phantomSpiderPlayerHPpcEnemyHppc1 = new AI(0, 23, 1, 0, 24, 1, false, new AI[]{phantomSpiderLifesplitter, basicattack}, 2, -1);
+    AI phantomSpiderPlayerHPpcEnemyHppc2 = new AI(0, 23, 1, 0, 24, 1, false, new AI[]{phantomSpiderPhantomsting, phantomSpiderVenomspit, basicattack}, 2, -1);
+
+    AI phantomSpiderRandom25pc = new AI(0, 26, 1, 0, 0, 25, false, new AI[]{phantomSpider, basicattack}, 2, -1);
+
+    AI phantomSpiderMore20 = new AI(0, 1, 1, 0, 9, 1, false, new AI[]{phantomSpiderRandom25pc, phantomSpiderPlayerHPpcEnemyHppc2, basicattack}, 4, -1);
+    AI phantomSpiderLess20 = new AI(0, 9, 1, 0, 9, 1, false, new AI[]{phantomSpiderPlayerHPpcEnemyHppc1, basicattack}, 1, -1);
+
+    AI mumieScratch = new AI(0, 11, 1, 1, 11, 1, true, new AI[0], 4, 2);
+    AI mumieOblivion = new AI(0, 11, 1, 1, 11, 1, true, new AI[0], 4, 2);
+    AI mumiePainfulscream = new AI(0, 11, 1, 1, 11, 1, true, new AI[0], 4, 2);
+
+    AI mumieloop1 = new AI(0, 22, 1, 0, 0, 1, false, new AI[]{mumieOblivion, basicattack}, 0, -1);
+    AI mumieloop2 = new AI(0, 22, 1, 0, 2, 1, false, new AI[]{mumiePainfulscream, basicattack}, 0, -1);
+    AI mumieloop3 = new AI(0, 22, 1, 0, 3, 1, false, new AI[]{mumieScratch, basicattack}, 0, -1);
+    AI mumieloop4 = new AI(0, 22, 1, 0, 1, 1, false, new AI[]{mumieOblivion, basicattack}, 0, -1);
+
 }

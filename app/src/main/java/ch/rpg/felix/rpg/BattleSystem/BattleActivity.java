@@ -20,6 +20,7 @@ import ch.rpg.felix.rpg.BattleSystem.Data.AllEnemies;
 import ch.rpg.felix.rpg.BattleSystem.Data.AllSkills;
 import ch.rpg.felix.rpg.Player.ChangeSkillsFragment;
 import ch.rpg.felix.rpg.R;
+import ch.rpg.felix.rpg.WorldFragmentChildren.WorldData;
 
 public class BattleActivity extends AppCompatActivity {
 
@@ -32,6 +33,7 @@ public class BattleActivity extends AppCompatActivity {
     private Gson gson = new Gson();
     private EnemyStatsCalc enemyStatsCalc = new EnemyStatsCalc();
     private DamageCalculation dc = new DamageCalculation();
+    private WorldData wd = new WorldData();
 
     private int current_playerhp;
     private int current_playermp;
@@ -41,7 +43,14 @@ public class BattleActivity extends AppCompatActivity {
     private int lastplayerdmg;
     private int lastenemydmg;
     private int lastplayerattacktype;
+    private int lastenemyskill = 0;
+    private int playerhppc = 100;
+    private int enemyhppc = 100;
     private int turncount;
+
+    private String x;
+    private String y;
+    private String z;
 
     private Button btn_skill1, btn_skill2, btn_skill3, btn_skill4, btn_skill5, btn_skill6;
     private TextView maxPlayerHp, currentPlayerHp, maxPlayerMp, currentPlayerMp, maxEnemyHp, currentEnemyHp, maxEnemyMp, currentEnemyMp, enemyname, enemylevel;
@@ -64,31 +73,23 @@ public class BattleActivity extends AppCompatActivity {
         loadPlayerEnemyStats();
         showSkills();
         showBattleprogress();
-        playerAttack();
+        playerSkillBtn();
         dialog = new Dialog(this);
     }
 
 
     private void loadEnemy() {
-        Button btn_test = findViewById(R.id.testtest);
-
         Bundle extras = getIntent().getExtras();
-        final String x = extras.getString("x");
-        final String y = extras.getString("y");
+        x = extras.getString("x");
+        y = extras.getString("y");
+        z = extras.getString("z");
 
         e = ae.getEnemies()[enemyStatsCalc.getEnemynr()];
 
-        enemy_level = ae.getEnemyComposition()[Integer.parseInt(x)][Integer.parseInt(y)].getLevel();
-        enemy_type = ae.getEnemyComposition()[Integer.parseInt(x)][Integer.parseInt(y)].getEnemy();
+        enemy_level = ae.getEnemyComposition()[Integer.parseInt(x)][Integer.parseInt(y)][Integer.parseInt(z)].getLevel();
+        enemy_type = ae.getEnemyComposition()[Integer.parseInt(x)][Integer.parseInt(y)][Integer.parseInt(z)].getEnemy();
 
         enemyStatsCalc.statscalc(enemy_type, enemy_level);
-
-        btn_test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("testtest", String.valueOf(ThreadLocalRandom.current().nextInt(0, 100 + 1)));
-            }
-        });
     }
 
     private void loadPlayerEnemyStats() {
@@ -114,7 +115,12 @@ public class BattleActivity extends AppCompatActivity {
         enemyhpbar = findViewById(R.id.enemy_healthBar);
         enemympbar = findViewById(R.id.enemy_manaBar);
 
-        enemyname.setText(ae.getEnemies()[enemy_type - 1].getName());
+        for (int i = 0; i < ae.getEnemies().length; i++) {
+            if (ae.getEnemies()[i].getEnemyId() == enemy_type) {
+                enemyname.setText(ae.getEnemies()[i].getName());
+            }
+        }
+
         enemylevel.setText(String.valueOf(enemy_level));
 
         maxPlayerHp.setText(String.valueOf(p.getMax_hp()));
@@ -163,7 +169,11 @@ public class BattleActivity extends AppCompatActivity {
         loadData();
         for (int i = 0; i < equippedSkills.length; i++) {
             if (equippedSkills[i] != 0) {
-                buttonarray[i].setText(String.valueOf(skilllist[equippedSkills[i] - 2].getSpellname()));
+                for (int j = 0; j < skilllist.length; j++) {
+                    if (equippedSkills[i] == as.getSkills()[j].getSkillid()) {
+                        buttonarray[i].setText(String.valueOf(skilllist[j].getSpellname()));
+                    }
+                }
             }
         }
     }
@@ -182,84 +192,108 @@ public class BattleActivity extends AppCompatActivity {
         playermpbar.setProgress(current_playermp);
     }
 
-    private void playerAttack() {
+    private void playerSkillBtn() {
         showSkills();
         btn_skill1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                playerattackloop(0);
+                playerAttack(0);
             }
         });
 
         btn_skill2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                playerattackloop(1);
+                playerAttack(1);
             }
         });
 
         btn_skill3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                playerattackloop(2);
+                playerAttack(2);
             }
         });
 
         btn_skill4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                playerattackloop(3);
+                playerAttack(3);
             }
         });
 
         btn_skill5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                playerattackloop(4);
+                playerAttack(4);
             }
         });
 
         btn_skill6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                playerattackloop(5);
+                playerAttack(5);
             }
         });
     }
 
-    private void enemyattack() {
-        int enemy = e.getAi().checkRule(new int[][]{new int[]{1, current_playerhp, p.getMax_hp(), current_playermp, p.getMax_mp(), p.getAtk(), p.getMag(), p.getDef(), p.getSpr(), current_enemyhp, enemyStatsCalc.getStats()[4], current_enemymp, enemyStatsCalc.getStats()[5], enemyStatsCalc.getStats()[0], enemyStatsCalc.getStats()[1], enemyStatsCalc.getStats()[2], enemyStatsCalc.getStats()[3], lastplayerdmg, lastenemydmg, 0, 0, lastplayerattacktype, turncount, generateRandomNr(),},
+    private void enemyAttack() {
+        final int enemy = e.getAi().checkRule(new int[][]{new int[]{1, current_playerhp, p.getMax_hp(), current_playermp, p.getMax_mp(), p.getAtk(), p.getMag(), p.getDef(), p.getSpr(),
+                current_enemyhp, enemyStatsCalc.getStats()[4], current_enemymp, enemyStatsCalc.getStats()[5], enemyStatsCalc.getStats()[0], enemyStatsCalc.getStats()[1], enemyStatsCalc.getStats()[2], enemyStatsCalc.getStats()[3],
+                lastplayerdmg, lastenemydmg, 0, 0, lastplayerattacktype, lastenemyskill, playerhppc, enemyhppc, turncount, generateRandomNr()},
                 new int[]{10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10}});
 
-        if (e.getSkillArray()[enemy].getType() == 0) {
-            current_playerhp -= dc.calcEnHybDmg(e.getSkillArray()[enemy].getModifier(), enemy_type);
+        if (e.getSkillArray()[enemy].getType() == 3) {
+            lastenemydmg = dc.calcEnHybDmg(e.getSkillArray()[enemy].getModifier(), enemy_type);
+            current_playerhp -= lastenemydmg;
         } else if (e.getSkillArray()[enemy].getType() == 1) {
-            current_playerhp -= dc.calcEnPhyDmg(e.getSkillArray()[enemy].getModifier(), enemy_type);
+            lastenemydmg = dc.calcEnPhyDmg(e.getSkillArray()[enemy].getModifier(), enemy_type);
+            current_playerhp -= lastenemydmg;
         } else {
-            current_playerhp -= dc.calcEnMagDmg(e.getSkillArray()[enemy].getModifier(), enemy_type);
+            lastenemydmg = dc.calcEnMagDmg(e.getSkillArray()[enemy].getModifier(), enemy_type);
+            current_playerhp -= lastenemydmg;
         }
+
+        Button btn_test = findViewById(R.id.testtest);
+
+        btn_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("testtest", String.valueOf(enemy));
+            }
+        });
+        lastenemyskill = e.getSkillArray()[enemy].getSkillid();
+        playerhppc = (current_playerhp / p.getMax_hp()) * 100;
+        current_enemymp -= e.getSkillArray()[enemy].getMp_cost();
         updateStats();
+
+        if (isPlayerAlive()) {
+
+        } else {
+            showBattleresult();
+        }
     }
 
-    private void playerattackloop(int equippedSkillPos) {
+    private void playerAttack(int equippedSkillPos) {
         for (int i = 0; i < as.getSkills().length; i++) {
             if (as.getSkills()[i].getSkillid() == equippedSkills[equippedSkillPos]) {
                 if (as.getSkills()[i].getMp_cost() > current_playermp) {
                     Toast.makeText(this, "You do not have enough mana lol", Toast.LENGTH_SHORT).show();
                 } else {
-
                     double modifier = as.getSkills()[i].getModifier();
                     int type = as.getSkills()[i].getType();
 
                     calculatePDmg(modifier, type, enemy_type);
                     current_playermp -= as.getSkills()[i].getMp_cost();
                     current_enemyhp -= calculatePDmg(modifier, type, enemy_type);
-                }
-                updateStats();
-                if (isEnemyAlive()) {
-                    enemyattack();
-                } else {
-                    showBattleresult();
+                    enemyhppc = (current_enemyhp / e.getMax_hp()) * 100;
+
+                    updateStats();
+                    if (isEnemyAlive()) {
+                        enemyAttack();
+                    } else {
+                        showBattleresult();
+                    }
                 }
             }
         }
@@ -267,12 +301,18 @@ public class BattleActivity extends AppCompatActivity {
 
     private int calculatePDmg(double modifier, int type, int enemy_type) {
         if (type == 2) {
-            return dc.calcPlMagDmg(modifier, enemy_type);
+            lastplayerattacktype = 2;
+            lastplayerdmg = dc.calcPlMagDmg(modifier, enemy_type);
+            return lastplayerdmg;
         }
         if (type == 1) {
-            return dc.calcPlPhyDmg(modifier, enemy_type);
+            lastplayerattacktype = 1;
+            lastplayerdmg = dc.calcPlPhyDmg(modifier, enemy_type);
+            return lastplayerdmg;
         }
-        return dc.calcPlHybDmg(modifier, enemy_type);
+        lastplayerattacktype = 3;
+        lastplayerdmg = dc.calcPlHybDmg(modifier, enemy_type);
+        return lastplayerdmg;
     }
 
     private boolean isEnemyAlive() {
@@ -281,6 +321,14 @@ public class BattleActivity extends AppCompatActivity {
             isEnemyalive = false;
         }
         return isEnemyalive;
+    }
+
+    private boolean isPlayerAlive() {
+        boolean isPlayeralive = true;
+        if (current_playerhp <= 0) {
+            isPlayeralive = false;
+        }
+        return isPlayeralive;
     }
 
     @Override
@@ -310,6 +358,7 @@ public class BattleActivity extends AppCompatActivity {
 
         if (current_enemyhp <= 0) {
             battleresult.setText("You won!");
+            saveData();
         } else {
             battleresult.setText("You lost!");
         }
@@ -328,6 +377,10 @@ public class BattleActivity extends AppCompatActivity {
             }
         });
         dialog.show();
+    }
+
+    private void saveData() {
+
     }
 
     private int generateRandomNr() {

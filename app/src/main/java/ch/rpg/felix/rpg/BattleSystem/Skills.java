@@ -9,7 +9,8 @@ public class Skills {
     private double modifier;
     private int def_pen;
     private int spr_pen;
-    private int type;      //1 = physical, 2 = magic, 3 = hybrid
+    private int type;      //1 = physical, 2 = magic, 3 = hybrid, 4 = fixeddmg
+    private int fixeddmg;
 
     private int hpheal;
     private int mpheal;
@@ -22,6 +23,15 @@ public class Skills {
         this.modifier = modifier;
         this.def_pen = def_pen;
         this.spr_pen = spr_pen;
+        this.mp_cost = mp_cost;
+        this.type = type;
+    }
+
+    //Fixed Damage
+    public Skills(int skillid, String spellname, int fixeddmg, int mp_cost, int type) {
+        this.skillid = skillid;
+        this.spellname = spellname;
+        this.fixeddmg = fixeddmg;
         this.mp_cost = mp_cost;
         this.type = type;
     }

@@ -22,11 +22,11 @@ public class Player extends Creature {
 
     public Player() {
         this.max_hp = 15;
-        this.max_mp = 1000;
+        this.max_mp = 20;
         this.atk = 3;
         this.mag = 3;
-        this.def = 2;
-        this.spr = 2;
+        this.def = 20;
+        this.spr = 20;
     }
 
     public int calculateLevel() {

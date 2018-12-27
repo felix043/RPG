@@ -1,99 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
-        android:id="@+id/framelayout_world"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:id="@+id/scrollview_world"
+        <FrameLayout
+            android:id="@+id/framelayout_world"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/scrollview_world"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/btn_prologue"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="0dp"
+                    android:text="World 1"
+                    android:textAllCaps="false" />
+
+                <Button
+                    android:id="@+id/btn_chapterOne"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_below="@+id/btn_prologue"
+                    android:layout_marginTop="5dp"
+                    android:text="World 2"
+                    android:textAllCaps="false"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/btn_chapterTwo"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_below="@+id/btn_chapterOne"
+                    android:layout_marginTop="5dp"
+                    android:text="World 3"
+                    android:textAllCaps="false"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/btn_chapterThree"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_below="@+id/btn_chapterTwo"
+                    android:layout_marginTop="5dp"
+                    android:text="World 4"
+                    android:textAllCaps="false"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/btn_chapterFour"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_below="@+id/btn_chapterThree"
+                    android:layout_marginTop="5dp"
+                    android:text="World 5"
+                    android:textAllCaps="false"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/btn_chapterFive"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_below="@+id/btn_chapterFour"
+                    android:layout_marginTop="5dp"
+                    android:text="World 6"
+                    android:textAllCaps="false"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/btn_chapterSix"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_below="@+id/btn_chapterFive"
+                    android:layout_marginTop="5dp"
+                    android:text="World 7"
+                    android:textAllCaps="false"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/btn_chapterSeven"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_below="@+id/btn_chapterSix"
+                    android:layout_marginTop="5dp"
+                    android:text="World 8"
+                    android:textAllCaps="false"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+        </FrameLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/float_btn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            app:srcCompat="@drawable/ic_arrow_right" />
 
-            <Button
-                android:id="@+id/btn_prologue"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="0dp"
-                android:text="World 1"
-                android:textAllCaps="false" />
-
-            <Button
-                android:id="@+id/btn_chapterOne"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_below="@+id/btn_prologue"
-                android:layout_marginTop="5dp"
-                android:text="World 2"
-                android:textAllCaps="false"
-                android:visibility="gone" />
-
-            <Button
-                android:id="@+id/btn_chapterTwo"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_below="@+id/btn_chapterOne"
-                android:layout_marginTop="5dp"
-                android:text="World 3"
-                android:textAllCaps="false"
-                android:visibility="gone" />
-
-            <Button
-                android:id="@+id/btn_chapterThree"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_below="@+id/btn_chapterTwo"
-                android:layout_marginTop="5dp"
-                android:text="World 4"
-                android:textAllCaps="false"
-                android:visibility="gone" />
-
-            <Button
-                android:id="@+id/btn_chapterFour"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_below="@+id/btn_chapterThree"
-                android:layout_marginTop="5dp"
-                android:text="World 5"
-                android:textAllCaps="false"
-                android:visibility="gone" />
-
-            <Button
-                android:id="@+id/btn_chapterFive"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_below="@+id/btn_chapterFour"
-                android:layout_marginTop="5dp"
-                android:text="World 6"
-                android:textAllCaps="false"
-                android:visibility="gone" />
-
-            <Button
-                android:id="@+id/btn_chapterSix"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_below="@+id/btn_chapterFive"
-                android:layout_marginTop="5dp"
-                android:text="World 7"
-                android:textAllCaps="false"
-                android:visibility="gone" />
-
-            <Button
-                android:id="@+id/btn_chapterSeven"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_below="@+id/btn_chapterSix"
-                android:layout_marginTop="5dp"
-                android:text="World 8"
-                android:textAllCaps="false"
-                android:visibility="gone" />
+    </RelativeLayout>
 
 
-        </RelativeLayout>
-    </FrameLayout>
-</ScrollView>
+</RelativeLayout>
